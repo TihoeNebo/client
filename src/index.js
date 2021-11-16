@@ -6,10 +6,10 @@ import parts from "./source.js";
 
 
 ReactDOM.render(
-  <React.StrictMode>
+    <React.StrictMode>
         <App parts={parts} />
-  </React.StrictMode>,
-  document.getElementById('root')
+    </React.StrictMode>,
+    document.getElementsByTagName('body')[0]
 );
 
 

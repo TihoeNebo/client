@@ -1,15 +1,15 @@
-
+import React from 'react';
 import './App.css';
-import Part from './part.js';
+import Part from './components/part.js';
 
 function App({ parts }) {
-    const partsList = [];
-    for (let i = 0; i < parts.length; i++) {
-        partsList.push(Part(parts[i]));
-    }
+    
+    
+    const partList = parts.map( data => <Part part={data} /> );
+    
   return (
-    <div className="part">
-          {partsList}
+    <div className="parts">
+          {partList}
     </div>
   );
 }

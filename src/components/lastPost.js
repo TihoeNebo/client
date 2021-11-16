@@ -1,13 +1,15 @@
 ﻿import React from "react";
 
-export default function LastPost({ lastPost }) {
+export default function LastPost(
+    { props }
+) {
     const {
         postPath,
         theme,
         lastPostDate,
         userId,
         userName
-    } = lastPost;
+    } = props;
 
     return (
         

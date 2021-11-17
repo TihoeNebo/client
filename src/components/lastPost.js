@@ -1,22 +1,21 @@
 ﻿import React from "react";
+import { Link } from 'react-router-dom';
 
-export default function LastPost(
-    { props }
-) {
+export default function LastPost({ lastPost }) {
     const {
         postPath,
         theme,
         lastPostDate,
         userId,
         userName
-    } = props;
+    } = lastPost;
 
     return (
         
-        <td>
-            <a href={postPath}>{theme}</a>
+        <div>
+            <Link to={postPath}>{theme}</Link>
             <p>Дата: {lastPostDate},
-                Автор: <a href={`/profile/${userId}`}>{userName}</a></p>
-        </td>
+                Автор: <Link to={`/profile/${userId}`}>{userName}</Link></p>
+        </div>
         )
 }

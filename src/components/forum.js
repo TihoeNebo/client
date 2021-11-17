@@ -1,22 +1,24 @@
-import React from "react";
+п»їimport React from "react";
 import LastPost from './lastPost.js';
+import { Link } from 'react-router-dom';
 
-export default function Forum( 
-    {
+export default function Forum({forum}) {
+    const {
         forumURN,
         forumName,
         sumTopics,
         sumPosts,
         lastPost
-    } 
-) {
-    lastPost.postPath = `/${forumURN}/${lastPost.topicId}#${lastPost.lastPostId}`;//изменить первоначальные параметры
+    } = forum;
+    lastPost.postPath = `/${forumURN}/${lastPost.topicId}#${lastPost.lastPostId}`;//РёР·РјРµРЅРёС‚СЊ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹
     return (
-        <tr>
-            <td><h3><a href={`/${forumURN}`}>{forumName}</a></h3></td>
-            <td>{sumTopics}</td>
-            <td>{sumPosts}</td>
-            <LastPost props={ lastPost } />
-        </tr>
+        <div>
+            <div><h3><Link to={`/${forumURN}`}>{forumName}</Link></h3></div>
+            <div>
+                Р’СЃРµРіРѕ С‚РµРј: {sumTopics}.
+                Р’СЃРµРіРѕ СЃРѕРѕР±С‰РµРЅРёР№: {sumPosts}.
+            </div>
+            <LastPost lastPost={ lastPost } />
+        </div>
         )
 }

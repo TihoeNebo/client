@@ -1,57 +1,57 @@
 ﻿const PostsData = {
     forum: {
-        urn: "FirstForum",
+        urn: "firstForum",
         name: "Луна"
     },
     topic: {
         id: 1,
-        theme: "",
-        comment: "",
+        theme: "sacrum",
+        comment: "Описание лунных дней",
         author: {
-            id: 17,
-            name: "Юхао"
-        }
+            id: 33,
+            name: "Vasya"
+        },
     },
     posts: [
         {
             id: 1,
-            content: "",
-            date: "22-02-2022",
+            content: "ug hjbhj b hjbh hb  hbjbhj  hjhbjbjkjbhhj",
+            date: "18-02-2022",
             essential: false,
             author: {
                 id: 17,
                 name: "Юхао"
             }
         }, {
-            id: 1,
-            content: "",
-            date: "22-02-2022",
+            id: 2,
+            content: "gvvgvbnmn n nbbhbjbhb hbj bj  bklh hh hjkh ",
+            date: "19-02-2022",
             essential: false,
             author: {
                 id: 17,
                 name: "Юхао"
             }
         }, {
-            id: 1,
-            content: "",
-            date: "22-02-2022",
+            id: 3,
+            content: "hihkbhjdsszgz fvygkhknccdltufl hluihhiuihh",
+            date: "20-02-2022",
             essential: false,
             author: {
                 id: 17,
                 name: "Юхао"
             }
         }, {
-            id: 1,
-            content: "",
-            date: "22-02-2022",
+            id: 4,
+            content: "yiyio kkljlcfcf ghb njkjhohiuuy",
+            date: "21-02-2022",
             essential: false,
             author: {
                 id: 17,
                 name: "Юхао"
             }
         }, {
-            id: 1,
-            content: "",
+            id: 5,
+            content: "uiouo ojlkkj ;nmmm,n gg gy",
             date: "22-02-2022",
             essential: false,
             author: {
@@ -61,3 +61,5 @@
         }
     ]
 }
+
+export default PostsData;

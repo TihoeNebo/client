@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Topic({ topic }) {
     return (
-        <div key={topic.id} dataEssential={topic.params.essential} dataClosed={topic.params.closed}>
+        <div key={topic.id}>
             <div>
                 <Link to={topic.linkPath}>{topic.theme}</Link><br/>
                 <p>{topic.comment}</p>

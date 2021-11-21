@@ -3,19 +3,18 @@ import { Link } from 'react-router-dom';
 
 export default function LastPost({ lastPost }) {
     const {
-        postPath,
-        theme,
-        lastPostDate,
-        userId,
-        userName
+        linkPath,
+        topic,
+        date,
+        author
     } = lastPost;
 
     return (
         
         <div>
-            <Link to={postPath}>{theme}</Link>
-            <p>Дата: {lastPostDate},
-                Автор: <Link to={`/profile/${userId}`}>{userName}</Link></p>
+            <Link to={linkPath}>{topic.theme}</Link>
+            <p>Дата: {date},
+                Автор: <Link to={`/profile/${author.id}`}>{author.name}</Link></p>
         </div>
         )
 }

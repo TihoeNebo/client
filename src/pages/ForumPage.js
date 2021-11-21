@@ -6,11 +6,9 @@ import TopicList from "../components/TopicList.js";
 
 
 export default function ForumPage() {
-    const urn = useParams();
-    console.dir(urn.forumURN)
-    const forumData = getForumList(urn.forumURN);
-
-    if (!forumData) return;
+    const { forumURN } = useParams();
+    console.dir(forumURN)
+    const { forum, topics } = getForumList(forumURN);
 
     return (
         <div>
@@ -18,15 +16,15 @@ export default function ForumPage() {
                 <strong><Link to="/">список форумов</Link></strong>
             </div>
             <div>
-                <h2>Форум {forumData.forumName}</h2>
+                <h2>Форум {forum.name}</h2>
             </div>
-            <TopicList topics={topicsData.topics} />
+            <TopicList topics={topics} />
         </div>
         )
 
 }
 
 function getForumList(forumURN) {
-    if (forumURN === topicsData.forumURN) return topicsData;
+    if (forumURN === topicsData.forum.urn) return topicsData;
     else return null;
 }

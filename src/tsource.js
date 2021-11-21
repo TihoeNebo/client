@@ -1,15 +1,16 @@
 ﻿const topicsData = {
-    forumId: 2,
-    forumURN: "firstForum",
-    forumName: "Луна",
+    forum: {
+        urn: "firstForum",
+        name: "Луна",
+    },
     page: 1,
     pages: 1,
     topics: [
         {
-            topicId: 1,
-            linkPath: "/firstForum/1",
+            id: 1,
             theme: "sacrum",
             comment: "Описание лунных дней",
+            linkPath: "/firstForum/1",
             sumPosts: 23,
             views: 170,
             author: {
@@ -29,7 +30,7 @@
                 closed: false
             }
         }, {
-            topicId: 2,
+            id: 2,
             linkPath: "/firstForum/1",
             theme: "лунные дома",
             comment: "Описание лунных домов",
@@ -52,7 +53,7 @@
                 closed: false
             }
         }, {
-            topicId: 3,
+            id: 3,
             linkPath: "/firstForum/1",
             theme: "Фазы Луны",
             comment: "Описание лунных фаз",
@@ -75,7 +76,7 @@
                 closed: false
             }
         }, {
-            topicId: 4,
+            id: 4,
             linkPath: "/firstForum/1",
             theme: "Лунные узлы",
             comment: "...и другие фиктивные точки",

@@ -5,9 +5,13 @@ import App from './App';
 
 
 
+
+
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        
+            <App />
+        
     </React.StrictMode>,
     document.getElementsByTagName('body')[0]
 );

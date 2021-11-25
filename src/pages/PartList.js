@@ -1,14 +1,18 @@
-import React from "react";
+﻿import React from "react";
 import Part from '../components/part.js';
-import CreateForumButton  from '../components/CreateForumButton.js';
 import parts from "../source.js";
+import ConditionButton from "../components/ConditionButton"
 
 const PartList = () => {
     const partList = parts.map(data => <Part part={data} />);
     return (
         <div className="parts">
             {partList}
-            <CreateForumButton />
+            <ConditionButton
+                condition="createForumButton"
+                title="Создать форум"
+                callback={() => console.log("Клик!")}
+            />
         </div>
         
     )

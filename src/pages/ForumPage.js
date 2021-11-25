@@ -1,13 +1,14 @@
 ﻿import React from "react";
+import ConditionButton from "../components/ConditionButton"
 import { Link, useParams } from "react-router-dom";
 import topicsData from "../tsource.js";
 import TopicList from "../components/TopicList.js";
 
 
 
+
 export default function ForumPage() {
     const { forumURN } = useParams();
-    console.dir(forumURN)
     const { forum, topics } = getForumList(forumURN);
 
     return (
@@ -19,6 +20,11 @@ export default function ForumPage() {
                 <h2>Форум {forum.name}</h2>
             </div>
             <TopicList topics={topics} />
+            <ConditionButton
+                condition="createTopicButton"
+                title="Создать тему"
+                callback={() => console.log("Клик тему!")}
+            />
         </div>
         )
 

@@ -2,6 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import postsData from "../psource.js";
 import PostList from "../components/PostList.js";
+import ConditionButton from "../components/ConditionButton";
 
 
 
@@ -20,6 +21,11 @@ export default function ForumPage() {
                 <strong>{topic.comment}</strong>
             </div>
             <PostList posts={posts} />
+            <ConditionButton
+                condition="createPostButton"
+                title="Написать сообщение"
+                callback={() => console.log("Клик post!")}
+            />
         </div>
         )
 

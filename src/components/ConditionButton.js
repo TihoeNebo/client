@@ -2,9 +2,9 @@
 import UserContext from './UserContext';
 
 export default function ConditionButton({ condition, title, callback }) {
-    const [buttonSwitches] = useContext(UserContext);
+    const [userData] = useContext(UserContext);
     
-    return buttonSwitches[condition] ? ( <button onClick={ ()=> callback() }>{ title }</button> ) : null;
+    return userData.switches[condition] ? ( <button onClick={ ()=> callback() }>{ title }</button> ) : null;
 }
     
 

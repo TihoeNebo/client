@@ -1,16 +1,13 @@
-﻿import React, { useContext } from "react";
-import UserContext from "./UserContext"
+﻿import React, { useState } from "react";
+import AuthForm from "./AuthForm.js";
 
 export default function AuthenticationMenu() {
-    const [context, setContext] = useContext(UserContext);
-    const buttonSwitches = {
-        createForumButton: true,
-        createTopicButton: true,
-        createPostButton: true
-    };
+    const [formType, setFormType] = useState(null);
+    const logIn = () => setFormType("LogIn");
     return (
         <div>
-            <button onClick={ () => setContext(buttonSwitches)}>Войти</button>
+            <button onClick={ logIn }>Войти</button>
+            <AuthForm formType={ formType } />
         </div>
     )
 }

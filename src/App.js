@@ -8,12 +8,15 @@ import UserContext from './components/UserContext';
 import HeadElems from './HeadElems';
 
 function App() {
-    const buttonSwitches = {
-        createForumButton: false,
-        createTopicButton: false,
-        createPostButton: false
-    };
-    const [context, setContext] = useState(buttonSwitches);
+    const userData = {
+        level: 0,
+        switches: {
+            createForumButton: false,
+            createTopicButton: false,
+            createPostButton: false
+        }
+    }
+    const [context, setContext] = useState(userData);
     return (
         <UserContext.Provider value={[context, setContext]}>
             <HeadElems />

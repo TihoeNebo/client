@@ -8,12 +8,13 @@ import App from './App';
 
 
 ReactDOM.render(
-    <React.StrictMode>
+
+    
         
             <App />
         
-    </React.StrictMode>,
-    document.getElementsByTagName('body')[0]
+    ,
+    document.getElementsByClassName('App')[0]
 );
 
 

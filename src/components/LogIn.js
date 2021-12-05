@@ -6,8 +6,9 @@ export default function LogIn() {
     const [_, setContext] = useContext(UserContext);
     const changeForm = e => setData({ ...data, [e.target.name]: e.target.value });
     const getUserData = async () => {
-        const userData = await sendForm(data);
         
+        const userData = await sendForm(data);
+        console.log("getuserdata")
         class Switches {
             constructor(level) {
                 this.createForumButton = (level > 3);
@@ -31,9 +32,8 @@ export default function LogIn() {
             
         </div>
     )
-    return null;
 }
 
 function sendForm(data) {
-    return { level: 2 };
+    return { name: "Vasya", level: 2 };
 }

@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, { useEffect, useState } from "react";
 import ConditionButton from "../components/ConditionButton"
 import { Link, useParams } from "react-router-dom";
 import topicsData from "../tsource.js";
@@ -9,7 +9,11 @@ import TopicList from "../components/TopicList.js";
 
 export default function ForumPage() {
     const { forumURN } = useParams();
-    const { forum, topics } = getForumList(forumURN);
+    const [data, setData] = useState({ forum: {}, topics: []});
+    useEffect(() => {
+        setData(getForumList(forumURN));
+    })
+    const { forum, topics } = data;
 
     return (
         <div>

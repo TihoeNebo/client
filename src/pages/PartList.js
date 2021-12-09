@@ -9,7 +9,7 @@ const PartList = () => {
     useEffect(() => {
         console.log("setparts")
         setParts(partsData)
-    })
+    }, [true] )
     const partList = parts.map(data => <Part part={data} />);
     return (
         <div className="parts">

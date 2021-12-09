@@ -35,5 +35,11 @@ export default function LogIn() {
 }
 
 function sendForm(data) {
-    return { name: "Vasya", level: 2 };
+    return {
+        id: 17,
+        name: "Vasya",
+        level: 2,
+        newNoticesCount: 3,
+        newMessagesCount: 2
+    };
 }

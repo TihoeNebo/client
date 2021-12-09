@@ -9,6 +9,7 @@ import HeadElems from './HeadElems';
 
 function App() {
     const userData = {
+        name: null,
         level: 0,
         switches: {
             createForumButton: false,
@@ -19,9 +20,10 @@ function App() {
     const [context, setContext] = useState(userData);
     return (
         <UserContext.Provider value={[context, setContext]}>
-            <HeadElems />
+            
             <main>
                 <BrowserRouter>
+                    <HeadElems />
                     <Routes>
                         <Route exact path='/' element={<PartList />} />
                         <Route exact path='/:forumURN' element={<ForumPage />} />

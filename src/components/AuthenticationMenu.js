@@ -1,10 +1,12 @@
 ﻿import React, { useState, useContext } from "react";
 import AuthForm from "./AuthForm.js";
 import UserContext from './UserContext';
+import LoginedMenu from "./LoginedMenu";
 
 export default function AuthenticationMenu() {
     const [formType, setFormType] = useState(null);
     const [user, setContext] = useContext(UserContext);
+    const noticesOpening = useState(false);
     
     const userData = {
         level: 0,
@@ -23,18 +25,12 @@ export default function AuthenticationMenu() {
     if (!user.level) {
         return (
             <div>
-                <button onClick={logIn}>Войти</button> /
+                <button onClick={logIn}>Войти</button> /&nbsp;
                 <button onClick={register}>Регистрация</button>
                 <AuthForm formType={formType} setFormType={ setFormType } />
             </div>
         )
     } else {
-        return (
-            <div>
-                <span>{user.name}</span>
-                {user.level === 1 ? "На ваш e-mail вышлено письмо с ссылкой для подтверждения указанного адреса. Пожалуйста, проверьте почту." : null }
-                <button onClick={ logOut }>Выйти</button>
-            </div>
-            )
+        return LoginedMenu(noticesOpening, logOut);
     }
 }

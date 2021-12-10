@@ -1,21 +1,35 @@
-﻿import React, { useContext, useState } from "react";
+﻿import React, { useContext, useState, useEffect } from "react";
 import UserContext from "./UserContext.js";
-import NoticesList from "./NoticesList.js";
+import List from "./List.js";
+import Notice from "./Notice.js";
+import Sender from "./Sender.js";
 
 
 
-export default function LoginedMenu([isNoticesOpened, setNoticesOpening], logOut ) {
-    
-    
+export default function LoginedMenu({ logOut }) {
+    const [isNoticesOpened, setNoticesOpening] = useState(false);
+    const [isSendersOpened, setSendersOpening] = useState(false);
     const [user, setContext] = useContext(UserContext);
 
-    const closeList = () => {
-        setNoticesOpening(false);
-        window.removeEventListener("click", closeList);
+    const setCloseList = (setComponentOpening) => {
+        return function closeList() {
+            setComponentOpening(false);
+            window.removeEventListener("click", closeList);
+        }
     }
-    const callNoticesList = () => setNoticesOpening(true);
+    const openList = (setComponentOpening) => {
+        return () => setComponentOpening(true);
+    }
+    const callMessagesWindow = (e) => {
+            if (e.target.classList.contains("sender")) console.log(e.target.dataset.id);
+        
+    }
+    
 
-    if (user.level < 1) return null;
+    useEffect(() => {
+        if (!isSendersOpened) return;
+        document.addEventListener("click", callMessagesWindow);
+    }, [isSendersOpened])
 
     return (
         <div>
@@ -25,15 +39,17 @@ export default function LoginedMenu([isNoticesOpened, setNoticesOpening], logOut
                 <li>
                     Профиль
                 </li>
-                <li onClick={ callNoticesList }>
+                <li onClick={ openList(setNoticesOpening) }>
                     Уведомления <span>{user.newNoticesCount}</span>
-                    {(isNoticesOpened) ? <NoticesList userId={user.id} closeList={closeList} /> : null }
+                    {(isNoticesOpened) ? <List url={"/notices"} Component={ Notice } closeList={setCloseList(setNoticesOpening)} /> : null }
                 </li>
-                <li>
-                    Сообщения <span>{ user.newMessagesCount }</span>
+                <li onClick={openList(setSendersOpening)}>
+                    Сообщения <span>{user.newMessagesCount}</span>
+                    {(isSendersOpened) ? <List url={"/senders"} Component={Sender} closeList={setCloseList(setSendersOpening)} /> : null}
                 </li>
             </ul>
             <button onClick={logOut}>Выйти</button>
+
         </div>
     )
 }

@@ -40,6 +40,6 @@ function sendForm(data) {
         name: "Vasya",
         level: 2,
         newNoticesCount: 3,
-        newMessagesCount: 2
+        newMessagesCount: 11
     };
 }

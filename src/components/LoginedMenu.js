@@ -1,15 +1,18 @@
-﻿import React, { useContext, useState, useEffect } from "react";
-import UserContext from "./UserContext.js";
+﻿import React, { useState, useEffect, useCallback } from "react";
+import { useUserContext } from "./UserContext.js";
 import List from "./List.js";
 import Notice from "./Notice.js";
 import Sender from "./Sender.js";
+import Messager from "./Messager.js";
 
 
 
 export default function LoginedMenu({ logOut }) {
     const [isNoticesOpened, setNoticesOpening] = useState(false);
     const [isSendersOpened, setSendersOpening] = useState(false);
-    const [user, setContext] = useContext(UserContext);
+    const [isMessagerOpened, setMessagerOpening] = useState(false);
+    const [senderId, setSenderId] = useState(null);
+    const [user, setContext] = useUserContext();
 
     const setCloseList = (setComponentOpening) => {
         return function closeList() {
@@ -21,12 +24,15 @@ export default function LoginedMenu({ logOut }) {
         return () => setComponentOpening(true);
     }
     const callMessagesWindow = (e) => {
-            if (e.target.classList.contains("sender")) console.log(e.target.dataset.id);
-        
+        if (e.target.classList.contains("sender")) {
+            setSenderId(e.target.dataset.id);
+            setMessagerOpening(true);
+            
+        } 
+        document.removeEventListener("click", callMessagesWindow);
     }
     
-
-    useEffect(() => {
+    useEffect( () => {
         if (!isSendersOpened) return;
         document.addEventListener("click", callMessagesWindow);
     }, [isSendersOpened])
@@ -49,7 +55,7 @@ export default function LoginedMenu({ logOut }) {
                 </li>
             </ul>
             <button onClick={logOut}>Выйти</button>
-
+            {isMessagerOpened ? <Messager senderId={senderId} /> : null}
         </div>
     )
 }

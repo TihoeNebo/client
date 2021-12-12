@@ -1,12 +1,12 @@
-﻿import React, { useState, useContext } from "react";
-import UserContext from './UserContext';
+﻿import React, { useState } from "react";
+import { useUserContext } from './UserContext';
 import LoginedMenu from "./LoginedMenu";
 import UnloginedMenu from "./UnloginedMenu";
 
 export default function AuthenticationMenu() {
 
     const [formType, setFormType] = useState(null);
-    const [user, setContext] = useContext(UserContext);
+    const [user, setContext] = useUserContext();
         
     const userData = {
         level: 0,

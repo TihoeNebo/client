@@ -1,9 +1,9 @@
-﻿import React, { useState, useContext } from "react";
-import UserContext from './UserContext';
+﻿import React, { useState } from "react";
+import { useUserContext } from './UserContext';
 
 export default function LogIn() {
     const [data, setData] = useState({ email: null, pass: null });
-    const [_, setContext] = useContext(UserContext);
+    const [_, setContext] = useUserContext();
     const changeForm = e => setData({ ...data, [e.target.name]: e.target.value });
     const getUserData = async () => {
         

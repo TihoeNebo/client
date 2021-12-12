@@ -1,29 +1,30 @@
 const messagesSource = [
     {
-        author: {
-            id: 111,
-            name: "Putin"
-        },
-        newMessagesCount: 6
+        type: "to",
+        date: "12:02 01-02-2022",
+        isReaded: true,
+        content: "rteyryrty!"
     }, {
-        author: {
-            id: 24,
-            name: "Anna"
-        },
-        newMessagesCount: 1
+        type: "from",
+        date: "12:21 01-02-2022",
+        isReaded: true,
+        content: "ghj ugyuy guy ggkjgj gchgfghfgh  hjkkhk!"
     }, {
-        author: {
-            id: 33,
-            name: "Lena"
-        },
-        newMessagesCount: 4
+        type: "to",
+        date: "12:31 01-02-2022",
+        isReaded: true,
+        content: "dfgdh gfhfg?"
     }, {
-        author: {
-            id: 165,
-            name: "Ohi"
-        },
-        newMessagesCount: 0
-    },
+        type: "from",
+        date: "12:35 01-02-2022",
+        isReaded: false,
+        content: "ghj ugyuy guy ggkjgj gchgfghfgh  hjkkhk!"
+    }, {
+        type: "from",
+        date: "12:36 01-02-2022",
+        isReaded: false,
+        content: "ghj uãùçãùçùy guy ggkjþþþ"
+    }
 ];
 
 export default messagesSource;

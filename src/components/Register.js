@@ -1,5 +1,5 @@
-﻿import React, { useState, useContext } from "react";
-import UserContext from './UserContext';
+﻿import React, { useState } from "react";
+import { useUserContext } from './UserContext';
 
 
 export default function Register( setFormType ) {
@@ -9,7 +9,7 @@ export default function Register( setFormType ) {
         name: null
     });
     const [isPassConfirmed, setIsPassConfirmed] = useState(false);
-    const [user, setContext] = useContext(UserContext);
+    const [user, setContext] = useUserContext();
     const changeForm = e => setData({ ...data, [e.target.name]: e.target.value });
     const confirmPass = e => setIsPassConfirmed(data.pass === e.target.value);
     const sendForm = () => {

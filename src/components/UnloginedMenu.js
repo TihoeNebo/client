@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from "react";
+﻿import React from "react";
 import AuthForm from "./AuthForm.js";
 
 export default function UnloginedMenu({ formType, setFormType }) {

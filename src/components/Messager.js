@@ -6,33 +6,36 @@ import { useUserContext } from "./UserContext.js";
 import sendersSource from "../senderssource.js";
 import messagesSource from "../messagessource.js";
 
-export default function Messager({ senderId }) {
+export default function Messager({ renderedUser }) {
     const [userData, setContext] = useUserContext();
     const [senders, setSenders] = useState([]);
     const [messages, setMessages] = useState([]);
-    const [renderedUserId, setRenderedUser] = useState(senderId);
+    const [renderedUserId, setRenderedUser] = renderedUser;
 
     useEffect(async () => {
         setSenders(await getSenders());
-    }, [true]);
+    }, [renderedUserId]);
     useEffect(async () => {
         setMessages(await getMessages(renderedUserId));
         
-    }, [true]);
-    console.log(senders)
+    }, [renderedUserId]);
+    
+
     const sendersList = senders.length ? senders.map(
         (senderData) => {
-            return Sender(senderData, (senderData.author.id === renderedUserId) )
+            return Sender(setRenderedUser)(senderData, (senderData.author.id === renderedUserId));
         }
     ) : "Пусто";
+    const messagesList = messages.length ? messages.map(
+        (messageData) => Message(messageData)) : "Сообщений нет.";
     
     const titleData = senders.length ? senders.find(data => data.author.id === +renderedUserId) : null;
 
-    const messagesList = messages.length ? messages.map(
-        (messageData) =>   Message( messageData ) ) : "Сообщений нет.";
+    
 
     return (
         <article>
+            <button onClick={() => setRenderedUser(null)}>[X]</button>
             {titleData ? (
                 <header>
                     <h3>
@@ -49,7 +52,9 @@ export default function Messager({ senderId }) {
                 )
             }
             <section>
-                {sendersList}
+                <ul>
+                    {sendersList}
+                </ul>
             </section>
             <section>
                 {messagesList}

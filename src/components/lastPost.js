@@ -1,5 +1,6 @@
 ﻿import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Author from './Author.js';
 
 export default function LastPost({ lastPost }) {
     const {
@@ -14,7 +15,7 @@ export default function LastPost({ lastPost }) {
         <div>
             <Link to={linkPath}>{topic.theme}</Link>
             <p>Дата: {date},
-                Автор: <Link to={`/profile/${author.id}`}>{author.name}</Link></p>
+                Автор: <Author author={ author } /></p>
         </div>
         )
 }

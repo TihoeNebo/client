@@ -6,11 +6,11 @@ export default function Notice(noticeData) {
     
     return (
 
-        <div className={isOpened ? "Opened" : "New"}>
+        <li className={isOpened ? "Opened" : "New"}>
 
             <Link to={`${topic.linkPath}#${lastPost.id}`} ><p>Новое сообщение в теме "{topic.theme} - {topic.comment}"</p></Link>
             <Link to={`/${forum.urn}`}>Форум "{ forum.name }". </Link>
             Дата: {lastPost.date}, автор: <Link to={`/profile/${lastPost.author.id}`} >{lastPost.author.name}</Link>
-        </div>
+        </li>
     );
 }

@@ -11,12 +11,12 @@ export default function List({ url, Component, closeList }) {
 
     if (!items.length) return null;
 
-    const itemsList = items.map(itemData => Component(itemData) );
+    const itemsList = items.map(itemData => Component(itemData, true) );
     return (
 
-        <div>
+        <ul>
             {itemsList}
-        </div>
+        </ul>
     );
 }
 

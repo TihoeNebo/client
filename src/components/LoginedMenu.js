@@ -10,8 +10,8 @@ import Messager from "./Messager.js";
 export default function LoginedMenu({ logOut }) {
     const [isNoticesOpened, setNoticesOpening] = useState(false);
     const [isSendersOpened, setSendersOpening] = useState(false);
-    const [isMessagerOpened, setMessagerOpening] = useState(false);
-    const [senderId, setSenderId] = useState(null);
+    const renderedUser = useState(null);
+    const [renderedUserId, setRenderedUser] = renderedUser;
     const [user, setContext] = useUserContext();
 
     const setCloseList = (setComponentOpening) => {
@@ -23,19 +23,7 @@ export default function LoginedMenu({ logOut }) {
     const openList = (setComponentOpening) => {
         return () => setComponentOpening(true);
     }
-    const callMessagesWindow = (e) => {
-        if (e.target.classList.contains("sender")) {
-            setSenderId(e.target.dataset.id);
-            setMessagerOpening(true);
-            
-        } 
-        document.removeEventListener("click", callMessagesWindow);
-    }
     
-    useEffect( () => {
-        if (!isSendersOpened) return;
-        document.addEventListener("click", callMessagesWindow);
-    }, [isSendersOpened])
 
     return (
         <div>
@@ -51,11 +39,11 @@ export default function LoginedMenu({ logOut }) {
                 </li>
                 <li onClick={openList(setSendersOpening)}>
                     Сообщения <span>{user.newMessagesCount}</span>
-                    {(isSendersOpened) ? <List url={"/senders"} Component={Sender} closeList={setCloseList(setSendersOpening)} /> : null}
+                    {(isSendersOpened) ? <List url={"/senders"} Component={Sender(setRenderedUser)} closeList={setCloseList(setSendersOpening)} /> : null}
                 </li>
             </ul>
             <button onClick={logOut}>Выйти</button>
-            {isMessagerOpened ? <Messager senderId={senderId} /> : null}
+            {renderedUserId ? <Messager renderedUser={renderedUser} /> : null}
         </div>
     )
 }

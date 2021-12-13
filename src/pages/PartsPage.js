@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from "react";
-import Part from '../components/part.js';
+import Part from '../components/Part.js';
 import partsData from "../source.js";
-import ConditionButton from "../components/ConditionButton"
+import ConditionButton from "../components/ConditionButton";
 
-const PartList = () => {
+export default function PartsPage() {
     console.log("partlist")
     const [parts, setParts] = useState([]);
     useEffect(() => {
@@ -24,4 +24,4 @@ const PartList = () => {
     )
 }
 
-export default PartList;
+

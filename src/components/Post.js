@@ -1,11 +1,11 @@
 ﻿import React from 'react';
-import { Link } from "react-router-dom";
+import Author from "./Author.js";
 
 export default function Post({ post }) {
     return (
         <div key={post.id}>
             <div>
-                Автор: <strong><Link to={`/profile/${post.author.id}`}>{post.author.name}</Link></strong>.<br />
+                Автор: <strong><Author author={post.author} /></strong>.<br />
                 Дата: {post.date}.
             </div>
             <div>

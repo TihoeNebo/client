@@ -2,9 +2,7 @@
 import ConditionButton from "../components/ConditionButton"
 import { Link, useParams } from "react-router-dom";
 import topicsData from "../tsource.js";
-import TopicList from "../components/TopicList.js";
-
-
+import Topic from "../components/Topic.js";
 
 
 export default function ForumPage() {
@@ -14,6 +12,7 @@ export default function ForumPage() {
         setData(getForumList(forumURN));
     })
     const { forum, topics } = data;
+    const topicList = topics.map(topic => <Topic topic={topic} />);
 
     return (
         <div>
@@ -23,7 +22,9 @@ export default function ForumPage() {
             <div>
                 <h2>Форум {forum.name}</h2>
             </div>
-            <TopicList topics={topics} />
+            <div>
+                {topicList}
+            </div>
             <ConditionButton
                 condition="createTopicButton"
                 title="Создать тему"

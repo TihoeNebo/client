@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import PartList from './pages/PartList.js';
+import PartsPage from './pages/PartsPage.js';
 import ForumPage from './pages/ForumPage.js';
 import TopicPage from './pages/TopicPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -15,7 +15,7 @@ function App() {
                 <HeadElems />
                 <main>
                     <Routes>
-                        <Route exact path='/' element={<PartList />} />
+                        <Route exact path='/' element={<PartsPage />} />
                         <Route exact path='/:forumURN' element={<ForumPage />} />
                         <Route exact path='/:forumURN/:topicId' element={<TopicPage />} />
                     </Routes>

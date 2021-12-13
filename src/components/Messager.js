@@ -1,7 +1,8 @@
 ﻿import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Author from "./Author.js";
 import Sender from "./Sender.js";
 import Message from "./Message.js";
+import Redactor from "./Redactor.js";
 import { useUserContext } from "./UserContext.js";
 import sendersSource from "../senderssource.js";
 import messagesSource from "../messagessource.js";
@@ -10,7 +11,17 @@ export default function Messager({ renderedUser }) {
     const [userData, setContext] = useUserContext();
     const [senders, setSenders] = useState([]);
     const [messages, setMessages] = useState([]);
+
     const [renderedUserId, setRenderedUser] = renderedUser;
+    const messageData = useState(
+        {
+            type: "privateMessage",
+            to: renderedUserId,
+            from: userData.id,
+            date: null,
+            content: ""
+        }
+    );
 
     useEffect(async () => {
         setSenders(await getSenders());
@@ -39,16 +50,14 @@ export default function Messager({ renderedUser }) {
             {titleData ? (
                 <header>
                     <h3>
-                        <Link to={`/profile/${titleData.author.id}`}>
-                            {titleData.author.name}
-                        </Link>
+                        <Author author={titleData.author} />
                     </h3>
                     <span>
                         {titleData.author.status}
                     </span>
                 </header>
             ) : (
-                    <header></header>
+                    <header>Пользователь не выбран</header>
                 )
             }
             <section>
@@ -59,10 +68,7 @@ export default function Messager({ renderedUser }) {
             <section>
                 {messagesList}
             </section>
-            <div>
-                <textarea />
-                <button>Отправить</button>
-            </div>
+            <Redactor messageData={messageData} sendMessage={sendMessage} />
         </article>
     );
 }
@@ -73,4 +79,8 @@ async function getSenders() {
 
 async function getMessages(senderId) {
     return messagesSource;
+}
+
+async function sendMessage(messageData) {
+        return;
 }

@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import LastPost from './lastPost.js';
+import LastPost from './LastPost.js';
 import { Link } from 'react-router-dom';
 
 export default function Forum({ forum }) {

@@ -6,24 +6,18 @@ import Redactor from "../components/Redactor.js";
 import { useUserContext } from "../components/UserContext.js"
 
 
-export default function ForumPage() {
+export default function TopicPage() {
     const { forumURN, topicId } = useParams();
-    const [data, setData] = useState({ forum: {}, topic: {}, posts: [] });
-    const messageData = useState(
-        {
-            type: "post",
-            forumURN: forumURN,
-            topicId: topicId,
-            date: null,
-            content: ""
-        }
-    );
     const [userData] = useUserContext();
-    useEffect(() => {
-        setData( getPostList(forumURN, topicId) );
-    })
+    const [postData, setPostData] = useState({ forum: {}, topic: {}, posts: [] });
+    const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
+    const launchReloading = () => setReloadingLauncher(!reloadingLauncherResult);
+    
+    useEffect(async () => {
+        setPostData( await getPostList(forumURN, topicId) );
+    }, [reloadingLauncherResult])
 
-    const { forum, topic, posts } = data;
+    const { forum, topic, posts } = postData;
     const postList = posts.map(post => <Post post={post} />);
 
     return (
@@ -41,10 +35,10 @@ export default function ForumPage() {
             </div>
             {
                 userData.level > 1 ?
-                    <>
+                    <Redactor launchReloading={launchReloading}>
                         <strong> Написать сообщение:</strong>
-                        <Redactor messageData={messageData} sendMessage={sendMessage} />
-                    </> : null
+                        <PostRedactor forumURN={forumURN} />
+                    </Redactor> : null
             }
             
         </div>
@@ -57,6 +51,3 @@ function getPostList(forumURN, topicId) {
     
 }
 
-async function sendMessage(messageData) {
-    return;
-}

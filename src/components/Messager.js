@@ -3,6 +3,7 @@ import Author from "./Author.js";
 import Sender from "./Sender.js";
 import Message from "./Message.js";
 import Redactor from "./Redactor.js";
+import MessageRedactor from "./MessageRedactor.js";
 import { useUserContext } from "./UserContext.js";
 import sendersSource from "../senderssource.js";
 import messagesSource from "../messagessource.js";
@@ -11,25 +12,19 @@ export default function Messager({ renderedUser }) {
     const [userData, setContext] = useUserContext();
     const [senders, setSenders] = useState([]);
     const [messages, setMessages] = useState([]);
+    const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
+    const launchReloading = () => setReloadingLauncher(!reloadingLauncherResult);
 
     const [renderedUserId, setRenderedUser] = renderedUser;
-    const messageData = useState(
-        {
-            type: "privateMessage",
-            to: renderedUserId,
-            from: userData.id,
-            date: null,
-            content: ""
-        }
-    );
+    
 
     useEffect(async () => {
         setSenders(await getSenders());
-    }, [renderedUserId]);
+    }, [renderedUserId, reloadingLauncherResult]);
     useEffect(async () => {
         setMessages(await getMessages(renderedUserId));
         
-    }, [renderedUserId]);
+    }, [renderedUserId, reloadingLauncherResult]);
     
 
     const sendersList = senders.length ? senders.map(
@@ -68,7 +63,9 @@ export default function Messager({ renderedUser }) {
             <section>
                 {messagesList}
             </section>
-            <Redactor messageData={messageData} sendMessage={sendMessage} />
+            <Redactor launchReloading={launchReloading}> 
+                <MessageRedactor recipientId={renderedUserId} />
+            </Redactor>
         </article>
     );
 }
@@ -81,6 +78,3 @@ async function getMessages(senderId) {
     return messagesSource;
 }
 
-async function sendMessage(messageData) {
-        return;
-}

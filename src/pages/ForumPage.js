@@ -3,17 +3,31 @@ import ConditionButton from "../components/ConditionButton"
 import { Link, useParams } from "react-router-dom";
 import topicsData from "../tsource.js";
 import Topic from "../components/Topic.js";
+import TopicRedactor from "../components/TopicRedactor.js";
+import PostRedactor from "../components/PostRedactor.js";
+import Redactor from "../components/Redactor.js";
 
 
 export default function ForumPage() {
     const { forumURN } = useParams();
-    const [data, setData] = useState({ forum: {}, topics: []});
-    useEffect(() => {
-        setData(getForumList(forumURN));
-    })
+    const [data, setData] = useState(null);
+
+    const [isRedactorOpened, setRedactorOpening] = useState(false);
+    const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
+    const closeRedactor = () => {
+        setRedactorOpening(false);
+        setReloadingLauncher(!reloadingLauncherResult);
+    }
+
+    useEffect(async () => {
+        await setData(getForumList(forumURN));
+    }, [reloadingLauncherResult]);
+
+    if (!data) return null;
+
     const { forum, topics } = data;
     const topicList = topics.map(topic => <Topic topic={topic} />);
-
+    
     return (
         <div>
             <div>
@@ -28,8 +42,16 @@ export default function ForumPage() {
             <ConditionButton
                 condition="createTopicButton"
                 title="Создать тему"
-                callback={() => console.log("Клик тему!")}
+                callback={() => setRedactorOpening(true)}
             />
+            {isRedactorOpened ?
+                <Redactor closeRedactor={closeRedactor} >
+                    <h3>Новая тема:</h3>
+                    <TopicRedactor  />
+                    <PostRedactor  />
+                </Redactor>
+                : null
+            }
         </div>
         )
 

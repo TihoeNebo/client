@@ -36,9 +36,17 @@ export default function TopicPage() {
             </div>
             {
                 userData.level > 1 ?
-                    <Redactor launchReloading={launchReloading}>
+                    <Redactor launchReloading={launchReloading} dataObject={
+                        {
+                            type: "CreatePost",
+                            post: {
+                                forumURN: forumURN,
+                                topicId: topicId
+                            }
+                        }
+                    }>
                         <strong> Написать сообщение:</strong>
-                        <PostRedactor forumURN={forumURN} topicId={+topicId} />
+                        <PostRedactor />
                     </Redactor> : null
             }
             

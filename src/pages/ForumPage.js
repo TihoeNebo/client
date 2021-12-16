@@ -40,7 +40,15 @@ export default function ForumPage() {
                 title="Создать тему"
                 reloadingLauncher={reloadingLauncher}
             >
-                <Redactor>
+                <Redactor dataObject={{
+                    type: "CreateTopic",
+                    topic: {
+                        forumURN: forumURN
+                    },
+                    post: {
+                        forumURN: forumURN
+                    }
+                }}>
                     <h3>Новая тема:</h3>
                     <TopicRedactor  />
                     <PostRedactor  />

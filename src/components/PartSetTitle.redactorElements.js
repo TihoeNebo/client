@@ -1,16 +1,16 @@
 ﻿import React from "react";
 
-export default function PartCall({ messageState = null, partId = null }) {
+export default function PartSetTitle({ messageState = null}) {
 
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
-    
+
     const textHandler = (e) => {
         setMessageData(
             {
                 ...messageData,
                 part: {
-                    id: partId,
+                    ...messageData.part,
                     name: e.target.value
                 }
             }

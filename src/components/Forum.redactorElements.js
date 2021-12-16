@@ -1,19 +1,14 @@
 ﻿import React from "react";
 
-export default function ForumRedactor({ messageState = null, forumURN = null }) {
+export default function ForumRedactor({ messageState = null }) {
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
-    const forumData = {
-        urn: forumURN
-        
-    };
 
     const textHandler = (e) => setMessageData(
         {
             ...messageData,
             forum: {
                 ...messageData.forum,
-                ...forumData,
                 [e.target.name]: e.target.value
             }
         }

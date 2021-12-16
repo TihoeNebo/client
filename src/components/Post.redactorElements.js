@@ -1,13 +1,8 @@
 ﻿import React from "react";
 
-export default function PostRedactor({ messageState = null, forumURN = null, topicId = null, postId = null }) {
+export default function PostRedactor({ messageState = null}) {
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
-    const postData = {
-        forumURN: forumURN,
-        topicId: topicId,
-        postId: postId
-    };
 
     return (
         <section>
@@ -17,7 +12,6 @@ export default function PostRedactor({ messageState = null, forumURN = null, top
                             ...messageData,
                             post: {
                                 ...messageData.post,
-                                ...postData,
                                 content: e.target.value
                             }
                         })

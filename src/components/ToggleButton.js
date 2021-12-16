@@ -29,10 +29,10 @@ export default function ToggleButton({ allowedLevel, title, reloadingLauncher, c
         <>
             {
                 userData.level >= +allowedLevel ? (
-                    <>
+                    <div >
                         <button onClick={() => setRedactorOpening(true)}>{title}</button>
                         {isRedactorOpened ? Elements : null}
-                    </>
+                    </div>
 
                 ) : null
             }

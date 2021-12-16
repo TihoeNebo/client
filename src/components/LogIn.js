@@ -8,18 +8,9 @@ export default function LogIn() {
     const getUserData = async () => {
         
         const userData = await sendForm(data);
-        console.log("getuserdata")
-        class Switches {
-            constructor(level) {
-                this.createForumButton = (level > 3);
-                this.createTopicButton = (level > 1);
-                this.createPostButton = (level > 1);
-            }
-        }
-
+        
         if (!userData) return null;
 
-        userData.switches = new Switches(userData.level);
         return setContext(userData);
     }
 
@@ -38,7 +29,7 @@ function sendForm(data) {
     return {
         id: 17,
         name: "Vasya",
-        level: 2,
+        level: 4,
         newNoticesCount: 3,
         newMessagesCount: 11
     };

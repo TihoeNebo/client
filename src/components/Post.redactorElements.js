@@ -6,8 +6,7 @@ export default function PostRedactor({ messageState = null, forumURN = null, top
     const postData = {
         forumURN: forumURN,
         topicId: topicId,
-        postId: postId,
-        content: null
+        postId: postId
     };
 
     return (
@@ -17,6 +16,7 @@ export default function PostRedactor({ messageState = null, forumURN = null, top
                         {
                             ...messageData,
                             post: {
+                                ...messageData.post,
                                 ...postData,
                                 content: e.target.value
                             }

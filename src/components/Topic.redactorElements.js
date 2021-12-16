@@ -1,19 +1,18 @@
-﻿import React, { useEffect } from "react";
+﻿import React from "react";
 
 export default function TopicRedactor({ messageState = null, forumURN = null, topicId = null }) {
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
     const topicData = {
         forumURN: forumURN,
-        topicId: topicId,
-        theme: null,
-        comment: null
+        topicId: topicId
     };
             
     const textHandler = (e) => setMessageData(
         {
             ...messageData,
             topic: {
+                ...messageData.topic,
                 ...topicData,
                 [e.target.name]: e.target.value
             }

@@ -6,12 +6,7 @@ export const UserProvider = ({ children }) => {
     
     const userData = {
         name: null,
-        level: 0,
-        switches: {
-            createForumButton: false,
-            createTopicButton: false,
-            createPostButton: false
-        }
+        level: 0
     }
     const [context, setContext] = useState(userData);
 

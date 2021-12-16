@@ -1,10 +1,10 @@
 ﻿import React, { useEffect, useState } from "react";
-import ConditionButton from "../components/ConditionButton"
+import ToggleButton from "../components/ToggleButton";
 import { Link, useParams } from "react-router-dom";
 import topicsData from "../tsource.js";
 import Topic from "../components/Topic.js";
-import TopicRedactor from "../components/TopicRedactor.js";
-import PostRedactor from "../components/PostRedactor.js";
+import TopicRedactor from "../components/Topic.redactorElements.js";
+import PostRedactor from "../components/Post.redactorElements.js";
 import Redactor from "../components/Redactor.js";
 
 
@@ -12,12 +12,8 @@ export default function ForumPage() {
     const { forumURN } = useParams();
     const [data, setData] = useState(null);
 
-    const [isRedactorOpened, setRedactorOpening] = useState(false);
-    const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
-    const closeRedactor = () => {
-        setRedactorOpening(false);
-        setReloadingLauncher(!reloadingLauncherResult);
-    }
+    const reloadingLauncher = useState(false);
+    const [reloadingLauncherResult, setReloadingLauncher] = reloadingLauncher;
 
     useEffect(async () => {
         await setData(getForumList(forumURN));
@@ -39,19 +35,17 @@ export default function ForumPage() {
             <div>
                 {topicList}
             </div>
-            <ConditionButton
-                condition="createTopicButton"
+            <ToggleButton
+                allowedLevel="2"
                 title="Создать тему"
-                callback={() => setRedactorOpening(true)}
-            />
-            {isRedactorOpened ?
-                <Redactor closeRedactor={closeRedactor} >
+                reloadingLauncher={reloadingLauncher}
+            >
+                <Redactor>
                     <h3>Новая тема:</h3>
                     <TopicRedactor  />
                     <PostRedactor  />
                 </Redactor>
-                : null
-            }
+            </ToggleButton>
         </div>
         )
 

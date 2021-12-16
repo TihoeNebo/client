@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import postsData from "../psource.js";
 import Post from "../components/Post.js";
 import Redactor from "../components/Redactor.js";
+import PostRedactor from "../components/Post.redactorElements.js";
 import { useUserContext } from "../components/UserContext.js"
 
 
@@ -37,7 +38,7 @@ export default function TopicPage() {
                 userData.level > 1 ?
                     <Redactor launchReloading={launchReloading}>
                         <strong> Написать сообщение:</strong>
-                        <PostRedactor forumURN={forumURN} />
+                        <PostRedactor forumURN={forumURN} topicId={+topicId} />
                     </Redactor> : null
             }
             

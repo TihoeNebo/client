@@ -5,7 +5,7 @@ import PartRedactorMenu from "./PartRedactorMenu.js";
 export default function Part({ part, reloadingLauncher }) {
 
     const { partId, partName, forums } = part;
-    const forumList = forums.map(forum => <Forum forum={forum} />);
+    const forumList = forums.map(forum => <Forum forum={forum} reloadingLauncher={reloadingLauncher} partId={partId} />);
 
     return (
         <section className="part" key={partId} >

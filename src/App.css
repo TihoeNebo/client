@@ -36,10 +36,10 @@
     transform: rotate(360deg);
   }
 }
-.menu {
+.menu, .forum_menu {
     display: none;
 }
 
-.part:hover .menu {
+.part:hover .menu, .forum:hover .forum_menu {
     display: block !important;
 }

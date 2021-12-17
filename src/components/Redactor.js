@@ -1,9 +1,9 @@
 ﻿import React, { useState } from "react";
 
 
-export default function Redactor({ children, closeRedactor = null, launchReloading = null, dataObject = null }) {
+export default function Redactor({ children, closeRedactor = null, launchReloading = null, data = null }) {
     
-    const messageState = useState(dataObject);
+    const messageState = useState(data);
     const [messageData, setMessageData] = messageState;
     const addMessageState = (element) => { 
             

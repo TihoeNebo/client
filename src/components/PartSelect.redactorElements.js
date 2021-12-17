@@ -1,17 +1,27 @@
 ﻿import React, { useState, useEffect } from "react";
 
-export default function PartSelect({ messageState = null, partId = null }) {
+export default function PartSelect({ messageState, partId = null }) {
 
-    //if (!messageState) return null;
     const [partsData, setPartsData] = useState([]);
+
     const [messageData, setMessageData] = messageState;
 
     useEffect(async () => setPartsData(await getPartsData()), [true]);
+    useEffect(() => {
+        setMessageData(
+            {
+                ...messageData,
+                part: {
+                    id: partId
+                }
+            }
+        );
+    }, [true]);
 
     const partsOptions = partsData.length ? partsData.map((part) => {
-
+               
         return (
-            <option value={part.id} selected={ (part.id === +partId)}>
+            <option value={part.id}>
                 {part.name}
             </option>
         )
@@ -27,12 +37,12 @@ export default function PartSelect({ messageState = null, partId = null }) {
                 }
             }
         );
-    } 
+    }
 
     return (
         <section>
             Выбрать раздел:
-            <select onChange={selectorHandler} name="id" onLoad={selectorHandler} >
+            <select onChange={selectorHandler} name="id" defaultValue={partId}>
                 {partsOptions}
             </select>
         </section>

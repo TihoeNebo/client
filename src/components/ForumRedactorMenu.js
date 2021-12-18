@@ -8,17 +8,31 @@ import { useUserContext } from './UserContext';
 
 export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) {
     const { urn, name } = forum;
-    const changeForumData = {
-        type: "changeForum",
+
+    const renameForumData = {
+        type: "renameForum",
         forum: { name, urn }
+    };
+    const changePartData = {
+        type: "renameForum",
+        forum: { partId: null, name, urn }
     };
     const deleteForumData = {
         type: "deleteForum",
         forum: { urn }
     };
 
-    const [userData] = useUserContext();
-    if (userData.level < 4) return null;
+    const [mainData] = useUserContext();
+    const forumDeletedLaunch = mainData.launchers.forumDeletedLaunch;
+    if (mainData.user.level < 4) return null;
+
+    const ForumDeletedWindow = () => {
+        return (
+            <div>
+                Форум "{name}" отправлен на удаление...
+            </div>
+            )
+    }
 
     return (
         <div className="forum_menu" >
@@ -28,7 +42,7 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
                 title="Переименовать форум"
                 reloadingLauncher={reloadingLauncher}
             >
-                <Redactor data={changeForumData}>
+                <Redactor data={renameForumData}>
                     <ForumRedactor />
                 </Redactor>
             </ToggleButton>
@@ -37,7 +51,7 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
                 title="Переместить в раздел..."
                 reloadingLauncher={reloadingLauncher}
             >
-                <Redactor data={changeForumData}>
+                <Redactor data={changePartData}>
                     <PartSelect partId={partId} />
                 </Redactor>
             </ToggleButton>
@@ -48,7 +62,8 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
             >
                 <ConfurmChoiceWindow
                     textQuestion={`Удалить форум "${name}"?`}
-                    textConfurm={`Форум "${name}" отправлен на удаление...`}
+                    popupWindowLaunch={forumDeletedLaunch}
+                    PopupWindowContent={ForumDeletedWindow}
                     data={deleteForumData}
                 />
             </ToggleButton>

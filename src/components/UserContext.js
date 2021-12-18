@@ -5,8 +5,10 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     
     const userData = {
-        name: null,
-        level: 0
+        user: {
+            name: null,
+            level: 0
+        }
     }
     const [context, setContext] = useState(userData);
 

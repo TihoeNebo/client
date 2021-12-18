@@ -6,26 +6,22 @@ import UnloginedMenu from "./UnloginedMenu";
 export default function AuthenticationMenu() {
 
     const [formType, setFormType] = useState(null);
-    const [user, setContext] = useUserContext();
+    const [mainData, setContext] = useUserContext();
         
     const userData = {
         level: 0,
-        switches: {
-            createForumButton: false,
-            createTopicButton: false,
-            createPostButton: false
-        }
+        name: null
     }
     
     const logOut = () => {
-        setContext(userData);
+        setContext({ ...mainData, user: userData});
         setFormType(null);
     }
     
     return (
        <>
             {
-                user.level !== 0 ?
+                mainData.user.level !== 0 ?
                     <LoginedMenu logOut={logOut} /> :
                     <UnloginedMenu formType={formType} setFormType={setFormType} />
             }

@@ -35,7 +35,7 @@ export default function TopicPage() {
                 {postList}
             </div>
             {
-                userData.level > 1 ?
+                userData.user.level > 1 ?
                     <Redactor launchReloading={launchReloading} dataObject={
                         {
                             type: "CreatePost",

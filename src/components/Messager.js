@@ -4,12 +4,12 @@ import Sender from "./Sender.js";
 import Message from "./Message.js";
 import Redactor from "./Redactor.js";
 import MessageRedactor from "./Message.redactorElements.js";
-import { useUserContext } from "./UserContext.js";
+
 import sendersSource from "../senderssource.js";
 import messagesSource from "../messagessource.js";
 
 export default function Messager({ renderedUser }) {
-    const [userData, setContext] = useUserContext();
+    
     const [senders, setSenders] = useState([]);
     const [messages, setMessages] = useState([]);
     const [reloadingLauncherResult, setReloadingLauncher] = useState(false);

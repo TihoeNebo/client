@@ -22,7 +22,7 @@ export default function ForumPage() {
     if (!data) return null;
 
     const { forum, topics } = data;
-    const topicList = topics.map(topic => <Topic topic={topic} />);
+    const topicList = topics.map(topic => <Topic topic={topic} reloadingLauncher={reloadingLauncher} />);
     
     return (
         <div>

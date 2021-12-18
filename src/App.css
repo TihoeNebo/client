@@ -40,6 +40,6 @@
     display: none;
 }
 
-.part:hover .menu, .forum:hover .forum_menu {
+.part:hover .menu, .forum:hover .forum_menu, .bud {
     display: block !important;
 }

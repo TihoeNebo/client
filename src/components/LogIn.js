@@ -3,7 +3,7 @@ import { useUserContext } from './UserContext';
 
 export default function LogIn() {
     const [data, setData] = useState({ email: null, pass: null });
-    const [_, setContext] = useUserContext();
+    const [mainData, setMainData] = useUserContext();
     const changeForm = e => setData({ ...data, [e.target.name]: e.target.value });
     const getUserData = async () => {
         
@@ -11,7 +11,11 @@ export default function LogIn() {
         
         if (!userData) return null;
 
-        return setContext(userData);
+        return setMainData(
+            {
+                ...mainData,
+                user: userData 
+            });
     }
 
     return (

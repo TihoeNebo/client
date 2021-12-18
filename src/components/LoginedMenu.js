@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from "react";
+﻿import React, { useState } from "react";
 import { useUserContext } from "./UserContext.js";
 import List from "./List.js";
 import Notice from "./Notice.js";
@@ -12,7 +12,8 @@ export default function LoginedMenu({ logOut }) {
     const [isSendersOpened, setSendersOpening] = useState(false);
     const renderedUser = useState(null);
     const [renderedUserId, setRenderedUser] = renderedUser;
-    const [user, setContext] = useUserContext();
+    const [{user}, setContext] = useUserContext();
+    
 
     const setCloseList = (setComponentOpening) => {
         return function closeList() {

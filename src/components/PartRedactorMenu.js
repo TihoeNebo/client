@@ -21,7 +21,7 @@ export default function PartRedactorMenu({ part, reloadingLauncher }) {
     };
 
     const [userData] = useUserContext();
-    if (userData.level < 4) return null;
+    if (userData.user.level < 4) return null;
 
     return (
         <div className="menu">

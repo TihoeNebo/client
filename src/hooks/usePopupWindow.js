@@ -1,17 +1,17 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react"; 
 
 export default function usePopupWindow() {
 
     const [isWindowOpened, setWindowOpened] = useState(false);
     const [PopupWindowContent, setPopupWindowContent] = useState(null);
 
-    const PopupWindow = ({ children, stayHold = false, closeTime = 4000 })=> {
+    const PopupWindow = ({ stayHold = false, closeTime = 4000 })=> {
 
         useEffect(() => {
             if (isWindowOpened && !stayHold) {
                 setTimeout(() => setWindowOpened(false), closeTime);
             }
-        }, [isWindowOpened]);
+        }, [isWindowOpened, PopupWindowContent]);
 
         return (
             <>
@@ -25,6 +25,7 @@ export default function usePopupWindow() {
     }
 
     const launchPopupWindow = (Content=null) => {
+
         setPopupWindowContent(Content);
         return setWindowOpened(true);
     }

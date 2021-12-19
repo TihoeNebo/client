@@ -3,7 +3,7 @@ import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import ForumRedactor from "./Forum.redactorElements.js";
 import PartSelect from "./PartSelect.redactorElements.js";
-import ConfurmChoiceWindow from "./ConfurmChoiceWindow.js";
+import { ConfirmChoiceWindow, QuestionContent, PopupWindowContent } from "./ConfirmChoiceWindow.js";
 import { useUserContext } from './UserContext';
 
 export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) {
@@ -14,7 +14,7 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
         forum: { name, urn }
     };
     const changePartData = {
-        type: "renameForum",
+        type: "changePart",
         forum: { partId: null, name, urn }
     };
     const deleteForumData = {
@@ -25,14 +25,6 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
     const [mainData] = useUserContext();
     const forumDeletedLaunch = mainData.launchers.forumDeletedLaunch;
     if (mainData.user.level < 4) return null;
-
-    const ForumDeletedWindow = () => {
-        return (
-            <div>
-                Форум "{name}" отправлен на удаление...
-            </div>
-            )
-    }
 
     return (
         <div className="forum_menu" >
@@ -60,12 +52,16 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
                 title="Удалить форум"
                 reloadingLauncher={reloadingLauncher}
             >
-                <ConfurmChoiceWindow
-                    textQuestion={`Удалить форум "${name}"?`}
-                    popupWindowLaunch={forumDeletedLaunch}
-                    PopupWindowContent={ForumDeletedWindow}
-                    data={deleteForumData}
-                />
+                <ConfirmChoiceWindow popupWindowLaunch={forumDeletedLaunch} data={deleteForumData}>
+                    <QuestionContent>
+                        <div>Удалить форум "{name}"?</div>
+                    </QuestionContent>
+                    <PopupWindowContent>
+                        <div>
+                            Форум "{name}" отправлен на удаление...
+                        </div>
+                    </PopupWindowContent>
+                </ConfirmChoiceWindow>
             </ToggleButton>
         </div>
     )

@@ -1,6 +1,8 @@
-﻿import React, {useState} from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Author from "./Author.js";
+import usePopupWindow from "../hooks/usePopupWindow.js";
+
 
 export default function Topic({ topic, reloadingLauncher, forumURN }) {
 
@@ -15,14 +17,25 @@ export default function Topic({ topic, reloadingLauncher, forumURN }) {
         }
     };
     const [isDeleted, setDeleted] = useState(false);
-
+    const [DeletedTopic, launchDeletedTopic] = usePopupWindow();
+    const DeletedTopicContent = () => {
+        return (
+            <p>
+                Тема была удалена. <br />
+                <span onClick={() => setDeleted(false)}>
+                    Восстановить
+                </span>
+            </p>
+            )
+    }
     
 
     return (
         <div key={topic.id}>
+            <DeletedTopic />
             {
                 isDeleted ?
-                    <p>Тема была удалена. <br /> <span onClick={() => setDeleted(false)}>Восстановить</span> </p> :
+                    null :
                 <>
                     <div>
                         <Link to={topic.linkPath}>{topic.theme}</Link><br/>

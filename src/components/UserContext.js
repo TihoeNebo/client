@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
             name: null,
             level: 0
         }
+
     }
     const [context, setContext] = useState(userData);
 

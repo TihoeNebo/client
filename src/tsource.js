@@ -10,6 +10,7 @@
             id: 1,
             theme: "sacrum",
             comment: "Описание лунных дней",
+            forumURN: "firstForum",
             linkPath: "/firstForum/1",
             sumPosts: 23,
             views: 170,
@@ -34,6 +35,7 @@
             linkPath: "/firstForum/1",
             theme: "лунные дома",
             comment: "Описание лунных домов",
+            forumURN: "firstForum",
             sumPosts: 31,
             views: 220,
             author: {
@@ -57,6 +59,7 @@
             linkPath: "/firstForum/1",
             theme: "Фазы Луны",
             comment: "Описание лунных фаз",
+            forumURN: "firstForum",
             sumPosts: 4,
             views: 11,
             author: {
@@ -80,6 +83,7 @@
             linkPath: "/firstForum/1",
             theme: "Лунные узлы",
             comment: "...и другие фиктивные точки",
+            forumURN: "firstForum",
             sumPosts: 6,
             views: 18,
             author: {

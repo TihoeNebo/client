@@ -1,38 +1,18 @@
 ﻿import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Author from "./Author.js";
+import TopicRedactorMenu from "./TopicRedactorMenu.js";
 import usePopupWindow from "../hooks/usePopupWindow.js";
 
 
-export default function Topic({ topic, reloadingLauncher, forumURN }) {
+export default function Topic({ topic, reloadingLauncher }) {
 
-    const renameTopicData = {
-        type: "renameTopic",
-        topic: {
-            forumURN: forumURN,
-            id: topic.id,
-            theme: topic.theme,
-            comment: topic.comment
-
-        }
-    };
     const [isDeleted, setDeleted] = useState(false);
     const [DeletedTopic, launchDeletedTopic] = usePopupWindow();
-    const DeletedTopicContent = () => {
-        return (
-            <p>
-                Тема была удалена. <br />
-                <span onClick={() => setDeleted(false)}>
-                    Восстановить
-                </span>
-            </p>
-            )
-    }
-    
 
     return (
-        <div key={topic.id}>
-            <DeletedTopic />
+        <div className="topic" key={topic.id}>
+            <DeletedTopic stayHold={true} />
             {
                 isDeleted ?
                     null :
@@ -51,29 +31,15 @@ export default function Topic({ topic, reloadingLauncher, forumURN }) {
                         от автора <Author author={topic.lastPost.author} /><br/>
                         опубликовано {topic.lastPost.date}.<br/>
                     </div>
+                    <TopicRedactorMenu
+                        topic={topic}
+                        reloadingLauncher={reloadingLauncher}
+                        launchDeletedTopic={launchDeletedTopic}
+                        setDeleted={setDeleted}
+                    />
                 </>
             }
             
         </div>
         )
 }
-/*<ToggleButton
-                allowedLevel="3"
-                title="Переименовать тему"
-                reloadingLauncher={reloadingLauncher}
-            >
-                <Redactor data={renameTopicData}>
-                    <TopicRedactor />
-                </Redactor>
-            </ToggleButton>
-            <ToggleButton
-                allowedLevel="3"
-                title="Удалить тему"
-                reloadingLauncher={reloadingLauncher}
-            >
-                <ConfurmChoiceWindow
-                    textQuestion={`Удалить форум "${name}"?`}
-                    textConfurm={`Форум "${name}" отправлен на удаление...`}
-                    data={deleteForumData}
-                />
-            </ToggleButton>*/

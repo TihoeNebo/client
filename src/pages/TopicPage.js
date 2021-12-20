@@ -19,7 +19,7 @@ export default function TopicPage() {
     }, [reloadingLauncherResult])
 
     const { forum, topic, posts } = postData;
-    const postList = posts.map(post => <Post post={post} />);
+    const postList = posts.map(post => <Post post={post} reloadingLauncher={[reloadingLauncherResult, setReloadingLauncher]} />);
 
     return (
         <div>

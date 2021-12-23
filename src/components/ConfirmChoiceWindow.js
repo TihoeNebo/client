@@ -1,44 +1,31 @@
-﻿import React, { useEffect } from "react";
+﻿import React from "react";
 import { useUserContext } from './UserContext';
 
-export function ConfirmChoiceWindow({ children, data, popupWindowLaunch, closeRedactor }) {
+export function ConfirmChoiceWindow({ children, data, closeRedactor }) {
 
-    
     const [{ launchers }] = useUserContext();
-    const confirmChoiceWindowLaunch = launchers.confirmChoiceLaunch;
+    const choiceConfirmedLaunch = launchers.choiceConfirmedLaunch;
 
-    const QuestionContent = (children.find(child => child.type.name === "QuestionContent")).props.children;
-    const PopupWindowContent = (children.find(child => child.type.name === "PopupWindowContent")).props.children;
+    const QuestionContent = (children.findOne(child => child.type.name === "QuestionContent")).props.children;
+    const PopupWindowContent = (children.findOne(child => child.type.name === "PopupWindowContent")).props.children;
 
-    
-
-    const ChoiceWindow = () => {
-        const confirmHandler = (isConfurmed) => {
-            if (isConfurmed) {
-                sendMessage(data);
-                closeRedactor();
-                confirmChoiceWindowLaunch(null);
-                popupWindowLaunch(PopupWindowContent);
-            } else {
-                
-                closeRedactor();
-                confirmChoiceWindowLaunch(null);
-
-            }
+    const confirmHandler = (isConfurmed) => {
+        if (isConfurmed) {
+            sendMessage(data);
+            closeRedactor();
+            choiceConfirmedLaunch(PopupWindowContent);
+        } else {
+            closeRedactor();
         }
-        return (
-            <div>
-                {QuestionContent}
-                <button onClick={()=> confirmHandler(true)} value={true}>Да</button>
-                <button onClick={() => confirmHandler(false)} value={false}>Нет</button>
-            </div>
-        );
     }
 
-    useEffect(()=> confirmChoiceWindowLaunch(ChoiceWindow), [true]);
-
-    return null;
-    
+    return (
+        <div>
+            {QuestionContent}
+            <button onClick={()=> confirmHandler(true)}>Да</button>
+            <button onClick={() => confirmHandler(false)}>Нет</button>
+        </div>
+    );  
 }
 
 export function QuestionContent() {

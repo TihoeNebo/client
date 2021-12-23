@@ -1,15 +1,19 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useUserContext } from './UserContext';
 
-export default function ToggleButton({ allowedLevel, title, reloadingLauncher, children }) {
-    const [userData] = useUserContext();
+export default function ToggleButton({ allowedLevel, title, reloadingLauncher = [false, () => { }], children }) {
 
+    const [{ user, launchers}] = useUserContext();
+
+    const redactorWindowLaunch = launchers ? launchers.redactorWindowLaunch : null;
     const [reloadingLauncherResult, setReloadingLauncher] = reloadingLauncher;
     const [isRedactorOpened, setRedactorOpening] = useState(false);
     const closeRedactor = () => {
+        redactorWindowLaunch(null);
         setRedactorOpening(false);
         setReloadingLauncher(!reloadingLauncherResult);
     }
+
     const addProps = (element) => {
 
         if (!element.props) return element;
@@ -24,14 +28,17 @@ export default function ToggleButton({ allowedLevel, title, reloadingLauncher, c
         return redactorElement;
     }
     const Elements = children.length ? children.map(addProps) : addProps(children);
+
+    useEffect(() => {
+        if (isRedactorOpened) redactorWindowLaunch(Elements);
+    }, [isRedactorOpened])
     
     return (
         <>
             {
-                userData.user.level >= +allowedLevel ? (
+                user.level >= +allowedLevel ? (
                     <div >
                         <button onClick={() => setRedactorOpening(true)}>{title}</button>
-                        {isRedactorOpened ? Elements : null}
                     </div>
 
                 ) : null

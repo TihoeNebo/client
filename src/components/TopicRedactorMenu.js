@@ -4,7 +4,7 @@ import Redactor from "./Redactor.js";
 import TopicRedactor from "./Topic.redactorElements.js";
 import { useUserContext } from './UserContext';
 
-export default function TopicRedactorMenu({ topic, reloadingLauncher, launchDeletedTopic, setDeleted }) {
+export default function TopicRedactorMenu({ topic, reloadingLauncher, setDeleted }) {
 
     const [{ user }] = useUserContext();
     console.dir(user)
@@ -35,21 +35,11 @@ export default function TopicRedactorMenu({ topic, reloadingLauncher, launchDele
         }
     };
 
-    const DeletedTopicContent = () => {
-        return (
-            <p>
-                Тема была удалена. <br />
-                <span onClick={() => setDeleted(false)}>
-                    Восстановить
-                </span>
-            </p>
-        )
-    }
+  
 
     const deletionHandler = () => {
         setDeleted(true);
         sendMessage(deleteTopicData);
-        launchDeletedTopic(DeletedTopicContent);
     }
     const closingHandler = () => {
         sendMessage(closeTopicData);

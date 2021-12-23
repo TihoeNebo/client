@@ -1,7 +1,7 @@
 ﻿import React from "react";
 
 export default function PostRedactor({ messageState = null}) {
-    if (!messageState) return null;
+
     const [messageData, setMessageData] = messageState;
 
     return (

@@ -2,23 +2,20 @@
 
 export default function usePopupWindow() {
 
-    const [isWindowOpened, setWindowOpened] = useState(false);
+    
     const [PopupWindowContent, setPopupWindowContent] = useState(null);
 
-    const PopupWindow = ({ stayHold = false, closeTime = 4000 })=> {
+    const PopupWindow = ({ stayHold = false, closingTime = 4000 })=> {
 
         useEffect(() => {
-            if (isWindowOpened && !stayHold) {
-                setTimeout(() => setWindowOpened(false), closeTime);
+            if (PopupWindowContent && !stayHold) {
+                setTimeout(() => setPopupWindowContent(null), closingTime);
             }
-        }, [isWindowOpened, PopupWindowContent]);
+        }, [ PopupWindowContent]);
 
         return (
             <>
-                {
-                    isWindowOpened ?
-                        PopupWindowContent : null
-                }
+                {PopupWindowContent}
             </>
             
         )
@@ -26,8 +23,7 @@ export default function usePopupWindow() {
 
     const launchPopupWindow = (Content=null) => {
 
-        setPopupWindowContent(Content);
-        return setWindowOpened(true);
+        return setPopupWindowContent(Content);
     }
 
     return [PopupWindow, launchPopupWindow];

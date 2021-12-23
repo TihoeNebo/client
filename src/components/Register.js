@@ -13,7 +13,7 @@ export default function Register( setFormType ) {
     const changeForm = e => setData({ ...data, [e.target.name]: e.target.value });
     const confirmPass = e => setIsPassConfirmed(data.pass === e.target.value);
     const sendForm = () => {
-        console.log("sendreg")
+        
         if (isPassConfirmed) {
             setFormType(null);
             setContext({ ...user, level: 1 });

@@ -4,23 +4,24 @@ import { useUserContext } from './UserContext';
 
 export default function PopupWindows() {
 
-    const [ForumDeletedWindow, forumDeletedLaunch] = usePopupWindow();
-    const [ConfirmChoiceWindow, confirmChoiceLaunch] = usePopupWindow();
+    const [ChoiceConfirmedWindow, choiceConfirmedLaunch] = usePopupWindow();
+    
+    const [RedactorWindow, redactorWindowLaunch] = usePopupWindow();
 
     const [userData, setUserData] = useUserContext();
 
     useEffect(() => {
         setUserData({
             ...userData, launchers: {
-                confirmChoiceLaunch, forumDeletedLaunch
+                choiceConfirmedLaunch, redactorWindowLaunch
             }
         })
     }, [true])
 
     return (
         <>
-            <ConfirmChoiceWindow stayHold={true} />
-            <ForumDeletedWindow />
+            <ChoiceConfirmedWindow />
+            <RedactorWindow stayHold={true} />
         </>
             
         )

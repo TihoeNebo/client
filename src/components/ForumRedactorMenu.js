@@ -23,7 +23,7 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
     };
 
     const [mainData] = useUserContext();
-    const forumDeletedLaunch = mainData.launchers.forumDeletedLaunch;
+    
     if (mainData.user.level < 4) return null;
 
     return (
@@ -52,7 +52,7 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
                 title="Удалить форум"
                 reloadingLauncher={reloadingLauncher}
             >
-                <ConfirmChoiceWindow popupWindowLaunch={forumDeletedLaunch} data={deleteForumData}>
+                <ConfirmChoiceWindow data={deleteForumData}>
                     <QuestionContent>
                         <div>Удалить форум "{name}"?</div>
                     </QuestionContent>

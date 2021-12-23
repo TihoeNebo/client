@@ -3,8 +3,8 @@ import Author from "./Author.js";
 import Sender from "./Sender.js";
 import Message from "./Message.js";
 import Redactor from "./Redactor.js";
-import MessageRedactor from "./Message.redactorElements.js";
-
+import PostRedactor from "./Post.redactorElements.js";
+import { useUserContext } from './UserContext';
 import sendersSource from "../senderssource.js";
 import messagesSource from "../messagessource.js";
 
@@ -12,11 +12,19 @@ export default function Messager({ renderedUser }) {
     
     const [senders, setSenders] = useState([]);
     const [messages, setMessages] = useState([]);
+
     const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
     const launchReloading = () => setReloadingLauncher(!reloadingLauncherResult);
 
+    const [{user}] = useUserContext();
     const [renderedUserId, setRenderedUser] = renderedUser;
-    
+    const messageData = {
+        type: "sendMessage",
+        message: {
+            to: renderedUserId,
+            from: user.id
+        }
+    }
 
     useEffect(async () => {
         setSenders(await getSenders());
@@ -63,8 +71,8 @@ export default function Messager({ renderedUser }) {
             <section>
                 {messagesList}
             </section>
-            <Redactor launchReloading={launchReloading}> 
-                <MessageRedactor recipientId={renderedUserId} />
+            <Redactor data={messageData} launchReloading={launchReloading}>
+                <PostRedactor />
             </Redactor>
         </article>
     );

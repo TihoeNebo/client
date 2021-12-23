@@ -2,20 +2,22 @@
 import { Link } from "react-router-dom";
 import Author from "./Author.js";
 import TopicRedactorMenu from "./TopicRedactorMenu.js";
-import usePopupWindow from "../hooks/usePopupWindow.js";
 
 
 export default function Topic({ topic, reloadingLauncher }) {
 
     const [isDeleted, setDeleted] = useState(false);
-    const [DeletedTopic, launchDeletedTopic] = usePopupWindow();
 
     return (
         <div className="topic" key={topic.id}>
-            <DeletedTopic stayHold={true} />
             {
                 isDeleted ?
-                    null :
+                    <p>
+                        Тема была удалена. <br />
+                        <span onClick={() => setDeleted(false)}>
+                            Восстановить
+                        </span>
+                    </p> :
                 <>
                     <div>
                         <Link to={topic.linkPath}>{topic.theme}</Link><br/>
@@ -34,7 +36,6 @@ export default function Topic({ topic, reloadingLauncher }) {
                     <TopicRedactorMenu
                         topic={topic}
                         reloadingLauncher={reloadingLauncher}
-                        launchDeletedTopic={launchDeletedTopic}
                         setDeleted={setDeleted}
                     />
                 </>

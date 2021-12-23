@@ -1,7 +1,7 @@
 ﻿import React, { useState } from "react";
 
 
-export default function Redactor({ children, closeRedactor = null, launchReloading = null, data = null }) {
+export default function Redactor({ children, closeRedactor = null, launchReloading = null, data = null, buttonTitle = "Отправить" }) {
     
     const messageState = useState(data);
     const [messageData, setMessageData] = messageState;
@@ -33,7 +33,7 @@ export default function Redactor({ children, closeRedactor = null, launchReloadi
                     : null
             }
             {redactorElements}
-            <button onClick={sendMessage}>Отправить</button>
+            <button onClick={sendMessage}>{buttonTitle}</button>
         </div>
         );
 }

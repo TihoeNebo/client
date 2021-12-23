@@ -15,7 +15,7 @@ export default function Post({ post, reloadingLauncher }) {
                     </div> :
                 <div key={post.id}>
                     <div>
-                        Автор: <strong><Author author={post.author} /></strong>.<br />
+                        Автор: <Author author={post.author} />.<br />
                         Дата: {post.date}.
                     </div>
                     <div>

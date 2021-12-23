@@ -1,19 +1,21 @@
 ﻿import React from "react";
 import { useUserContext } from './UserContext';
 
-export function ConfirmChoiceWindow({ children, data, closeRedactor }) {
+export function ConfirmChoiceWindow({ children, data, closeRedactor, closePrevious }) {
 
     const [{ launchers }] = useUserContext();
     const choiceConfirmedLaunch = launchers.choiceConfirmedLaunch;
 
-    const QuestionContent = (children.findOne(child => child.type.name === "QuestionContent")).props.children;
-    const PopupWindowContent = (children.findOne(child => child.type.name === "PopupWindowContent")).props.children;
+    const QuestionContent = (children.find(child => child.type.name === "QuestionContent")).props.children;
+    const PopupWindowContent = (children.find(child => child.type.name === "PopupWindowContent")).props.children;
 
     const confirmHandler = (isConfurmed) => {
+        
         if (isConfurmed) {
             sendMessage(data);
             closeRedactor();
             choiceConfirmedLaunch(PopupWindowContent);
+            closePrevious();
         } else {
             closeRedactor();
         }

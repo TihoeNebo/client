@@ -36,7 +36,7 @@ export default function TopicPage() {
             </div>
             {
                 userData.user.level > 1 ?
-                    <Redactor launchReloading={launchReloading} dataObject={
+                    <Redactor launchReloading={launchReloading} data={
                         {
                             type: "CreatePost",
                             post: {

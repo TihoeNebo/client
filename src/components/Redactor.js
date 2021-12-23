@@ -7,7 +7,7 @@ export default function Redactor({ children, closeRedactor = null, launchReloadi
     const [messageData, setMessageData] = messageState;
     const addMessageState = (element) => { 
             console.log(element)
-            if (!element.props) return element; 
+            if (!element.type.name) return element; 
             const redactorElement = {
                 ...element, 
                 props:  {

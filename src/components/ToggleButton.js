@@ -10,13 +10,12 @@ export default function ToggleButton({ allowedLevel, title, reloadingLauncher = 
     const [isRedactorOpened, setRedactorOpening] = useState(false);
     const closeRedactor = () => {
         redactorWindowLaunch(null);
-        setRedactorOpening(false);
         setReloadingLauncher(!reloadingLauncherResult);
     }
-
+    console.log("ToggleButton")
     const addProps = (element) => {
 
-        if (!element.props) return element;
+        if (!element.type.name) return element;
         const redactorElement = {
             ...element,
             props: {
@@ -31,6 +30,8 @@ export default function ToggleButton({ allowedLevel, title, reloadingLauncher = 
 
     useEffect(() => {
         if (isRedactorOpened) redactorWindowLaunch(Elements);
+        console.log("redactorWindowLaunch")
+        return () => setRedactorOpening(false);
     }, [isRedactorOpened])
     
     return (

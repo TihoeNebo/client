@@ -4,6 +4,7 @@ import List from "./List.js";
 import Notice from "./Notice.js";
 import Sender from "./Sender.js";
 import Messager from "./Messager.js";
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,7 +33,7 @@ export default function LoginedMenu({ logOut }) {
             {user.level === 1 ? "На ваш e-mail выслано письмо с ссылкой для подтверждения указанного адреса. Пожалуйста, проверьте почту." : null}
             <ul>
                 <li>
-                    Профиль
+                    <Link to="/settings">Настройки</Link>
                 </li>
                 <li onClick={ openList(setNoticesOpening) }>
                     Уведомления <span>{user.newNoticesCount}</span>

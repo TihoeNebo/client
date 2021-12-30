@@ -1,28 +1,29 @@
-﻿import React, { useEffect, useState } from "react";
-import ToggleButton from "../components/ToggleButton";
+﻿import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import topicsData from "../tsource.js";
+import ToggleButton from "../components/ToggleButton";
 import Topic from "../components/Topic.js";
 import TopicRedactor from "../components/Topic.redactorElements.js";
 import PostRedactor from "../components/Post.redactorElements.js";
 import Redactor from "../components/Redactor.js";
+import { getForum } from "../redux/actions.js";
 
 
 export default function ForumPage() {
+
     const { forumURN } = useParams();
-    const [data, setData] = useState(null);
 
-    const reloadingLauncher = useState(false);
-    const [reloadingLauncherResult, setReloadingLauncher] = reloadingLauncher;
+    const data = useSelector(state => state.forum.forum);
+    const dispatch = useDispatch();
 
-    useEffect(async () => {
-        await setData(getForumList(forumURN));
-    }, [reloadingLauncherResult]);
+    useEffect( () => {
+        dispatch(getForum(forumURN));
+    }, [true]);
 
     if (!data) return null;
 
     const { forum, topics } = data;
-    const topicList = topics.map(topic => <Topic topic={topic} reloadingLauncher={reloadingLauncher} />);
+    const topicList = topics.map(topic => <Topic topic={topic} />);
     
     return (
         <div>
@@ -35,12 +36,8 @@ export default function ForumPage() {
             <div>
                 {topicList}
             </div>
-            <ToggleButton
-                allowedLevel="2"
-                title="Создать тему"
-                reloadingLauncher={reloadingLauncher}
-            >
-                <Redactor dataObject={{
+            <ToggleButton allowedLevel="2" title="Создать тему">
+                <Redactor launchReloading={getForum(forumURN)} data={{
                     type: "CreateTopic",
                     topic: {
                         forumURN: forumURN
@@ -59,7 +56,3 @@ export default function ForumPage() {
 
 }
 
-function getForumList(forumURN) {
-    if (forumURN === topicsData.forum.urn) return topicsData;
-    else return null;
-}

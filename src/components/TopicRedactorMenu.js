@@ -1,13 +1,15 @@
 ﻿import React from "react";
+import { connect } from "react-redux";
 import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import TopicRedactor from "./Topic.redactorElements.js";
 import { useUserContext } from './UserContext';
+import { getForum, sendMessage, deleteTopic } from "../redux/actions.js";
 
-export default function TopicRedactorMenu({ topic, reloadingLauncher, setDeleted }) {
+function TopicRedactorMenu({ topic, sendMessage, deleteTopic }) {
 
     const [{ user }] = useUserContext();
-    console.dir(user)
+    
     const renameTopicData = {
         type: "renameTopic",
         topic: {
@@ -19,12 +21,8 @@ export default function TopicRedactorMenu({ topic, reloadingLauncher, setDeleted
         }
     };
     const deleteTopicData = {
-        type: "deleteTopic",
-        topic: {
-            forumURN: topic.forumURN,
-            id: topic.id
-
-        }
+        forumURN: topic.forumURN,
+        id: topic.id
     };
     const closeTopicData = {
         type: "closeTopic",
@@ -38,8 +36,7 @@ export default function TopicRedactorMenu({ topic, reloadingLauncher, setDeleted
   
 
     const deletionHandler = () => {
-        setDeleted(true);
-        sendMessage(deleteTopicData);
+        deleteTopic(deleteTopicData);
     }
     const closingHandler = () => {
         sendMessage(closeTopicData);
@@ -50,12 +47,8 @@ export default function TopicRedactorMenu({ topic, reloadingLauncher, setDeleted
             {
                 user.level > 2 ?
                     <div className="topic_menu">
-                        <ToggleButton
-                            allowedLevel="3"
-                            title="Переименовать тему"
-                            reloadingLauncher={reloadingLauncher}
-                        >
-                            <Redactor data={renameTopicData}>
+                        <ToggleButton allowedLevel="3" title="Переименовать тему">
+                            <Redactor data={renameTopicData} launchReloading={getForum(topic.forumURN)}>
                                 <TopicRedactor />
                             </Redactor>
                         </ToggleButton>
@@ -68,6 +61,8 @@ export default function TopicRedactorMenu({ topic, reloadingLauncher, setDeleted
     )
 }
 
-function sendMessage(data) {
-    return console.log(data);
-}
+const mapDispatchToProps = {
+    sendMessage, deleteTopic
+};
+
+export default connect(null, mapDispatchToProps)(TopicRedactorMenu)

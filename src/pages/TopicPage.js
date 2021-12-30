@@ -1,25 +1,30 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import postsData from "../psource.js";
+import { useSelector, useDispatch } from "react-redux";
 import Post from "../components/Post.js";
 import Redactor from "../components/Redactor.js";
 import PostRedactor from "../components/Post.redactorElements.js";
-import { useUserContext } from "../components/UserContext.js"
+import { useUserContext } from "../components/UserContext.js";
+import { getTopic } from "../redux/actions.js";
+
 
 
 export default function TopicPage() {
+
     const { forumURN, topicId } = useParams();
-    const [userData] = useUserContext();
-    const [postData, setPostData] = useState({ forum: {}, topic: {}, posts: [] });
-    const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
-    const launchReloading = () => setReloadingLauncher(!reloadingLauncherResult);
+    const [{ user }] = useUserContext();
+
+    const data = useSelector(state => state.topic.topic);
+    const dispatch = useDispatch();
     
     useEffect(async () => {
-        setPostData( await getPostList(forumURN, topicId) );
-    }, [reloadingLauncherResult])
+        dispatch(getTopic(forumURN, topicId));
+    }, [true])
 
-    const { forum, topic, posts } = postData;
-    const postList = posts.map(post => <Post post={post} reloadingLauncher={[reloadingLauncherResult, setReloadingLauncher]} />);
+    if (!Object.keys(data).length) return null;
+
+    const { forum, topic, posts } = data;
+    const postList = posts.map(post => <Post post={post} />);
 
     return (
         <div>
@@ -35,8 +40,8 @@ export default function TopicPage() {
                 {postList}
             </div>
             {
-                userData.user.level > 1 ?
-                    <Redactor launchReloading={launchReloading} data={
+                user.level > 1 ?
+                    <Redactor launchReloading={getTopic(forumURN, topicId)} data={
                         {
                             type: "CreatePost",
                             post: {
@@ -55,8 +60,5 @@ export default function TopicPage() {
 
 }
 
-function getPostList(forumURN, topicId) {
-    return postsData;
-    
-}
+
 

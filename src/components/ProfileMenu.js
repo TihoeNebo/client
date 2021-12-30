@@ -1,12 +1,14 @@
 ﻿import React from 'react';
+import { connect } from "react-redux";
 import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import BanPanel from "./BanPanel.js";
 import PostRedactor from "./Post.redactorElements.js";
-import { ConfirmChoiceWindow, QuestionContent, PopupWindowContent } from "./ConfirmChoiceWindow.js";
 import { useUserContext } from './UserContext';
+import { showPrompt, sendMessage, deleteUser } from "../redux/actions.js";
 
-export default function ProfileMenu({ authorState, profileData }) {
+
+function ProfileMenu({ profileData, showPrompt, sendMessage }) {
 
     const [{ user }] = useUserContext();
 
@@ -24,12 +26,6 @@ export default function ProfileMenu({ authorState, profileData }) {
             banPeriod: 0
         }
     }
-    const deleteAuthorData = {
-        type: "deleteUser",
-        author: {
-            id: profileData.id
-        }
-    }
 
     return (
         <section>
@@ -38,34 +34,39 @@ export default function ProfileMenu({ authorState, profileData }) {
                     <PostRedactor />
                 </Redactor>
             </ToggleButton>
+            
             {
                 profileData.isBanned ?
-
-                    <button onClick={() => sendMessage(bannedData)}>
-                        Разбанить
-                    </button> :
+                        user.level > 2 ?
+                            <button onClick={() => sendMessage(bannedData)}>
+                                Разбанить
+                            </button> : null
+                     :
                     <ToggleButton allowedLevel="3" title="Забанить пользователя">
                         <Redactor data={bannedData} buttonTitle="Забанить">
                             <BanPanel />
                         </Redactor>
                     </ToggleButton>
             }
-            <ToggleButton allowedLevel="4" title="Удалить пользователя">
-                <ConfirmChoiceWindow data={deleteAuthorData} closePrevious={() => authorState[1](null)}>
-                    <QuestionContent>
-                        <div>Удалить пользователя {profileData.name}?</div>
-                    </QuestionContent>
-                    <PopupWindowContent>
-                        <div>
-                            Пользователь {profileData.name} отправлен на удаление...
-                        </div>
-                    </PopupWindowContent>
-                </ConfirmChoiceWindow>
-            </ToggleButton>
+            {
+                user.level > 3 ?
+                    <button onClick={() => {
+                        showPrompt(
+                            (<div>Удалить аккаунт пользователя {profileData.name}?</div>),
+                            deleteUser({ id: profileData.id, name: profileData.name })
+                        )
+                    }}>
+                        Удалить аккаунт.
+                    </button>
+                    : null
+            }
+            
         </section>
     )
 }
 
-function sendMessage(data) {
-    return console.log(data);
-}
+const mapDispatchToProps = {
+    showPrompt, sendMessage
+};
+
+export default connect(null, mapDispatchToProps)(ProfileMenu)

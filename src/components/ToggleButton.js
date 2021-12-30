@@ -1,45 +1,16 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React from "react";
 import { useUserContext } from './UserContext';
+import { showRedactor } from "../redux/actions.js";
+import {connect} from "react-redux";
 
-export default function ToggleButton({ allowedLevel, title, reloadingLauncher = [false, () => { }], children }) {
-
-    const [{ user, launchers}] = useUserContext();
-
-    const redactorWindowLaunch = launchers ? launchers.redactorWindowLaunch : null;
-    const [reloadingLauncherResult, setReloadingLauncher] = reloadingLauncher;
-    const [isRedactorOpened, setRedactorOpening] = useState(false);
-    const closeRedactor = () => {
-        redactorWindowLaunch(null);
-        setReloadingLauncher(!reloadingLauncherResult);
-    }
-    console.log("ToggleButton")
-    const addProps = (element) => {
-
-        if (!element.type.name) return element;
-        const redactorElement = {
-            ...element,
-            props: {
-                ...element.props,
-                closeRedactor: closeRedactor
-            }
-        };
-
-        return redactorElement;
-    }
-    const Elements = children.length ? children.map(addProps) : addProps(children);
-
-    useEffect(() => {
-        if (isRedactorOpened) redactorWindowLaunch(Elements);
-        console.log("redactorWindowLaunch")
-        return () => setRedactorOpening(false);
-    }, [isRedactorOpened])
-    
+function ToggleButton({ allowedLevel, title, showRedactor, children }) {
+    const [{ user }] = useUserContext();
     return (
         <>
             {
                 user.level >= +allowedLevel ? (
                     <div >
-                        <button onClick={() => setRedactorOpening(true)}>{title}</button>
+                        <button onClick={() => showRedactor(children)}>{title}</button>
                     </div>
 
                 ) : null
@@ -47,5 +18,8 @@ export default function ToggleButton({ allowedLevel, title, reloadingLauncher = 
         </>
     );
 }
-    
+
+const mapDispatchToProps = { showRedactor };
+
+export default connect(null, mapDispatchToProps)(ToggleButton);
 

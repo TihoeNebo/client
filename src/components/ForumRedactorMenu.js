@@ -1,12 +1,13 @@
 ﻿import React from "react";
+import { connect } from "react-redux";
 import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import ForumRedactor from "./Forum.redactorElements.js";
 import PartSelect from "./PartSelect.redactorElements.js";
-import { ConfirmChoiceWindow, QuestionContent, PopupWindowContent } from "./ConfirmChoiceWindow.js";
 import { useUserContext } from './UserContext';
+import { showPrompt, deleteForum, getParts } from "../redux/actions.js";
 
-export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) {
+function ForumRedactorMenu({ forum, partId, showPrompt }) {
     const { urn, name } = forum;
 
     const renameForumData = {
@@ -17,10 +18,6 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
         type: "changePart",
         forum: { partId: null, name, urn }
     };
-    const deleteForumData = {
-        type: "deleteForum",
-        forum: { urn }
-    };
 
     const [mainData] = useUserContext();
     
@@ -29,41 +26,30 @@ export default function ForumRedactorMenu({ forum, reloadingLauncher, partId }) 
     return (
         <div className="forum_menu" >
             
-            <ToggleButton
-                allowedLevel="4"
-                title="Переименовать форум"
-                reloadingLauncher={reloadingLauncher}
-            >
-                <Redactor data={renameForumData}>
+            <ToggleButton  allowedLevel="4" title="Переименовать форум">
+                <Redactor data={renameForumData} launchReloading={getParts}>
                     <ForumRedactor />
                 </Redactor>
             </ToggleButton>
-            <ToggleButton
-                allowedLevel="4"
-                title="Переместить в раздел..."
-                reloadingLauncher={reloadingLauncher}
-            >
-                <Redactor data={changePartData}>
+            <ToggleButton allowedLevel="4" title="Переместить в раздел...">
+                <Redactor data={changePartData} launchReloading={getParts}>
                     <PartSelect partId={partId} />
                 </Redactor>
             </ToggleButton>
-            <ToggleButton
-                allowedLevel="4"
-                title="Удалить форум"
-                reloadingLauncher={reloadingLauncher}
-            >
-                <ConfirmChoiceWindow data={deleteForumData}>
-                    <QuestionContent>
-                        <div>Удалить форум "{name}"?</div>
-                    </QuestionContent>
-                    <PopupWindowContent>
-                        <div>
-                            Форум "{name}" отправлен на удаление...
-                        </div>
-                    </PopupWindowContent>
-                </ConfirmChoiceWindow>
-            </ToggleButton>
+            <button onClick={ () => {
+                    showPrompt(
+                        (<div>Удалить форум "{name}"?</div>),
+                        deleteForum(forum)
+                    )
+            } }>
+                Удалить форум
+            </button>
         </div>
     )
 }
 
+const mapDispatchToProps = {
+    showPrompt
+};
+
+export default connect(null, mapDispatchToProps)(ForumRedactorMenu)

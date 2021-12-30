@@ -1,28 +1,33 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import Part from '../components/Part.js';
-import partsData from "../source.js";
 import CreatePartButton from "../components/CreatePartButton";
+import { getParts } from "../redux/actions.js";
 
-export default function PartsPage() {
+function PartsPage({ parts, getParts}) {
     console.log("partlist")
-    const [parts, setParts] = useState([]);
-
-    const reloadingLauncher = useState(false);
-    const [reloadingLauncherResult, setReloadingLauncher] = reloadingLauncher;
-
+    
     useEffect(() => {
-        console.log("setparts")
-        setParts(partsData)
-    }, [reloadingLauncherResult])
+        getParts();
+    }, [true])
 
-    const partList = parts.length ? parts.map(data => <Part part={data} reloadingLauncher={reloadingLauncher} />) : null;
+    const partList = parts.length ? parts.map(( data, i) => <Part part={data} key={i} />) : null;
     return (
         <div className="parts">
             {partList}
-            <CreatePartButton reloadingLauncher={reloadingLauncher} />
+            <CreatePartButton />
         </div>
         
     )
 }
 
+const mapStateToProps = state => ({
+    parts: state.parts.parts
+})
 
+const mapDispatchToProps = {
+    getParts
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PartsPage)

@@ -1,34 +1,29 @@
-﻿import React, { useState, useEffect } from 'react';
-import profileSource from "../profilesource.js";
+﻿import React from 'react';
+import { connect } from "react-redux";
+import { hideProfile } from "../redux/actions.js";
 import ProfileMenu from "./ProfileMenu.js";
 
 
-export default function Profile({ authorState }) {
+function Profile({ hideProfile, profile}) {
 
-    const [authorId, setAuthorId] = authorState;
-    const [profileData, setProfileData] = useState(null);
-    console.log("Profile")
-    useEffect(async () => {
-        console.log("Proe")
-        if (authorId) setProfileData( await getProfile(authorId));
-    }, [true]);
+    
 
-    if (!profileData) return null;
+    if (!profile) return null;
 
     return (
         <article>
-            <button onClick={() => setAuthorId(null)}>[X]</button>
+            <button onClick={() => hideProfile()}>[X]</button>
             <header>
-                <h3>{profileData.name}</h3>
+                <h3>{profile.name}</h3>
                 <span>
-                    {profileData.isOnline ? "Сейчас на сайте" : `Был${profileData.gender === 2 ? "a" : ""} на сайте ${profileData.lastComing}.`}
+                    {profile.isOnline ? "Сейчас на сайте" : `Был${profile.gender === 2 ? "a" : ""} на сайте ${profile.lastComing}.`}
                 </span>
             </header>
             <section>
                 <p>Пол:&nbsp; 
                     {
                         (() => {
-                            switch (profileData.gender) {
+                            switch (profile.gender) {
                                 case 0:
                                     return "не указан";
                                 case 1:
@@ -41,19 +36,20 @@ export default function Profile({ authorState }) {
                     }
                 </p>
                 <p>
-                    Дата рождения: {profileData.birthday}
+                    Дата рождения: {profile.birthday}
                 </p>
                 <p>
-                    Зарегистрирован: {profileData.registeredDate}
+                    Зарегистрирован: {profile.registeredDate}
                 </p>
             </section>
-            <ProfileMenu authorState={authorState} profileData={profileData} />
+            <ProfileMenu profileData={profile} />
         </article>
     )
 }
 
-function getProfile(authorId) {
-    return profileSource;
-}
+const mapStateToProps = state => ({ profile: state.popup.profile });
+const mapDispatchToProps = { hideProfile };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 

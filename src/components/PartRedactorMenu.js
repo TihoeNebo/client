@@ -6,8 +6,9 @@ import TopicRedactor from "./Topic.redactorElements.js";
 import PostRedactor from "./Post.redactorElements.js";
 import PartSetTitle from "./PartSetTitle.redactorElements.js";
 import { useUserContext } from './UserContext';
+import { getParts } from "../redux/actions.js";
 
-export default function PartRedactorMenu({ part, reloadingLauncher }) {
+export default function PartRedactorMenu({ part }) {
 
     const changePartNameData = {
         type: "changePartName",
@@ -28,18 +29,16 @@ export default function PartRedactorMenu({ part, reloadingLauncher }) {
             <ToggleButton
                 allowedLevel="4"
                 title="Переименовать раздел"
-                reloadingLauncher={reloadingLauncher}
             >
-                <Redactor dataObject={changePartNameData}>
+                <Redactor data={changePartNameData} launchReloading={getParts}>
                     <PartSetTitle />
                 </Redactor>
             </ToggleButton>
             <ToggleButton
                 allowedLevel="4"
                 title="Создать форум"
-                reloadingLauncher={reloadingLauncher}
             >
-                <Redactor dataObject={createForumData}>
+                <Redactor data={createForumData} launchReloading={getParts}>
                     <h3>Новый форум: </h3>
                     <ForumRedactor />
                     <h4>Первая тема:</h4>

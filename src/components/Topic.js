@@ -1,12 +1,15 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import Author from "./Author.js";
 import TopicRedactorMenu from "./TopicRedactorMenu.js";
+import { returnTopic } from "../redux/actions.js";
 
 
-export default function Topic({ topic, reloadingLauncher }) {
+function Topic({ topic, deletedTopics, returnTopic }) {
 
-    const [isDeleted, setDeleted] = useState(false);
+    const isDeleted = deletedTopics.length ?
+        deletedTopics.find(deletedTopic => topic.id == deletedTopic.id && topic.forumURN == deletedTopic.forumURN) + 1 : false;
 
     return (
         <div className="topic" key={topic.id}>
@@ -14,7 +17,7 @@ export default function Topic({ topic, reloadingLauncher }) {
                 isDeleted ?
                     <p>
                         Тема была удалена. <br />
-                        <span onClick={() => setDeleted(false)}>
+                        <span onClick={() => returnTopic({id: topic.id, forumURN: topic.forumURN})}>
                             Восстановить
                         </span>
                     </p> :
@@ -33,14 +36,21 @@ export default function Topic({ topic, reloadingLauncher }) {
                         от автора <Author author={topic.lastPost.author} /><br/>
                         опубликовано {topic.lastPost.date}.<br/>
                     </div>
-                    <TopicRedactorMenu
-                        topic={topic}
-                        reloadingLauncher={reloadingLauncher}
-                        setDeleted={setDeleted}
-                    />
+                    <TopicRedactorMenu topic={topic} />
                 </>
             }
             
         </div>
         )
 }
+
+const mapStateToProps = state => ({
+    deletedTopics: state.forum.topics
+})
+
+const mapDispatchToProps = {
+    returnTopic
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Topic)

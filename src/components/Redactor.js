@@ -1,12 +1,15 @@
 ﻿import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { sendMessage } from "../redux/actions.js";
 
-
-export default function Redactor({ children, closeRedactor = null, launchReloading = null, data = null, buttonTitle = "Отправить" }) {
+export default function Redactor({ children, launchReloading = null, data = null, buttonTitle = "Отправить" }) {
     
+    const dispatch = useDispatch();
+
     const messageState = useState(data);
-    const [messageData, setMessageData] = messageState;
+    const [messageData] = messageState;
     const addMessageState = (element) => { 
-            console.log(element)
+            
             if (!element.type.name) return element; 
             const redactorElement = {
                 ...element, 
@@ -20,20 +23,14 @@ export default function Redactor({ children, closeRedactor = null, launchReloadi
         }
 
     const redactorElements = children.length ? children.map(addMessageState) : addMessageState(children);
-
-    const sendMessage = async () => {
-        closeRedactor ? closeRedactor() : launchReloading();
-        return console.dir(messageData);
-    }
+        
     return (
         <div>
-            {
-                closeRedactor ?
-                    <button onClick={() => closeRedactor()}>X</button>
-                    : null
-            }
             {redactorElements}
-            <button onClick={sendMessage}>{buttonTitle}</button>
+            <button onClick={ async () => {
+                await dispatch(sendMessage(messageData));
+                if (launchReloading) dispatch(launchReloading);
+            }}>{buttonTitle}</button>
         </div>
         );
 }

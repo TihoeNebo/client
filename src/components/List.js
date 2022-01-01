@@ -1,25 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import noticesSource from "../noticessource.js";
-import sendersSource from "../senderssource.js";
+﻿import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import PopupList from "./PopupList.js";
+import Notice from "./Notice.js";
+import Sender from "./Sender.js";
+import { useUserContext } from "./UserContext.js";
+import { getNotices, getSenders } from "../redux/actions.js";
 
-export default function List({ url, Component, closeList }) {
-    const [items, setItems] = useState([]);
-    useEffect(async () => setItems(await getItems(url)));
+
+
+export default function List({ type }) {
+
+    const visibilityState = useState(false);
+    const [_, setVisibility] = visibilityState;
+    console.log(type)
+    const data = useSelector(state => state.messager[type])
+    const dispatch = useDispatch();
+
+    const [{ user }] = useUserContext();
+
     useEffect(() => {
-        window.addEventListener("click", closeList)
-    },[url]);
+        switch (type) {
+            case "notices":
+                return dispatch(getNotices());
+            case "senders":
+                return dispatch(getSenders());
+        }
+        
+    }, [true]);
 
-    if (!items.length) return null;
+    const mapMethods = {
+        notices: notice => <Notice data={notice} />,
+        senders: sender => <Sender senderData={sender} />
+    }
 
-    const itemsList = items.map(itemData => Component(itemData, true) );
+    const elements = data.length ? data.map(mapMethods[type]) : null;
+
     return (
-
-        <ul>
-            {itemsList}
-        </ul>
-    );
+        <li onClick={()=>setVisibility(true)}>
+            {
+                type == "notices" ?
+                    <>
+                        Уведомления <span> {user.newNoticesCount}</span>
+                    </>
+                    :
+                    <>
+                        Сообщения <span>{user.newMessagesCount}</span>
+                    </>
+            }
+            
+            <PopupList data={elements} visibilityState={visibilityState} />
+        </li>            
+    )
 }
 
-async function getItems(url) {
-    return (url === "/notices") ? noticesSource : sendersSource;
-}

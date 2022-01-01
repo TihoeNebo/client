@@ -1,18 +1,33 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { setRenderedUser, showMessager } from "../redux/actions.js";
 
-export default function Sender(setRenderedUser) {
+function Sender({ senderData, renderedUser = null, setRenderedUser, isMessagerOpened, showMessager }) {
 
-    return function (senderData, isPutted = false) {
+    const { author, newMessagesCount } = senderData;
+    const isPutted = (author.id == renderedUser);
         
-        const { author, newMessagesCount } = senderData;
-        
-        return (
-            <li className={`sender`, isPutted ? " putted" : ""} onClick={() => setRenderedUser(author.id)} >
+   return (
+       <li className={`sender`, isPutted ? " putted" : ""} onClick={() => {
+           if (!isPutted) {
+               isMessagerOpened ? setRenderedUser(author.id) : showMessager(author.id);
+           }
+       }} >
                 {author.name} ({newMessagesCount})<br />
                 <span>
                     {author.status}
                 </span>
             </li>
-        );
-    }
+   );
+    
 }
+
+const mapStateToProps = state => ({
+    isMessagerOpened: state.popup.isMessagerOpened
+});
+
+const mapDispatchToProps = {
+    setRenderedUser, showMessager
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sender);

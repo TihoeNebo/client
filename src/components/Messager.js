@@ -1,56 +1,42 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React from "react";
+import { connect } from "react-redux";
 import Author from "./Author.js";
 import Sender from "./Sender.js";
 import Message from "./Message.js";
 import Redactor from "./Redactor.js";
 import PostRedactor from "./Post.redactorElements.js";
 import { useUserContext } from './UserContext';
-import sendersSource from "../senderssource.js";
-import messagesSource from "../messagessource.js";
+import { getMessages, hideMessager } from "../redux/actions.js";
 
-export default function Messager({ renderedUser }) {
-    
-    const [senders, setSenders] = useState([]);
-    const [messages, setMessages] = useState([]);
 
-    const [reloadingLauncherResult, setReloadingLauncher] = useState(false);
-    const launchReloading = () => setReloadingLauncher(!reloadingLauncherResult);
+function Messager({ renderedUser, senders, messages, isOpened, hideMessager }) {
 
-    const [{user}] = useUserContext();
-    const [renderedUserId, setRenderedUser] = renderedUser;
+    const [{ user }] = useUserContext();
+    console.log("messager")
     const messageData = {
         type: "sendMessage",
         message: {
-            to: renderedUserId,
+            to: renderedUser,
             from: user.id
         }
-    }
-
-    useEffect(async () => {
-        setSenders(await getSenders());
-    }, [renderedUserId, reloadingLauncherResult]);
-    useEffect(async () => {
-        setMessages(await getMessages(renderedUserId));
+    };
         
-    }, [renderedUserId, reloadingLauncherResult]);
-    
+    if (!isOpened) return null;
 
     const sendersList = senders.length ? senders.map(
-        (senderData) => {
-            return Sender(setRenderedUser)(senderData, (senderData.author.id === renderedUserId));
-        }
+        senderData => <Sender senderData={senderData} renderedUser={renderedUser} />
     ) : "Пусто";
-    const messagesList = messages.length ? messages.map(
-        (messageData) => Message(messageData)) : "Сообщений нет.";
-    
-    const titleData = senders.length ? senders.find(data => data.author.id === +renderedUserId) : null;
 
+    const messagesList = messages.length ? messages.map(
+        data => <Message messageData={data} />
+    ) : "Сообщений нет.";
     
+    const titleData = senders.length ? senders.find(data => data.author.id == renderedUser) : null;
 
     return (
         <article>
-            <button onClick={() => setRenderedUser(null)}>[X]</button>
-            {titleData ? (
+            <button onClick={() => hideMessager()}>[X]</button>
+            {titleData ? 
                 <header>
                     <h3>
                         <Author author={titleData.author} />
@@ -59,9 +45,9 @@ export default function Messager({ renderedUser }) {
                         {titleData.author.status}
                     </span>
                 </header>
-            ) : (
+             : 
                     <header>Пользователь не выбран</header>
-                )
+                
             }
             <section>
                 <ul>
@@ -71,18 +57,22 @@ export default function Messager({ renderedUser }) {
             <section>
                 {messagesList}
             </section>
-            <Redactor data={messageData} launchReloading={launchReloading}>
+            <Redactor data={messageData} launchReloading={getMessages()}>
                 <PostRedactor />
             </Redactor>
         </article>
     );
 }
 
-async function getSenders() {
-    return sendersSource;
-}
+const mapStateToProps = state => ({
+    isOpened: state.popup.isMessagerOpened,
+    senders: state.messager.senders,
+    messages: state.messager.messages,
+    renderedUser: state.messager.renderedUser
+})
 
-async function getMessages(senderId) {
-    return messagesSource;
-}
+const mapDispatchToProps = {
+    hideMessager
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(Messager)

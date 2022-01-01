@@ -3,7 +3,8 @@ import * as TYPE from "./types.js";
 const initialState = {
 	prompt: null,
 	alert: null,
-	redactor: null
+	redactor: null,
+	isMessagerOpened: false
 	
 }
 
@@ -49,6 +50,16 @@ export const popupReducer = (state = initialState, action) => {
 			return {
 				...state,
 				profile: null
+			}
+		case TYPE.SHOW_MESSAGER:
+			return {
+				...state,
+				isMessagerOpened: true
+			}
+		case TYPE.HIDE_MESSAGER:
+			return {
+				...state,
+				isMessagerOpened: false
 			}
 		default:
 			return state;

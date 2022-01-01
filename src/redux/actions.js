@@ -2,6 +2,9 @@ import parts from "../source.js";
 import forum from "../tsource.js";
 import topic from "../psource.js";
 import profile from "../profilesource.js";
+import senders from "../senderssource.js";
+import messages from "../messagessource.js";
+import notices from "../noticessource.js";
 import * as TYPE from "./types.js";
 
 export const getParts = () => {
@@ -180,5 +183,65 @@ export const sendMessage = (data) => {
             dispatch(showAlert("Ошибка. Сообщение отправить не удалось."));
             return false;
         }
+    }
+}
+
+export const showMessager = (renderedUser = null) => {
+    return async dispatch => {
+
+        dispatch({
+            type: TYPE.SHOW_MESSAGER
+        });
+        await dispatch(getSenders());
+        if (renderedUser) {
+            await dispatch(setRenderedUser(renderedUser));
+            await dispatch(getMessages(renderedUser));
+        }
+    }
+}
+
+export const hideMessager = () => {
+    return dispatch => {
+        dispatch({
+            type: TYPE.HIDE_MESSAGER
+        });
+        dispatch(setRenderedUser(null))
+    }
+}
+
+export const getSenders = () => {
+    return async dispatch => {
+        const response = await senders;
+        dispatch({
+            type: TYPE.GET_SENDERS,
+            payload: response
+        })
+    }
+}
+
+export const getMessages = (renderedUser) => {
+    return async dispatch => {
+        const response = await messages;
+        dispatch({
+            type: TYPE.GET_MESSAGES,
+            payload: response
+        })
+    }
+}
+
+export const getNotices = () => {
+    return async dispatch => {
+        const response = await notices;
+        dispatch({
+            type: TYPE.GET_NOTICES,
+            payload: response
+        })
+    }
+}
+
+export const setRenderedUser = (id) => {
+    return {
+        type: TYPE.SET_RENDERED_USER,
+        payload: id
     }
 }

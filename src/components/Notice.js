@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { Link } from "react-router-dom";
 
-export default function Notice(noticeData) {
-    const { forum, topic, lastPost, isOpened } = noticeData;
+export default function Notice({ data }) {
+    const { forum, topic, lastPost, isOpened } = data;
     
     return (
 

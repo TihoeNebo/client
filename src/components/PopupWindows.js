@@ -3,6 +3,7 @@ import Prompt from "./Prompt.js";
 import Alert from "./Alert.js";
 import RedactorViewer from "./RedactorViewer.js";
 import Profile from "./Profile.js";
+import Messager from "./Messager.js";
 
 export default function PopupWindows() {
 
@@ -12,6 +13,7 @@ export default function PopupWindows() {
             <Alert />
             <RedactorViewer />
             <Profile />
+            <Messager />
         </>
             
         )

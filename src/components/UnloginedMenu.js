@@ -1,16 +1,20 @@
 ﻿import React from "react";
-import AuthForm from "./AuthForm.js";
+import { connect } from "react-redux";
+import { showLogIn, showRegistration } from "../redux/actions.js";
 
-export default function UnloginedMenu({ formType, setFormType }) {
+function UnloginedMenu({ showLogIn, showRegistration }) {
 
-    const logIn = () => setFormType("LogIn");
-    const register = () => setFormType("Register");
 
     return (
         <div>
-            <button onClick={logIn}>Войти</button> /&nbsp;
-            <button onClick={register}>Регистрация</button>
-            <AuthForm formType={formType} setFormType={setFormType} />
+            <button onClick={() => showLogIn()}>Войти</button> /&nbsp;
+            <button onClick={() => showRegistration()}>Регистрация</button>
         </div>
     )
 }
+
+const mapDispatchToProps = {
+    showLogIn, showRegistration
+};
+
+export default connect(null, mapDispatchToProps)(UnloginedMenu)

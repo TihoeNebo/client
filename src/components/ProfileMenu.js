@@ -4,13 +4,10 @@ import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import BanPanel from "./BanPanel.js";
 import PostRedactor from "./Post.redactorElements.js";
-import { useUserContext } from './UserContext';
 import { showPrompt, sendMessage, deleteUser } from "../redux/actions.js";
 
 
-function ProfileMenu({ profileData, showPrompt, sendMessage }) {
-
-    const [{ user }] = useUserContext();
+function ProfileMenu({ user, profileData, showPrompt, sendMessage }) {
 
     const messageData = {
         type: "sendMessage",
@@ -68,5 +65,8 @@ function ProfileMenu({ profileData, showPrompt, sendMessage }) {
 const mapDispatchToProps = {
     showPrompt, sendMessage
 };
+const mapStateToProps = state => ({
+    user: state.user.account
+})
 
-export default connect(null, mapDispatchToProps)(ProfileMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu)

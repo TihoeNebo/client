@@ -3,12 +3,9 @@ import { connect } from "react-redux";
 import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import TopicRedactor from "./Topic.redactorElements.js";
-import { useUserContext } from './UserContext';
 import { getForum, sendMessage, deleteTopic } from "../redux/actions.js";
 
-function TopicRedactorMenu({ topic, sendMessage, deleteTopic }) {
-
-    const [{ user }] = useUserContext();
+function TopicRedactorMenu({ topic, user, sendMessage, deleteTopic }) {
     
     const renameTopicData = {
         type: "renameTopic",
@@ -64,5 +61,8 @@ function TopicRedactorMenu({ topic, sendMessage, deleteTopic }) {
 const mapDispatchToProps = {
     sendMessage, deleteTopic
 };
+const mapStateToProps = state => ({
+    user: state.user.account
+})
 
-export default connect(null, mapDispatchToProps)(TopicRedactorMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(TopicRedactorMenu)

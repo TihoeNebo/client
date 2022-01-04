@@ -4,10 +4,8 @@ import { hideRedactor } from "../redux/actions.js";
 
 
 function RedactorViewer({ redactor, hideRedactor }) {
-    console.log(redactor)
-    if (!redactor) return null;
-
     
+    if (!redactor) return null;
 
     return (
         <article>

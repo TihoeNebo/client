@@ -1,26 +1,23 @@
 ﻿import React, { useState } from "react";
-import { useUserContext } from './UserContext';
+import { connect } from "react-redux";
+import { logIn, hideLogIn } from '../redux/actions.js';
 
-export default function LogIn() {
+function LogIn({ isOpened, logIn, hideLogIn }) {
+
     const [data, setData] = useState({ email: null, pass: null });
-    const [mainData, setMainData] = useUserContext();
     const changeForm = e => setData({ ...data, [e.target.name]: e.target.value });
+
     const getUserData = async () => {
         
-        const userData = await sendForm(data);
+        await logIn(data);
         
-        if (!userData) return null;
-
-        return setMainData(
-            {
-                ...mainData,
-                user: userData 
-            });
     }
+
+    if (!isOpened) return null;
 
     return (
         <div>
-            
+            <div onClick={ ()=> hideLogIn()}>[X]</div>
             e-mail: <input type="text" name="email" onChange={ changeForm } />
             пароль: <input type="text" name="pass" onChange={ changeForm } />
             <button onClick={ getUserData }>Войти</button>
@@ -29,12 +26,8 @@ export default function LogIn() {
     )
 }
 
-function sendForm(data) {
-    return {
-        id: 17,
-        name: "Vasya",
-        level: 4,
-        newNoticesCount: 3,
-        newMessagesCount: 11
-    };
-}
+const mapStateToProps = state => ({
+    isOpened: state.popup.isLogInOpened
+})
+
+export default connect(mapStateToProps, {logIn, hideLogIn})(LogIn)

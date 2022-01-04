@@ -1,6 +1,5 @@
 ﻿import React from 'react';
-import { useDispatch } from "react-redux";
-import { useUserContext } from './UserContext';
+import { useDispatch, useSelector } from "react-redux";
 import PostRedactor from "./Post.redactorElements.js";
 import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
@@ -27,7 +26,7 @@ export default function PostRedactorMenu({ post }) {
         }))
     }
 
-    const [{ user }] = useUserContext();
+    const user = useSelector( state => state.user.account);
 
 
     return (

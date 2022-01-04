@@ -5,14 +5,11 @@ import Sender from "./Sender.js";
 import Message from "./Message.js";
 import Redactor from "./Redactor.js";
 import PostRedactor from "./Post.redactorElements.js";
-import { useUserContext } from './UserContext';
 import { getMessages, hideMessager } from "../redux/actions.js";
 
 
-function Messager({ renderedUser, senders, messages, isOpened, hideMessager }) {
+function Messager({ user, renderedUser, senders, messages, isOpened, hideMessager }) {
 
-    const [{ user }] = useUserContext();
-    console.log("messager")
     const messageData = {
         type: "sendMessage",
         message: {
@@ -68,7 +65,8 @@ const mapStateToProps = state => ({
     isOpened: state.popup.isMessagerOpened,
     senders: state.messager.senders,
     messages: state.messager.messages,
-    renderedUser: state.messager.renderedUser
+    renderedUser: state.messager.renderedUser,
+    user: state.user.account
 })
 
 const mapDispatchToProps = {

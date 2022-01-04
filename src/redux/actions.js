@@ -7,6 +7,7 @@ import messages from "../messagessource.js";
 import notices from "../noticessource.js";
 import * as TYPE from "./types.js";
 
+
 export const getParts = () => {
     return async dispatch => {
         
@@ -156,6 +157,38 @@ export const hideProfile = () => {
     }
 }
 
+export const showLogIn = () => {
+
+    return {
+        type: TYPE.SHOW_LOGIN
+    }
+}
+
+export const hideLogIn = () => {
+    return {
+        type: TYPE.HIDE_LOGIN
+    }
+}
+
+export const showRegistration = () => {
+
+    return {
+        type: TYPE.SHOW_REGISTRATION
+    }
+}
+
+export const hideRegistration = () => {
+    return {
+        type: TYPE.HIDE_REGISTRATION
+    }
+}
+
+export const registerUser = (data) => {
+    return dispatch => {
+
+    }
+}
+
 export const deleteUser = (user) => {
     return async dispatch => {
         const request = {
@@ -243,5 +276,64 @@ export const setRenderedUser = (id) => {
     return {
         type: TYPE.SET_RENDERED_USER,
         payload: id
+    }
+}
+
+export const logIn = (mail, pass) => {
+    return async dispatch => {
+        const response = await {
+            account: {
+                id: 17,
+                level: 4,
+                mail: null,
+                isMailConfurmed: true,
+                isBanned: false,
+                banPeriod: null
+            },
+            person: {
+                name: "Vasya",
+                gender: 1,
+                birthday: null,
+                registered: null,
+	        },
+            statistic: {
+                newNoticesCount: 3,
+                newMessagesCount: 11
+            }
+        }
+        dispatch({
+            type: TYPE.SET_USER_DATA,
+            payload: response
+        });
+        dispatch(hideLogIn());
+    }
+}
+
+export const logOut = () => {
+    return dispatch => {
+        const guest = {
+            account: {
+                id: null,
+                level: 0,
+                mail: null,
+                isMailConfurmed: false,
+                isBanned: false,
+                banPeriod: null
+            },
+            person: {
+                name: "Гость",
+                gender: 2,
+                birthday: null,
+                registered: null,
+            },
+            statistic: {
+                newNoticesCount: null,
+                newMessagesCount: null
+            }
+        };
+        dispatch({
+            type: TYPE.SET_USER_DATA,
+            payload: guest
+        })
     }
 }

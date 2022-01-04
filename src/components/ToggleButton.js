@@ -1,10 +1,9 @@
 ﻿import React from "react";
-import { useUserContext } from './UserContext';
 import { showRedactor } from "../redux/actions.js";
 import {connect} from "react-redux";
 
-function ToggleButton({ allowedLevel, title, showRedactor, children }) {
-    const [{ user }] = useUserContext();
+function ToggleButton({ user, allowedLevel, title, showRedactor, children }) {
+    
     return (
         <>
             {
@@ -20,6 +19,9 @@ function ToggleButton({ allowedLevel, title, showRedactor, children }) {
 }
 
 const mapDispatchToProps = { showRedactor };
+const mapStateToProps = state => ({
+    user: state.user.account
+})
 
-export default connect(null, mapDispatchToProps)(ToggleButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleButton);
 

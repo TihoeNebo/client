@@ -4,10 +4,9 @@ import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import ForumRedactor from "./Forum.redactorElements.js";
 import PartSelect from "./PartSelect.redactorElements.js";
-import { useUserContext } from './UserContext';
 import { showPrompt, deleteForum, getParts } from "../redux/actions.js";
 
-function ForumRedactorMenu({ forum, partId, showPrompt }) {
+function ForumRedactorMenu({ user, forum, partId, showPrompt }) {
     const { urn, name } = forum;
 
     const renameForumData = {
@@ -18,10 +17,8 @@ function ForumRedactorMenu({ forum, partId, showPrompt }) {
         type: "changePart",
         forum: { partId: null, name, urn }
     };
-
-    const [mainData] = useUserContext();
     
-    if (mainData.user.level < 4) return null;
+    if (user.level < 4) return null;
 
     return (
         <div className="forum_menu" >
@@ -51,5 +48,8 @@ function ForumRedactorMenu({ forum, partId, showPrompt }) {
 const mapDispatchToProps = {
     showPrompt
 };
+const mapStateToProps = state => ({
+    user: state.user.account
+})
 
-export default connect(null, mapDispatchToProps)(ForumRedactorMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(ForumRedactorMenu)

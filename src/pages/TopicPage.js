@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Post from "../components/Post.js";
 import Redactor from "../components/Redactor.js";
 import PostRedactor from "../components/Post.redactorElements.js";
-import { useUserContext } from "../components/UserContext.js";
 import { getTopic } from "../redux/actions.js";
 
 
@@ -12,8 +11,8 @@ import { getTopic } from "../redux/actions.js";
 export default function TopicPage() {
 
     const { forumURN, topicId } = useParams();
-    const [{ user }] = useUserContext();
 
+    const user = useSelector(state => state.user.account);
     const data = useSelector(state => state.topic.topic);
     const dispatch = useDispatch();
     

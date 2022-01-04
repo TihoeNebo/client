@@ -1,11 +1,11 @@
 ﻿import React from 'react';
-import { useUserContext } from '../components/UserContext';
+
 
 export default function Settings() {
 
-    const [{ user }] = useUserContext();
+    
 
-    if (!user.id) return (<p>Вы не авторизованы.</p>);
+    //if (!user.id) return (<p>Вы не авторизованы.</p>);
 
     return (
         <section>

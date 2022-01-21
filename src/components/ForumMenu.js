@@ -4,19 +4,11 @@ import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import ForumRedactor from "./Forum.redactorElements.js";
 import PartSelect from "./PartSelect.redactorElements.js";
-import { showPrompt, deleteForum, getParts } from "../redux/actions.js";
+import { showPrompt, deleteForum, replaceForum, renameForum } from "../redux/actions.js";
 
-function ForumRedactorMenu({ user, forum, partId, showPrompt }) {
+function ForumMenu({ user, forum, partId, showPrompt }) {
+
     const { urn, name } = forum;
-
-    const renameForumData = {
-        type: "renameForum",
-        forum: { name, urn }
-    };
-    const changePartData = {
-        type: "changePart",
-        forum: { partId: null, name, urn }
-    };
     
     if (user.level < 4) return null;
 
@@ -24,19 +16,19 @@ function ForumRedactorMenu({ user, forum, partId, showPrompt }) {
         <div className="forum_menu" >
             
             <ToggleButton  allowedLevel="4" title="Переименовать форум">
-                <Redactor data={renameForumData} launchReloading={getParts}>
-                    <ForumRedactor />
+                <Redactor action={renameForum(urn)} >
+                    <ForumRedactor forum={forum} />
                 </Redactor>
             </ToggleButton>
             <ToggleButton allowedLevel="4" title="Переместить в раздел...">
-                <Redactor data={changePartData} launchReloading={getParts}>
+                <Redactor action={replaceForum(urn)} >
                     <PartSelect partId={partId} />
                 </Redactor>
             </ToggleButton>
             <button onClick={ () => {
                     showPrompt(
                         (<div>Удалить форум "{name}"?</div>),
-                        deleteForum(forum)
+                        deleteForum(urn)
                     )
             } }>
                 Удалить форум
@@ -49,7 +41,7 @@ const mapDispatchToProps = {
     showPrompt
 };
 const mapStateToProps = state => ({
-    user: state.user.account
+    user: state.data.user.account
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForumRedactorMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(ForumMenu)

@@ -93,10 +93,7 @@ class BanTime {
 
         setMessageData({
             ...messageData,
-            author: {
-                ...messageData.author,
-                banPeriod: this.banTime.getTime() - this.nowDate.getTime()
-            }
+            banPeriod: this.banTime.getTime() - this.nowDate.getTime()
         });
     };
 

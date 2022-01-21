@@ -1,6 +1,6 @@
 ﻿import React from "react";
 
-export default function PartSetTitle({ messageState = null}) {
+export default function PartSetTitle({ messageState = null, thisTitle = ""}) {
 
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
@@ -20,7 +20,7 @@ export default function PartSetTitle({ messageState = null}) {
     return (
 
         <section>
-            Название раздела: <input type="text" onChange={textHandler} name="name" /><br />
+            Название раздела: <input type="text" onChange={textHandler} name="name" defaultValue={thisTitle} /><br />
         </section>
 
     );

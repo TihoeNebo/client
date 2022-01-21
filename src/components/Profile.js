@@ -4,11 +4,9 @@ import { hideProfile } from "../redux/actions.js";
 import ProfileMenu from "./ProfileMenu.js";
 
 
-function Profile({ hideProfile, profile}) {
-
+function Profile({ hideProfile, profile, isOpened}) {
     
-
-    if (!profile) return null;
+    if (!isOpened || !profile) return null;
 
     return (
         <article>
@@ -47,7 +45,10 @@ function Profile({ hideProfile, profile}) {
     )
 }
 
-const mapStateToProps = state => ({ profile: state.popup.profile });
+const mapStateToProps = state => ({
+    profile: state.data.profile,
+    isOpened: state.popup.profile
+});
 const mapDispatchToProps = { hideProfile };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

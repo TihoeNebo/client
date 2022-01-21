@@ -13,7 +13,14 @@ export default function Prompt() {
     return (
         <article>
             {prompt.question}
-            <button onClick={() => dispatch(prompt.reducer)}>Да</button>
+            <button onClick={
+                () => {
+                    dispatch(prompt.reducer);
+                    dispatch(hidePrompt());
+                }
+            }>
+                Да
+            </button>
             <button onClick={() => dispatch(hidePrompt())}>Нет</button>
         </article>
     )

@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Author from "./Author.js";
-import TopicRedactorMenu from "./TopicRedactorMenu.js";
+import TopicMenu from "./TopicMenu.js";
 import { returnTopic } from "../redux/actions.js";
 
 
@@ -17,7 +17,7 @@ function Topic({ topic, deletedTopics, returnTopic }) {
                 isDeleted ?
                     <p>
                         Тема была удалена. <br />
-                        <span onClick={() => returnTopic({id: topic.id, forumURN: topic.forumURN})}>
+                        <span onClick={() => returnTopic(topic.forumURN, topic.id)}>
                             Восстановить
                         </span>
                     </p> :
@@ -36,7 +36,7 @@ function Topic({ topic, deletedTopics, returnTopic }) {
                         от автора <Author author={topic.lastPost.author} /><br/>
                         опубликовано {topic.lastPost.date}.<br/>
                     </div>
-                    <TopicRedactorMenu topic={topic} />
+                    <TopicMenu topic={topic} />
                 </>
             }
             
@@ -45,7 +45,7 @@ function Topic({ topic, deletedTopics, returnTopic }) {
 }
 
 const mapStateToProps = state => ({
-    deletedTopics: state.forum.topics
+    deletedTopics: state.forum.deletedTopics
 })
 
 const mapDispatchToProps = {

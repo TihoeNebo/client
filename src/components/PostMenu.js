@@ -3,30 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import PostRedactor from "./Post.redactorElements.js";
 import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
-import { deletePost, getTopic } from "../redux/actions.js";
+import { deletePost, redactPost } from "../redux/actions.js";
 
-export default function PostRedactorMenu({ post }) {
+export default function PostMenu({ post }) {
 
     const dispatch = useDispatch();
 
-    const redactPostData = {
-        type: "redactPost",
-        post: {
-            forumURN: post.forumURN,
-            topicId: post.topicId,
-            id: post.id
-        }
-    };
+    const { forumURN, topicId, id, content } = post;
 
     const deletionHandler = () => {
-        dispatch(deletePost({
-            forumURN: post.forumURN,
-            topicId: post.topicId,
-            id: post.id
-        }))
+        dispatch(deletePost(forumURN, topicId, id))
     }
 
-    const user = useSelector( state => state.user.account);
+    const user = useSelector( state => state.data.user.account);
 
 
     return (
@@ -35,9 +24,9 @@ export default function PostRedactorMenu({ post }) {
                 (user.level > 2 || user.id === post.author.id && user.level === 2) ?
                     <div>
                         <ToggleButton allowedLevel="2" title="Редактировать">
-                            <Redactor data={redactPostData} reloadingLauncher={getTopic(post.forumURN, post.topicId)}>
+                            <Redactor action={redactPost(forumURN, topicId, id)}>
                                 <h4>Отредактировать сообщение:</h4>
-                                <PostRedactor />
+                                <PostRedactor content={ content } />
                             </Redactor>
                         </ToggleButton>
                         <button onClick={deletionHandler}>Удалить</button>

@@ -1,12 +1,12 @@
 ﻿import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { sendMessage } from "../redux/actions.js";
+import { hideRedactor } from "../redux/actions.js";
 
-export default function Redactor({ children, launchReloading = null, data = null, buttonTitle = "Отправить" }) {
+export default function Redactor({ children, action, buttonTitle = "Отправить" }) {
     
     const dispatch = useDispatch();
 
-    const messageState = useState(data);
+    const messageState = useState({ ...action.payload });
     const [messageData] = messageState;
     const addMessageState = (element) => { 
             
@@ -27,10 +27,12 @@ export default function Redactor({ children, launchReloading = null, data = null
     return (
         <div>
             {redactorElements}
-            <button onClick={ async () => {
-                await dispatch(sendMessage(messageData));
-                if (launchReloading) dispatch(launchReloading);
-            }}>{buttonTitle}</button>
+            <button onClick={ () => {
+                    action.payload = messageData;
+                    dispatch(action);
+                    dispatch(hideRedactor());
+                }
+            }>{buttonTitle}</button>
         </div>
         );
 }

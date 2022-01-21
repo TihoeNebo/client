@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import Forum from './Forum.js';
-import PartRedactorMenu from "./PartRedactorMenu.js";
+import PartMenu from "./PartMenu.js";
 
 export default function Part({ part }) {
 
@@ -10,7 +10,7 @@ export default function Part({ part }) {
     return (
         <section className="part" key={partId} >
             <span>{partName}</span>
-            <PartRedactorMenu part={{ id: partId, name: partName }} />
+            <PartMenu part={{ id: partId, name: partName }} />
             {forumList}
         </section>
         )

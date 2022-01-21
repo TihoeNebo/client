@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Post from "../components/Post.js";
 import Redactor from "../components/Redactor.js";
 import PostRedactor from "../components/Post.redactorElements.js";
-import { getTopic } from "../redux/actions.js";
+import { getTopic, createPost } from "../redux/actions.js";
 
 
 
@@ -12,15 +12,15 @@ export default function TopicPage() {
 
     const { forumURN, topicId } = useParams();
 
-    const user = useSelector(state => state.user.account);
-    const data = useSelector(state => state.topic.topic);
+    const user = useSelector(state => state.data.user.account);
+    const data = useSelector(state => state.data.topic);
     const dispatch = useDispatch();
     
     useEffect(async () => {
         dispatch(getTopic(forumURN, topicId));
     }, [true])
 
-    if (!Object.keys(data).length) return null;
+    if (!data) return null;
 
     const { forum, topic, posts } = data;
     const postList = posts.map(post => <Post post={post} />);
@@ -39,16 +39,8 @@ export default function TopicPage() {
                 {postList}
             </div>
             {
-                user.level > 1 ?
-                    <Redactor launchReloading={getTopic(forumURN, topicId)} data={
-                        {
-                            type: "CreatePost",
-                            post: {
-                                forumURN: forumURN,
-                                topicId: topicId
-                            }
-                        }
-                    }>
+                user.level > 1 && !topic.params.closed ?
+                    <Redactor action={createPost(forumURN, topicId)} >
                         <strong> Написать сообщение:</strong>
                         <PostRedactor />
                     </Redactor> : null

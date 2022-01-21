@@ -11,6 +11,10 @@
             id: 33,
             name: "Vasya"
         },
+        params: {
+            essential: true,
+            closed: false
+        }
     },
     posts: [
         {

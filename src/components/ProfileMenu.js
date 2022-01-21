@@ -4,30 +4,15 @@ import ToggleButton from "./ToggleButton";
 import Redactor from "./Redactor.js";
 import BanPanel from "./BanPanel.js";
 import PostRedactor from "./Post.redactorElements.js";
-import { showPrompt, sendMessage, deleteUser } from "../redux/actions.js";
+import { showPrompt, banUser, disbanUser, sendMessage, deleteUser } from "../redux/actions.js";
 
 
-function ProfileMenu({ user, profileData, showPrompt, sendMessage }) {
-
-    const messageData = {
-        type: "sendMessage",
-        message: {
-            to: profileData.id,
-            from: user.id
-        }
-    }
-    const bannedData = {
-        type: "ban",
-        author: {
-            id: profileData.id,
-            banPeriod: 0
-        }
-    }
+function ProfileMenu({ user, profileData, showPrompt, disbanUser }) {
 
     return (
         <section>
             <ToggleButton allowedLevel="1" title="Написать автору">
-                <Redactor data={messageData}>
+                <Redactor action={sendMessage(profileData.id)}>
                     <PostRedactor />
                 </Redactor>
             </ToggleButton>
@@ -35,12 +20,12 @@ function ProfileMenu({ user, profileData, showPrompt, sendMessage }) {
             {
                 profileData.isBanned ?
                         user.level > 2 ?
-                            <button onClick={() => sendMessage(bannedData)}>
+                        <button onClick={() => disbanUser() }>
                                 Разбанить
                             </button> : null
                      :
                     <ToggleButton allowedLevel="3" title="Забанить пользователя">
-                        <Redactor data={bannedData} buttonTitle="Забанить">
+                        <Redactor action={banUser(profileData.id)} buttonTitle="Забанить">
                             <BanPanel />
                         </Redactor>
                     </ToggleButton>
@@ -50,10 +35,10 @@ function ProfileMenu({ user, profileData, showPrompt, sendMessage }) {
                     <button onClick={() => {
                         showPrompt(
                             (<div>Удалить аккаунт пользователя {profileData.name}?</div>),
-                            deleteUser({ id: profileData.id, name: profileData.name })
+                            deleteUser(profileData.id)
                         )
                     }}>
-                        Удалить аккаунт.
+                        Удалить аккаунт
                     </button>
                     : null
             }
@@ -63,10 +48,10 @@ function ProfileMenu({ user, profileData, showPrompt, sendMessage }) {
 }
 
 const mapDispatchToProps = {
-    showPrompt, sendMessage
+    showPrompt, disbanUser
 };
 const mapStateToProps = state => ({
-    user: state.user.account
+    user: state.data.user.account
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu)

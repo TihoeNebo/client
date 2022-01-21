@@ -20,7 +20,7 @@ function ToggleButton({ user, allowedLevel, title, showRedactor, children }) {
 
 const mapDispatchToProps = { showRedactor };
 const mapStateToProps = state => ({
-    user: state.user.account
+    user: state.data.user.account
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToggleButton);

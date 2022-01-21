@@ -1,31 +1,25 @@
-import { GET_TOPIC, DELETE_POST, RETURN_POST} from "./types.js";
+import * as TYPE from "./types.js";
 
 const initialState = {
-	topic: {},
-	posts:[]
+	deletedPosts:[]
 }
 
 export const topicReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_TOPIC:
+		case TYPE.ADD_DELETED_POST:
 			return {
 				...state,
-				topic: { ...action.payload }
+				deletedPosts: [...state.posts, action.payload]
 			}
-		case DELETE_POST:
-			return {
-				...state,
-				posts: [...state.posts, action.payload]
-			}
-		case RETURN_POST:
-			const index = state.posts.findIndex(post =>
+		case TYPE.RETURN_POST:
+			const index = state.deletedPosts.findIndex(post =>
 				post.topicId == action.payload.topicId &&
 				post.forumURN == action.payload.forumURN &&
 				post.id == action.payload.id);
 			if (!(index + 1)) return;
-			const posts = [...state.posts];
-			posts.splice(index, 1);
-			return { ...state, posts };
+			const deletedPosts = [...state.deletedPosts];
+			deletedPosts.splice(index, 1);
+			return { ...state, deletedPosts };
 		default:
 			return state;
 	}

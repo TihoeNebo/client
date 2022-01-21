@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import LastPost from './LastPost.js';
 import { Link } from 'react-router-dom';
-import ForumRedactorMenu from "./ForumRedactorMenu.js";
+import ForumMenu from "./ForumMenu.js";
 
 export default function Forum({ forum, partId }) {
     const { urn, name, postsCount, topicsCount, lastPost } = forum;
@@ -14,7 +14,7 @@ export default function Forum({ forum, partId }) {
                 Всего сообщений: {postsCount}.
             </div>
             <LastPost lastPost={lastPost} />
-            <ForumRedactorMenu forum={{ urn, name }} partId={partId} />
+            <ForumMenu forum={{ urn, name }} partId={partId} />
         </div>
         )
 }

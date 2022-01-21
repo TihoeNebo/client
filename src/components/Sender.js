@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { setRenderedUser, showMessager } from "../redux/actions.js";
+import { renderUser, showMessager } from "../redux/actions.js";
 
-function Sender({ senderData, renderedUser = null, setRenderedUser, isMessagerOpened, showMessager }) {
+function Sender({ senderData, renderedUser = null, renderUser, isMessagerOpened, showMessager }) {
 
     const { author, newMessagesCount } = senderData;
     const isPutted = (author.id == renderedUser);
@@ -10,7 +10,7 @@ function Sender({ senderData, renderedUser = null, setRenderedUser, isMessagerOp
    return (
        <li className={`sender`, isPutted ? " putted" : ""} onClick={() => {
            if (!isPutted) {
-               isMessagerOpened ? setRenderedUser(author.id) : showMessager(author.id);
+               isMessagerOpened ? renderUser(author.id) : showMessager(author.id);
            }
        }} >
                 {author.name} ({newMessagesCount})<br />
@@ -23,11 +23,11 @@ function Sender({ senderData, renderedUser = null, setRenderedUser, isMessagerOp
 }
 
 const mapStateToProps = state => ({
-    isMessagerOpened: state.popup.isMessagerOpened
+    isMessagerOpened: state.popup.messager
 });
 
 const mapDispatchToProps = {
-    setRenderedUser, showMessager
+    renderUser, showMessager
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sender);

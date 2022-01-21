@@ -1,40 +1,37 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function PartSelect({ messageState, partId = null }) {
 
-    const [partsData, setPartsData] = useState([]);
-
     const [messageData, setMessageData] = messageState;
 
-    useEffect(async () => setPartsData(await getPartsData()), [true]);
+    const partsData = useSelector(state => state.data.parts);
+
     useEffect(() => {
         setMessageData(
             {
                 ...messageData,
-                part: {
-                    id: partId
-                }
+                partId: partId
             }
         );
     }, [true]);
 
-    const partsOptions = partsData.length ? partsData.map((part) => {
-               
-        return (
-            <option value={part.id}>
-                {part.name}
-            </option>
-        )
-    }) : null;
+    const parts = partsData.map(
+        (part) => {
+            return (
+                <option value={part.partId}>
+                    {part.partName}
+                </option>
+            )
+        }
+    );
 
     
     const selectorHandler = (e) => {
          setMessageData(
             {
                 ...messageData,
-                part: {
-                    id: e.target.value
-                }
+                partId: e.target.value
             }
         );
     }
@@ -43,24 +40,10 @@ export default function PartSelect({ messageState, partId = null }) {
         <section>
             Выбрать раздел:
             <select onChange={selectorHandler} name="id" defaultValue={partId}>
-                {partsOptions}
+                {parts}
             </select>
         </section>
-
     );
 }
 
-async function getPartsData() {
-    return [
-        {
-            id: 2,
-            name: "First"
-        }, {
-            id: 3,
-            name: "Принципы ритуальной магии"
-        }, {
-            id: 4,
-            name: "Астрология"
-        },
-    ];
-}
+

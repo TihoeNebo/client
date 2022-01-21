@@ -1,91 +1,5 @@
-import parts from "../source.js";
-import forum from "../tsource.js";
-import topic from "../psource.js";
-import profile from "../profilesource.js";
-import senders from "../senderssource.js";
-import messages from "../messagessource.js";
-import notices from "../noticessource.js";
 import * as TYPE from "./types.js";
 
-
-export const getParts = () => {
-    return async dispatch => {
-        
-        const partsData = await parts;
-        dispatch({
-            type: TYPE.GET_PARTS,
-            payload: partsData
-        });
-    }
-}
-
-export const getForum = (forumURN) => {
-    return async dispatch => {
-        console.log("dispatching topics")
-        const forumData = await forum;
-        dispatch({
-            type: TYPE.GET_FORUM,
-            payload: forumData
-        });
-    }
-}
-
-export const getTopic = (forumURN, topicId) => {
-    return async dispatch => {
-        console.log("dispatching topic")
-        const topicData = await topic;
-        dispatch({
-            type: TYPE.GET_TOPIC,
-            payload: topicData
-        });
-    }
-}
-
-export const deleteTopic = (topic) => {
-    return async dispatch => {
-        
-        await dispatch(sendMessage({ type: "deleteTopic", topic }));
-        dispatch({
-            type: TYPE.DELETE_TOPIC,
-            payload: topic
-        });
-    }
-}
-
-export const returnTopic = (topic) => {
-    return async dispatch => {
-        
-        await dispatch(sendMessage({ type: "returnTopic", topic }));
-        dispatch({
-            type: TYPE.RETURN_TOPIC,
-            payload: topic
-        });
-        dispatch(getForum(topic.forumURN))
-    }
-}
-
-export const deletePost = (post) => {
-    return async dispatch => {
-
-        await dispatch(sendMessage({ type: "deletePost", post }));
-        dispatch({
-            type: TYPE.DELETE_POST,
-            payload: post
-        });
-    }
-}
-
-export const returnPost = (post) => {
-    return async dispatch => {
-
-        await dispatch(sendMessage({ type: "returnPost", post }));
-        dispatch({
-            type: TYPE.RETURN_POST,
-            payload: post
-        });
-        dispatch(getTopic(post.forumURN, post.topicId))
-    }
-}
 
 export const showPrompt = (question, reducer) => {
 
@@ -98,21 +12,6 @@ export const showPrompt = (question, reducer) => {
 export const hidePrompt = () => {
     return {
         type: TYPE.HIDE_PROMPT
-    }
-}
-
-export const deleteForum = (forum) => {
-    return async dispatch => {
-        const request = {
-            type: "deleteForum",
-            forum: {
-                urn: forum.urn
-            }
-        };
-        const isSended = await sendMessage(request);
-        dispatch(hidePrompt());
-        dispatch(getParts());
-        if (isSended) dispatch(showAlert(`Форум "${forum.name}" удален.`));
     }
 }
 
@@ -143,11 +42,246 @@ export const hideRedactor = () => {
     }
 }
 
-export const showProfile = (userId) => {
-
+export const changePartName = (partId) => {
     return {
-        type: TYPE.SHOW_PROFILE,
-        payload: profile
+        type: TYPE.CHANGE_PART,
+        payload: {
+            part: {id: partId}
+        }
+    }
+}
+
+export const createForum = (partId) => {
+    return {
+        type: TYPE.CREATE_FORUM,
+        payload: {
+            forum: { partId }
+        }
+    }
+}
+
+export const createPart = ( ) => {
+    return {
+        type: TYPE.CREATE_PART,
+        payload: { }
+    }
+}
+
+export const deleteForum = (urn) => {
+    return {
+        type: TYPE.DELETE_FORUM,
+        payload: { urn }
+    }
+}
+
+export const replaceForum = (urn) => {
+    return {
+        type: TYPE.CHANGE_FORUM,
+        payload: {
+            forum: { urn }
+        }
+    }
+}
+
+export const getParts = () => {
+    return {
+        type: TYPE.GET_PARTS
+    }
+}
+
+export const getForum = (forumURN) => {
+    return {
+        type: TYPE.GET_FORUM,
+        payload: { forumURN }
+    }
+}
+
+export const renameForum = (urn) => {
+    return {
+        type: TYPE.CHANGE_FORUM,
+        payload: {
+            forum: {
+                oldURN: urn
+            }
+        }
+    }
+}
+
+export const createTopic = (forumURN) => {
+    return {
+        type: TYPE.CREATE_TOPIC,
+        payload: {
+            topic: {
+                forumURN
+            },
+            post: {
+                forumURN
+            }
+        }
+    }
+}
+
+export const deleteTopic = (forumURN, id) => {
+    return dispatch => {
+        dispatch({
+            type: TYPE.DELETE_TOPIC,
+            payload: {
+                forumURN, id
+            }
+        });
+        dispatch({
+            type: TYPE.ADD_DELETED_TOPIC,
+            payload: {
+                forumURN, id
+            }
+        });
+    }
+}
+
+export const returnTopic = (forumURN, id) => {
+    return async dispatch => {
+        await dispatch({
+            type: TYPE.DELETE_TOPIC,
+            payload: { forumURN, id }
+        });
+        dispatch({
+            type: TYPE.RETURN_TOPIC,
+            payload: { forumURN, id }
+        });
+    }
+}
+
+export const renameTopic = (forumURN, id) => {
+    return {
+        type: TYPE.CHANGE_TOPIC,
+        payload: {
+            topic: {
+                forumURN, id
+            }
+        }
+    }
+}
+
+export const closeTopic = (forumURN, id) => {
+    return {
+        type: TYPE.CHANGE_TOPIC,
+        payload: {
+            topic: {
+                forumURN, id,
+                closed: true
+            }
+        }
+    }
+}
+
+export const openTopic = (forumURN, id) => {
+    return {
+        type: TYPE.CHANGE_TOPIC,
+        payload: {
+            topic: {
+                forumURN, id,
+                closed: false
+            }
+        }
+    }
+}
+
+export const getTopic = (forumURN, topicId) => {
+    return {
+        type: TYPE.GET_TOPIC,
+        payload: {
+            forumURN, topicId
+        }
+    }
+}
+
+export const createPost = (forumURN, topicId) => {
+    return {
+        type: TYPE.CREATE_POST,
+        payload: {
+            post: {
+                forumURN, topicId
+            }
+        }
+    }
+}
+
+export const redactPost = (forumURN, topicId, id) => {
+    return {
+        type: TYPE.CHANGE_POST,
+        payload: {
+            post: {
+                forumURN, topicId, id
+            }
+        }
+    }
+}
+
+export const deletePost = (forumURN, topicId, id) => {
+    return dispatch => {
+        dispatch({
+            type: TYPE.DELETE_POST,
+            payload: {
+                forumURN, topicId, id
+            }
+        });
+        dispatch({
+            type: TYPE.ADD_DELETED_POST,
+            payload: {
+                forumURN, topicId, id
+            }
+        });
+    }
+}
+
+export const returnPost = (forumURN, topicId, id) => {
+    return dispatch => {
+        dispatch({
+            type: TYPE.DELETE_POST,
+            payload: {
+                forumURN, topicId, id
+            }
+        });
+        dispatch({
+            type: TYPE.RETURN_POST,
+            payload: {
+                forumURN, topicId, id
+            }
+        });
+    }
+}
+
+export const logIn = (mail, pass) => {
+    return {
+        type: TYPE.GET_USER_DATA,
+        payload: {
+            mail, pass
+        }
+    }
+}
+
+export const logOut = () => {
+    return {
+        type: TYPE.SET_GUEST_DATA
+    }
+}
+
+export const createUser = () => {
+    return {
+        type: TYPE.CREATE_USER_DATA
+    }
+}
+
+export const showProfile = (id) => {
+
+    return dispatch => {
+        dispatch({
+            type: TYPE.GET_PROFILE,
+            payload: { id }
+        })
+        dispatch({
+            type: TYPE.SHOW_PROFILE
+        });
     }
 }
 
@@ -157,79 +291,55 @@ export const hideProfile = () => {
     }
 }
 
-export const showLogIn = () => {
-
-    return {
-        type: TYPE.SHOW_LOGIN
-    }
-}
-
-export const hideLogIn = () => {
-    return {
-        type: TYPE.HIDE_LOGIN
-    }
-}
-
-export const showRegistration = () => {
-
-    return {
-        type: TYPE.SHOW_REGISTRATION
-    }
-}
-
-export const hideRegistration = () => {
-    return {
-        type: TYPE.HIDE_REGISTRATION
-    }
-}
-
-export const registerUser = (data) => {
-    return dispatch => {
-
-    }
-}
-
-export const deleteUser = (user) => {
+export const deleteUser = (id) => {
     return async dispatch => {
-        const request = {
-            type: "deleteUser",
-            user: {
-                id: user.id
-            }
-        };
-        dispatch(hidePrompt());
-        const isSended = await sendMessage(request);
         dispatch(hideProfile());
-        if (isSended) dispatch(showAlert(`Аккаунт пользователя "${user.name}" удален.`));
+        dispatch({
+            type: TYPE.DELETE_ACCOUNT,
+            payload: {
+                id
+            }
+        });
     }
 }
 
-export const sendMessage = (data) => {
-    return async dispatch => {
-        
-        try {
-            const response = await data;
-            console.log(response);
-            dispatch(hideRedactor());
-            return true;
-        } catch (e) {
-            dispatch(showAlert("Ошибка. Сообщение отправить не удалось."));
-            return false;
+export const banUser = (id) => {
+    return {
+        type: TYPE.CHANGE_USER_DATA,
+        payload: {
+                id
         }
+    }
+}
+
+export const disbanUser = (id) => {
+    return {
+        type: TYPE.CHANGE_USER_DATA,
+        payload: {
+            id,
+            banPeriod: 0
+        }
+    }
+}
+
+export const sendMessage = (id) => {
+    return {
+        type: TYPE.CREATE_MESSAGE,
+        payload: { id }
     }
 }
 
 export const showMessager = (renderedUser = null) => {
-    return async dispatch => {
+    return dispatch => {
+
+        if (renderedUser) {
+            dispatch(renderUser(renderedUser));
+        }
+        dispatch(getSenders());
 
         dispatch({
             type: TYPE.SHOW_MESSAGER
         });
-        await dispatch(getSenders());
-        if (renderedUser) {
-            await dispatch(setRenderedUser(renderedUser));
-            await dispatch(getMessages(renderedUser));
-        }
     }
 }
 
@@ -238,102 +348,37 @@ export const hideMessager = () => {
         dispatch({
             type: TYPE.HIDE_MESSAGER
         });
-        dispatch(setRenderedUser(null))
+    }
+}
+
+export const renderUser = (id) => {
+    return dispatch => {
+
+        dispatch({
+            type: TYPE.RENDER_USER,
+            payload: id
+        });
+        dispatch(getMessages(id));
+    }
+}
+
+export const getMessages = (from) => {
+    return {
+        type: TYPE.GET_MESSAGES,
+        payload: { from }
     }
 }
 
 export const getSenders = () => {
-    return async dispatch => {
-        const response = await senders;
-        dispatch({
-            type: TYPE.GET_SENDERS,
-            payload: response
-        })
-    }
-}
-
-export const getMessages = (renderedUser) => {
-    return async dispatch => {
-        const response = await messages;
-        dispatch({
-            type: TYPE.GET_MESSAGES,
-            payload: response
-        })
+    return {
+        type: TYPE.GET_SENDERS
     }
 }
 
 export const getNotices = () => {
-    return async dispatch => {
-        const response = await notices;
-        dispatch({
-            type: TYPE.GET_NOTICES,
-            payload: response
-        })
-    }
-}
 
-export const setRenderedUser = (id) => {
     return {
-        type: TYPE.SET_RENDERED_USER,
-        payload: id
+        type: TYPE.GET_NOTICES
     }
 }
 
-export const logIn = (mail, pass) => {
-    return async dispatch => {
-        const response = await {
-            account: {
-                id: 17,
-                level: 4,
-                mail: null,
-                isMailConfurmed: true,
-                isBanned: false,
-                banPeriod: null
-            },
-            person: {
-                name: "Vasya",
-                gender: 1,
-                birthday: null,
-                registered: null,
-	        },
-            statistic: {
-                newNoticesCount: 3,
-                newMessagesCount: 11
-            }
-        }
-        dispatch({
-            type: TYPE.SET_USER_DATA,
-            payload: response
-        });
-        dispatch(hideLogIn());
-    }
-}
-
-export const logOut = () => {
-    return dispatch => {
-        const guest = {
-            account: {
-                id: null,
-                level: 0,
-                mail: null,
-                isMailConfurmed: false,
-                isBanned: false,
-                banPeriod: null
-            },
-            person: {
-                name: "Гость",
-                gender: 2,
-                birthday: null,
-                registered: null,
-            },
-            statistic: {
-                newNoticesCount: null,
-                newMessagesCount: null
-            }
-        };
-        dispatch({
-            type: TYPE.SET_USER_DATA,
-            payload: guest
-        })
-    }
-}

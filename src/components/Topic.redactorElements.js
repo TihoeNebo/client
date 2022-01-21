@@ -1,6 +1,6 @@
 ﻿import React from "react";
 
-export default function TopicRedactor({ messageState = null}) {
+export default function TopicRedactor({ messageState, topic = {theme: "", comment: ""}}) {
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
             
@@ -17,8 +17,8 @@ export default function TopicRedactor({ messageState = null}) {
     return (
         
             <section>
-                <input type="text" onChange={textHandler} name="theme" /><br />
-                <input type="text" onChange={textHandler} name="comment" /><br />
+            <input type="text" onChange={textHandler} name="theme" defaultValue={ topic.theme } /><br />
+            <input type="text" onChange={textHandler} name="comment" defaultValue={ topic.comment } /><br />
             </section>
         
     );

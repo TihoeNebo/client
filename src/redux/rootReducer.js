@@ -1,17 +1,17 @@
 import { combineReducers } from "redux";
-import { partsReducer } from "./partsReducer.js";
 import { popupReducer } from "./popupReducer.js";
 import { forumReducer } from "./forumReducer.js";
 import { topicReducer } from "./topicReducer.js";
 import { messagerReducer } from "./messagerReducer.js";
-import { userReducer } from "./userReducer.js";
+import { requestReducer } from "./requestReducer.js";
+import { responseReducer } from "./responseReducer.js";
 
 
 export const rootReducer = combineReducers({
-    parts: partsReducer,
     popup: popupReducer,
     forum: forumReducer,
     topic: topicReducer,
     messager: messagerReducer,
-    user: userReducer
+    request: requestReducer,
+    data: responseReducer
 });

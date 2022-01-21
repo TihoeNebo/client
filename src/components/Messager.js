@@ -5,19 +5,12 @@ import Sender from "./Sender.js";
 import Message from "./Message.js";
 import Redactor from "./Redactor.js";
 import PostRedactor from "./Post.redactorElements.js";
-import { getMessages, hideMessager } from "../redux/actions.js";
+import { hideMessager, sendMessage } from "../redux/actions.js";
 
 
-function Messager({ user, renderedUser, senders, messages, isOpened, hideMessager }) {
+function Messager({ renderedUser, senders, messages, isOpened, hideMessager }) {
 
-    const messageData = {
-        type: "sendMessage",
-        message: {
-            to: renderedUser,
-            from: user.id
-        }
-    };
-        
+            
     if (!isOpened) return null;
 
     const sendersList = senders.length ? senders.map(
@@ -43,8 +36,7 @@ function Messager({ user, renderedUser, senders, messages, isOpened, hideMessage
                     </span>
                 </header>
              : 
-                    <header>Пользователь не выбран</header>
-                
+                <header>Пользователь не выбран</header>
             }
             <section>
                 <ul>
@@ -54,7 +46,7 @@ function Messager({ user, renderedUser, senders, messages, isOpened, hideMessage
             <section>
                 {messagesList}
             </section>
-            <Redactor data={messageData} launchReloading={getMessages()}>
+            <Redactor action={ sendMessage(renderedUser) }>
                 <PostRedactor />
             </Redactor>
         </article>
@@ -62,11 +54,10 @@ function Messager({ user, renderedUser, senders, messages, isOpened, hideMessage
 }
 
 const mapStateToProps = state => ({
-    isOpened: state.popup.isMessagerOpened,
-    senders: state.messager.senders,
-    messages: state.messager.messages,
-    renderedUser: state.messager.renderedUser,
-    user: state.user.account
+    isOpened: state.popup.messager,
+    senders: state.data.messager.senders,
+    messages: state.data.messager.messages,
+    renderedUser: state.messager.renderedUser
 })
 
 const mapDispatchToProps = {

@@ -1,20 +1,16 @@
 ﻿import React from "react";
-import { connect } from "react-redux";
-import { showLogIn, showRegistration } from "../redux/actions.js";
+import LogIn from "./LogIn.js";
+import RegistrationForm from "./RegistrationForm.js";
 
-function UnloginedMenu({ showLogIn, showRegistration }) {
-
+export default function UnloginedMenu() {
 
     return (
         <div>
-            <button onClick={() => showLogIn()}>Войти</button> /&nbsp;
-            <button onClick={() => showRegistration()}>Регистрация</button>
+            <LogIn /> /&nbsp;
+            <RegistrationForm />
         </div>
     )
 }
 
-const mapDispatchToProps = {
-    showLogIn, showRegistration
-};
 
-export default connect(null, mapDispatchToProps)(UnloginedMenu)
+

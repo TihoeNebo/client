@@ -22,7 +22,7 @@ function PartsPage({ parts, getParts}) {
 }
 
 const mapStateToProps = state => ({
-    parts: state.parts.parts
+    parts: state.data.parts
 })
 
 const mapDispatchToProps = {

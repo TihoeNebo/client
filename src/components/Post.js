@@ -1,18 +1,17 @@
 ﻿import React from 'react';
 import { connect } from "react-redux";
 import Author from "./Author.js";
-import PostRedactorMenu from "./PostRedactorMenu.js";
+import PostMenu from "./PostMenu.js";
 import { returnPost } from "../redux/actions.js";
 
 function Post({ post, deletedPosts, returnPost }) {
 
-    const isDeleted = deletedPosts.length ?
-        deletedPosts.find(
+    const isDeleted = deletedPosts.find(
             deletedPost =>
                 post.topicId == deletedPost.topicId &&
                 post.forumURN == deletedPost.forumURN &&
                 post.id == deletedPost.id
-                ) + 1 : false;
+        );
 
     return (
         <>
@@ -20,13 +19,9 @@ function Post({ post, deletedPosts, returnPost }) {
                 isDeleted ?
                     <div>
                         Сообщение удалено.
-                        <span onClick={() => returnPost(
-                            {
-                                id: post.id,
-                                forumURN: post.forumURN,
-                                topicId: post.topicId
-                            }
-                        )}>Восстановить.</span>
+                        <span onClick={() => returnPost(post.forumURN, post.topicId, post.id)}>
+                            Восстановить.
+                        </span>
                     </div> :
                 <div key={post.id}>
                     <div>
@@ -36,7 +31,7 @@ function Post({ post, deletedPosts, returnPost }) {
                     <div>
                         {post.content}
                     </div>
-                    <PostRedactorMenu post={post} />
+                    <PostMenu post={post} />
                 </div>
             }
         </>
@@ -44,7 +39,7 @@ function Post({ post, deletedPosts, returnPost }) {
 }
 
 const mapStateToProps = state => ({
-    deletedPosts: state.topic.posts
+    deletedPosts: state.topic.deletedPosts
 })
 
 const mapDispatchToProps = {

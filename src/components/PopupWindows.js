@@ -4,8 +4,6 @@ import Alert from "./Alert.js";
 import RedactorViewer from "./RedactorViewer.js";
 import Profile from "./Profile.js";
 import Messager from "./Messager.js";
-import LogIn from "./LogIn.js";
-import RegistrationForm from "./RegistrationForm.js";
 
 export default function PopupWindows() {
 
@@ -16,8 +14,6 @@ export default function PopupWindows() {
             <RedactorViewer />
             <Profile />
             <Messager />
-            <LogIn />
-            <RegistrationForm />
         </>
             
         )

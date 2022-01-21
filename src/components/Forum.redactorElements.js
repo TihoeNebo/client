@@ -1,6 +1,6 @@
 ﻿import React from "react";
 
-export default function ForumRedactor({ messageState = null }) {
+export default function ForumRedactor({ messageState = null, forum = {urn: "", name:""} }) {
     if (!messageState) return null;
     const [messageData, setMessageData] = messageState;
 
@@ -17,8 +17,8 @@ export default function ForumRedactor({ messageState = null }) {
     return (
 
         <section>
-            Имя форума: <input type="text" onChange={textHandler} name="forumName" /><br />
-            URN форума: <input type="text" onChange={textHandler} name="newUrn" /><br />
+            Имя форума: <input type="text" onChange={textHandler} name="name" defaultValue={ forum.name } /><br />
+            URN форума: <input type="text" onChange={textHandler} name="urn" defaultValue={ forum.urn } /><br />
         </section>
 
     );

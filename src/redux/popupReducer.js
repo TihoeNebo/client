@@ -4,9 +4,8 @@ const initialState = {
 	prompt: null,
 	alert: null,
 	redactor: null,
-	isMessagerOpened: false,
-	isLogInOpened: false,
-	isRegistrationOpened: false
+	profile: false,
+	messager: false
 }
 
 export const popupReducer = (state = initialState, action) => {
@@ -45,42 +44,22 @@ export const popupReducer = (state = initialState, action) => {
 		case TYPE.SHOW_PROFILE:
 			return {
 				...state,
-				profile: { ...action.payload }
+				profile: true
 			}
 		case TYPE.HIDE_PROFILE:
 			return {
 				...state,
-				profile: null
+				profile: false
 			}
 		case TYPE.SHOW_MESSAGER:
 			return {
 				...state,
-				isMessagerOpened: true
+				messager: true
 			}
 		case TYPE.HIDE_MESSAGER:
 			return {
 				...state,
-				isMessagerOpened: false
-			}
-		case TYPE.SHOW_LOGIN:
-			return {
-				...state,
-				isLogInOpened: true
-			}
-		case TYPE.HIDE_LOGIN:
-			return {
-				...state,
-				isLogInOpened: false
-			}
-		case TYPE.SHOW_REGISTRATION:
-			return {
-				...state,
-				isRegistrationOpened: true
-			}
-		case TYPE.HIDE_REGISTRATION:
-			return {
-				...state,
-				isRegistrationOpened: false
+				messager: false
 			}
 		default:
 			return state;

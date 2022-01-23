@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import './App.css';
-import PartsPage from './pages/PartsPage.js';
-import ForumPage from './pages/ForumPage.js';
-import TopicPage from './pages/TopicPage.js';
-import Settings from './pages/Settings.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeadElems from './HeadElems';
+import './App.css';
+import PartsPage from './components/PartsPage/PartsPage.js';
+import ForumPage from './components/ForumPage/ForumPage.js';
+import TopicPage from './components/TopicPage/TopicPage.js';
+import Settings from './components/UserSettings/Settings.js';
+import HeadElems from './components/HeadElems/HeadElems.js';
 import sendRequest from './redux/sendRequest.js';
 
 
-function App() {
+export default function App() {
 
     const request = useSelector(state => state.request);
     const dispatch = useDispatch();
@@ -37,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+

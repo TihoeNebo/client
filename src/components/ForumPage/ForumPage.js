@@ -1,12 +1,12 @@
 ﻿import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import ToggleButton from "../components/ToggleButton";
-import Topic from "../components/Topic.js";
-import TopicRedactor from "../components/Topic.redactorElements.js";
-import PostRedactor from "../components/Post.redactorElements.js";
-import Redactor from "../components/Redactor.js";
-import { getForum, createTopic } from "../redux/actions.js";
+import ToggleButton from "../Redactor/ToggleButton.js";
+import Topic from "./Topic.js";
+import TopicRedactor from "../Redactor/Topic.redactorElements.js";
+import PostRedactor from "../Redactor/Post.redactorElements.js";
+import Redactor from "../Redactor/Redactor.js";
+import { getForum, createTopic } from "../../redux/actions.js";
 
 
 export default function ForumPage() {

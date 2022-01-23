@@ -1,13 +1,16 @@
 ﻿import React from 'react';
-import { connect } from "react-redux";
-import ToggleButton from "./ToggleButton";
-import Redactor from "./Redactor.js";
-import BanPanel from "./BanPanel.redactorElements.js";
-import PostRedactor from "./Post.redactorElements.js";
-import { showPrompt, banUser, disbanUser, sendMessage, deleteUser } from "../redux/actions.js";
+import { useSelector, useDispatch } from "react-redux";
+import ToggleButton from "../Redactor/ToggleButton";
+import Redactor from "../Redactor/Redactor.js";
+import BanPanel from "../Redactor/BanPanel.redactorElements.js";
+import PostRedactor from "../Redactor/Post.redactorElements.js";
+import { showPrompt, banUser, disbanUser, sendMessage, deleteUser } from "../../redux/actions.js";
 
 
-function ProfileMenu({ user, profileData, showPrompt, disbanUser }) {
+export default function ProfileMenu({ profileData }) {
+
+    const user = useSelector(state => state.data.user.account);
+    const dispatch = useDispatch();
 
     return (
         <section>
@@ -20,7 +23,7 @@ function ProfileMenu({ user, profileData, showPrompt, disbanUser }) {
             {
                 profileData.isBanned ?
                         user.level > 2 ?
-                        <button onClick={() => disbanUser() }>
+                        <button onClick={() => dispatch(disbanUser()) }>
                                 Разбанить
                             </button> : null
                      :
@@ -33,10 +36,10 @@ function ProfileMenu({ user, profileData, showPrompt, disbanUser }) {
             {
                 user.level > 3 ?
                     <button onClick={() => {
-                        showPrompt(
+                        dispatch(showPrompt(
                             (<div>Удалить аккаунт пользователя {profileData.name}?</div>),
                             deleteUser(profileData.id)
-                        )
+                        ))
                     }}>
                         Удалить аккаунт
                     </button>
@@ -46,12 +49,3 @@ function ProfileMenu({ user, profileData, showPrompt, disbanUser }) {
         </section>
     )
 }
-
-const mapDispatchToProps = {
-    showPrompt, disbanUser
-};
-const mapStateToProps = state => ({
-    user: state.data.user.account
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu)

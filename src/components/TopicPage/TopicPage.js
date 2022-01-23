@@ -1,10 +1,10 @@
 ﻿import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Post from "../components/Post.js";
-import Redactor from "../components/Redactor.js";
-import PostRedactor from "../components/Post.redactorElements.js";
-import { getTopic, createPost } from "../redux/actions.js";
+import Post from "./Post.js";
+import Redactor from "../Redactor/Redactor.js";
+import PostRedactor from "../Redactor/Post.redactorElements.js";
+import { getTopic, createPost } from "../../redux/actions.js";
 
 
 

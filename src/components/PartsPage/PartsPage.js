@@ -1,8 +1,8 @@
 ﻿import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import Part from '../components/Part.js';
-import CreatePartButton from "../components/CreatePartButton";
-import { getParts } from "../redux/actions.js";
+import Part from './Part.js';
+import CreatePartButton from "./CreatePartButton.js";
+import { getParts } from "../../redux/actions.js";
 
 function PartsPage({ parts, getParts}) {
     console.log("partlist")

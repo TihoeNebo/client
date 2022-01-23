@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\HeadElems",
+    "\\src\\components\\HeadElems\\PopupWindows",
+    "\\src\\components\\PartsPage",
+    "\\src\\components\\Profile",
+    "\\src\\redux",
+    "\\src\\redux\\reducers"
+  ],
+  "SelectedNode": "\\src\\redux\\store.js",
+  "PreviewInSolutionExplorer": false
+}

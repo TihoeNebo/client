@@ -15,7 +15,7 @@ export default function RegistrationForm() {
                 <strong>Регистрация</strong><br />
                 e-mail: <Mail /><br />
                 Имя на сайте: <Name /><br />
-                пароль: <Pass /><br />
+                пароль: <Pass newPass={true} /><br />
                 повторите пароль: <ConfirmPass />
             </Redactor>
         </ToggleButton>

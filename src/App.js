@@ -15,8 +15,8 @@ export default function App() {
     const request = useSelector(state => state.request);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const response = sendRequest(request);
+    useEffect(async () => {
+        const response = await sendRequest(request);
 
         dispatch(response);
     }, [request]);

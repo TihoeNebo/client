@@ -1,17 +1,19 @@
 import React from "react";
 
-export default function Pass({ messageState = null }) {
+export default function Pass({ messageState = null, newPass = false }) {
+
+    const name = newPass ? "newPass" : "pass";
 
     const [messageData, setMessageData] = messageState;
 
     return (
-        <input type="password" name="pass" onChange={
+        <input type="password" name={ name } onChange={
             (e) => setMessageData(
                 {
                     ...messageData,
                     account: {
                         ...messageData.account,
-                        pass: e.target.value
+                        [e.target.name]: e.target.value
                     }
                     
                 })

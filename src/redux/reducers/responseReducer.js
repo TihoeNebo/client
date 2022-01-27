@@ -5,11 +5,13 @@ const initialState = {
 	forum: null,
 	topic: null,
 	profile: null,
-	notices: [],
 	messager: {
 		messages: [],
 		senders: [],
-		subscribes: []
+		subscribes: [],
+		notices: [],
+		ignored: [],
+		mailing: null
 	},
 	user: {
 		account: {
@@ -69,7 +71,10 @@ export const responseReducer = (state = initialState, action) => {
 		case TYPE.SET_NOTICES:
 			return {
 				...state,
+				messager: {
+					...state.messager,
 					notices: [...action.payload]
+				}
 			}
 		case TYPE.SET_PROFILE:
 			return {
@@ -92,6 +97,22 @@ export const responseReducer = (state = initialState, action) => {
 				messager: {
 					...state.messager,
 					subscribes: [...action.payload]
+				}
+			}
+		case TYPE.SET_MAILING:
+			return {
+				...state,
+				messager: {
+					...state.messager,
+					mailing: { ...action.payload }
+				}
+			}
+		case TYPE.SET_IGNORED:
+			return {
+				...state,
+				messager: {
+					...state.messager,
+					ignored: [...action.payload]
 				}
 			}
 		default:

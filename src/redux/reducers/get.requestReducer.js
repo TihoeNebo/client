@@ -88,6 +88,16 @@ export const getReducer = (state = initialState, action) => {
 					type: TYPE.SET_SUBSCRIBES
 				}
 			}
+		case TYPE.GET_IGNORED:
+			return {
+				url: "/messager/ignored",
+				request: {
+					method: "GET"
+				},
+				response: {
+					type: TYPE.SET_IGNORED
+				}
+			}
 		case TYPE.GET_PROFILE:
 			return {
 				url: `/profile?id=${action.payload.id}`,
@@ -106,6 +116,27 @@ export const getReducer = (state = initialState, action) => {
 				},
 				response: {
 					type: TYPE.SET_USER_DATA
+				}
+			}
+		case TYPE.CONFIRM_MAIL:
+			return {
+				url: "/messager/mailing?confirm=1",
+				request: {
+					method: "GET"
+				},
+				response: {
+					type: TYPE.SHOW_ALERT,
+					payload: "—сылка была отправлена."
+				}
+			}
+		case TYPE.GET_MAILING:
+			return {
+				url: "/messager/mailing",
+				request: {
+					method: "GET"
+				},
+				response: {
+					type: TYPE.SET_MAILING
 				}
 			}
 		default:

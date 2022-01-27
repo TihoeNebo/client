@@ -73,6 +73,20 @@ export const deleteReducer = (state = initialState, action) => {
 					type: TYPE.SET_SUBSCRIBES
 				}
 			}
+		case TYPE.DELETE_IGNORED:
+			return {
+				url: `/messager/ignored`,
+				request: {
+					method: "DELETE",
+					headers: {
+						'Content-Type': 'application/json;charset=utf-8'
+					},
+					body: JSON.stringify(action.payload)
+				},
+				response: {
+					type: TYPE.SET_IGNORED
+				}
+			}
 		case TYPE.DELETE_ACCOUNT:
 			return {
 				url: `/user`,

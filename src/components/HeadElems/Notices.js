@@ -10,7 +10,7 @@ export default function Notices( ) {
     const visibilityState = useState(false);
     const [isVisible, setVisibility] = visibilityState;
 
-    const data = useSelector(state => state.data.notices)
+    const data = useSelector(state => state.data.messager.notices)
     
     const user = useSelector(state => state.data.user.account);
     const dispatch = useDispatch();

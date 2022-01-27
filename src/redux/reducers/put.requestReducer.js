@@ -101,6 +101,20 @@ export const putReducer = (state = initialState, action) => {
 					type: TYPE.SET_USER_DATA
 				}
 			}
+		case TYPE.CHANGE_MESSAGER_SETTINGS:
+			return {
+				url: `/messager`,
+				request: {
+					method: "PUT",
+					headers: {
+						'Content-Type': 'application/json;charset=utf-8'
+					},
+					body: JSON.stringify(action.payload)
+				},
+				response: {
+					type: TYPE.SET_USER_DATA
+				}
+			}
 		default:
 			return state;
 	}

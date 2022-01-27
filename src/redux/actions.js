@@ -382,3 +382,70 @@ export const getNotices = () => {
     }
 }
 
+export const openSection = (section) => {
+
+    return {
+        type: TYPE.SHOW_SECTION,
+        payload: section
+    }
+}
+
+export const changeUserData = () => {
+
+    return {
+        type: TYPE.CHANGE_USER_DATA
+    }
+}
+
+export const confirmMail = () => {
+
+    return {
+        type: TYPE.CONFIRM_MAIL
+    }
+}
+
+export const changeMailingSettings = (data) => {
+
+    return {
+        type: TYPE.CHANGE_MESSAGER_SETTINGS,
+        payload: data
+    }
+}
+
+export const getMailingSettings = () => {
+
+    return {
+        type: TYPE.GET_MAILING
+    }
+}
+
+export const getSubscribes = () => {
+
+    return {
+        type: TYPE.GET_SUBSCRIBES
+    }
+}
+
+export const deleteSubscribes = (forumURN, id) => {
+
+    return {
+        type: TYPE.DELETE_SUBSCRIBE,
+        payload: { forumURN, id }
+    }
+}
+
+export const getIgnored = () => {
+
+    return {
+        type: TYPE.GET_IGNORED
+    }
+}
+
+export const deleteIgnored = (id) => {
+
+    return {
+        type: TYPE.DELETE_IGNORED,
+        payload: { id }
+    }
+}
+

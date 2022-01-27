@@ -8,14 +8,15 @@ import notices from "../noticessource.js";
 import * as TYPE from "./types.js";
 
 
-export default function sendRequest(request) {
-		//try {
+export default async function sendRequest(request) {
+	console.log(request);
+		try {
 			const response = { body: fetchEmulate(request.response.type), ok: true }; // await fetch(state.url, state.request);
 
 			return { ...request.response, payload: response.body };
-		//} catch (e) {
-			//store.dispatch({ type: TYPE.SHOW_ALERT, payload: "Âîçíèêëà îøèáêà." });
-	//	}
+		} catch (e) {
+			return { type: TYPE.SHOW_ALERT, payload: "Возникла ошибка." };
+		}
 
 }
 
@@ -34,16 +35,15 @@ function fetchEmulate(type) {
 		case TYPE.SET_NOTICES:
 			console.log("notices")
 			return notices;
-		case TYPE.SET_SUBSCRIBES:
+		case TYPE.SET_IGNORED:
+			return [];
+		case TYPE.SET_MAILING:
 			return {
-				url: "/messager/subscribes",
-				request: {
-					method: "GET"
-				},
-				response: {
-					type: TYPE.SET_SUBSCRIBES
-				}
-			}
+				privateMessages: false,
+				subscribes: true
+			};
+		case TYPE.SET_SUBSCRIBES:
+			return [];
 		case TYPE.SET_PROFILE:
 			return profile;
 		case TYPE.SET_USER_DATA:

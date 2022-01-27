@@ -11,7 +11,7 @@ export default function ConfirmPass({ messageState = null }) {
                         ...messageData,
                         account: {
                             ...messageData.account,
-                            isPassConfirmed: (messageData.account.pass === e.target.value)
+                            isPassConfirmed: (messageData.account.newPass === e.target.value)
                         }
                     })
             }

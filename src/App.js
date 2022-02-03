@@ -18,7 +18,7 @@ export default function App() {
     useEffect(async () => {
         const response = await sendRequest(request);
 
-        dispatch(response);
+        setTimeout(() => dispatch(response), 3000);
     }, [request]);
     
 

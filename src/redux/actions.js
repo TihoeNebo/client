@@ -426,10 +426,18 @@ export const getSubscribes = () => {
     }
 }
 
-export const deleteSubscribes = (forumURN, id) => {
+export const deleteSubscribe = (forumURN, id) => {
 
     return {
         type: TYPE.DELETE_SUBSCRIBE,
+        payload: { forumURN, id }
+    }
+}
+
+export const createSubscribe = (forumURN, id) => {
+
+    return {
+        type: TYPE.CREATE_SUBSCRIBE,
         payload: { forumURN, id }
     }
 }
@@ -449,3 +457,17 @@ export const deleteIgnored = (id) => {
     }
 }
 
+export const createIgnored = (id) => {
+
+    return {
+        type: TYPE.CREATE_IGNORED,
+        payload: { id }
+    }
+}
+
+export const beginPartsLoading = () => {
+
+    return {
+        type: TYPE.SHOW_PARTS_LOADING
+    }
+}

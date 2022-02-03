@@ -1,21 +1,28 @@
-﻿import React from "react";
+﻿import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Author from "../../Profile/Author.js";
+import IgnoreButton from "../../Profile/IgnoreButton.js";
 import Sender from "../Sender.js";
 import Message from "../Message.js";
 import Redactor from "../../Redactor/Redactor.js";
 import PostRedactor from "../../Redactor/Post.redactorElements.js";
-import { hideMessager, sendMessage } from "../../../redux/actions.js";
+import Loading from "../../Loading/Loading.js";
+import { hideMessager, sendMessage, getMessages } from "../../../redux/actions.js";
 
 
 export default function Messager() {
 
     const isOpened = useSelector(state => state.popup.messager);
+
+    const isSendersLoaded = useSelector(state => state.loading.senders);
+    const isMessagesLoaded = useSelector(state => state.loading.messages);
+
     const senders = useSelector(state => state.data.messager.senders);
     const messages = useSelector(state => state.data.messager.messages);
     const renderedUser = useSelector(state => state.messager.renderedUser);
     const dispatch = useDispatch();
 
+    useEffect(() => { if (renderedUser) dispatch(getMessages(renderedUser)); }, [renderedUser]);
             
     if (!isOpened) return null;
 
@@ -36,6 +43,7 @@ export default function Messager() {
                 <header>
                     <h3>
                         <Author author={titleData.author} />
+                        <IgnoreButton userId={titleData.author.id} />
                     </h3>
                     <span>
                         {titleData.author.status}
@@ -45,12 +53,16 @@ export default function Messager() {
                 <header>Пользователь не выбран</header>
             }
             <section>
-                <ul>
-                    {sendersList}
-                </ul>
+                <Loading isLoaded={isSendersLoaded}>
+                    <ul>
+                        {sendersList}
+                    </ul>
+                </Loading>
             </section>
-            <section>
-                {messagesList}
+                <section>
+                <Loading isLoaded={isMessagesLoaded}>
+                    {messagesList}
+                </Loading>
             </section>
             <Redactor action={ sendMessage(renderedUser) }>
                 <PostRedactor />

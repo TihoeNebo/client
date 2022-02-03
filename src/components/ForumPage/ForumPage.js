@@ -6,6 +6,7 @@ import Topic from "./Topic.js";
 import TopicRedactor from "../Redactor/Topic.redactorElements.js";
 import PostRedactor from "../Redactor/Post.redactorElements.js";
 import Redactor from "../Redactor/Redactor.js";
+import Loading from "../Loading/Loading.js";
 import { getForum, createTopic } from "../../redux/actions.js";
 
 
@@ -14,28 +15,34 @@ export default function ForumPage() {
     const { forumURN } = useParams();
 
     const data = useSelector(state => state.data.forum);
+    const isLoaded = useSelector(state => state.loading.forum);
     const dispatch = useDispatch();
 
     useEffect( () => {
         dispatch(getForum(forumURN));
     }, [true]);
 
-    if (!data) return null;
-
-    const { forum, topics } = data;
-    const topicList = topics.map(topic => <Topic topic={topic} />);
+    const topicList = data && data.topics.length ? data.topics.map(topic => <Topic topic={topic} />) : "пусто";
     
     return (
         <div>
-            <div>
-                <strong><Link to="/">список форумов</Link></strong>
-            </div>
-            <div>
-                <h2>Форум {forum.name}</h2>
-            </div>
-            <div>
-                {topicList}
-            </div>
+            <Loading isLoaded={isLoaded}>
+                {
+                    data ?
+                        <>
+                            <div>
+                                <strong><Link to="/">список форумов</Link></strong>
+                            </div>
+                            <div>
+                                <h2>Форум {data.forum.name}</h2>
+                            </div>
+                            <div>
+                                {topicList}
+                            </div>
+                        </>
+                        : null
+                }
+            </Loading>
             <ToggleButton allowedLevel={2} title="Создать тему">
                 <Redactor action={ createTopic(forumURN) } >
                     <h3>Новая тема:</h3>

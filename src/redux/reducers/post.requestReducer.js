@@ -101,6 +101,20 @@ export const postReducer = (state = initialState, action) => {
 					type: TYPE.SET_SUBSCRIBES
 				}
 			}
+		case TYPE.CREATE_IGNORED:
+			return {
+				url: `/messager/ignored`,
+				request: {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=utf-8'
+					},
+					body: JSON.stringify(action.payload)
+				},
+				response: {
+					type: TYPE.SET_IGNORED
+				}
+			}
 		case TYPE.CREATE_USER_DATA:
 			return {
 				url: `/user`,

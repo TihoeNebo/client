@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { popupReducer } from "./popupReducer.js";
+import { loadingReducer } from "./loadingReducer.js";
 import { forumReducer } from "./forumReducer.js";
 import { topicReducer } from "./topicReducer.js";
 import { settingsReducer } from "./settingsReducer.js";
@@ -15,5 +16,6 @@ export const rootReducer = combineReducers({
     settings: settingsReducer,
     messager: messagerReducer,
     request: requestReducer,
+    loading: loadingReducer,
     data: responseReducer
 });

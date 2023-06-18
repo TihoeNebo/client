@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import Notices from "./Notices.js";
@@ -25,7 +25,10 @@ export default function LoginedMenu() {
                 <Notices /> 
                 <Senders />
             </ul>
-            <button onClick={() => dispatch(logOut()) }>Выйти</button>
+            <button onClick={async () => {
+		await dispatch(logOut());
+		window.location.replace("/");
+	}}>Выйти</button>
         </div>
     )
 }

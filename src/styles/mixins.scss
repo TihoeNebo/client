@@ -1,0 +1,17 @@
+@import "./colors.scss";
+
+
+@mixin standard_button {
+    background-color: $bgColor;
+    color: $mainFontColor;
+    border-width: 1px;
+    border-radius: 10px;
+    border-style: solid;
+    padding: 7px;
+    display: inline-block;
+    width: 150px;
+    overflow: visible;
+    height: auto;
+    text-align: center;
+    margin: 2px;
+}

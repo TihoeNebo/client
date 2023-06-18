@@ -1,8 +1,15 @@
 ﻿import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { showRedactor } from "../../redux/actions.js";
+import defaultStyle from "./button.module.scss";
 
-export default function ToggleButton({ allowedLevel, title, children }) {
+
+export default function ToggleButton({ 
+        allowedLevel, 
+        title, 
+        style = defaultStyle.main_button, 
+        children 
+    }) {
 
     const user = useSelector(state => state.data.user.account);
     const dispatch = useDispatch();
@@ -11,10 +18,7 @@ export default function ToggleButton({ allowedLevel, title, children }) {
         <>
             {
                 user.level >= +allowedLevel ? (
-                    <div >
-                        <button onClick={() => dispatch( showRedactor(children) ) }>{title}</button>
-                    </div>
-
+                    <button className={style} onClick={() => dispatch( showRedactor(children) ) }>{title}</button>
                 ) : null
             }
         </>

@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import { hideRedactor } from "../../redux/actions.js";
 
-export default function Redactor({ children, action, buttonTitle = "Отправить" }) {
+export default function Redactor({ children, action, buttonTitle = "Отправить", style = null }) {
     
     const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ export default function Redactor({ children, action, buttonTitle = "Отправ
     const redactorElements = children.length ? children.map(addMessageState) : addMessageState(children);
         
     return (
-        <div>
+        <div className={style}>
             {redactorElements}
             <button onClick={ () => {
                     action.payload = messageData;

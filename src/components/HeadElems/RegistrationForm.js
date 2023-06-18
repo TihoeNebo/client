@@ -6,13 +6,14 @@ import Pass from "../Redactor/Pass.redactorElements.js";
 import Mail from "../Redactor/Mail.redactorElements.js";
 import Name from "../Redactor/Name.redactorElements.js";
 import { createUser } from "../../redux/actions.js";
+import styles from "./header.module.scss";
 
 export default function RegistrationForm() {
 
     return (
-        <ToggleButton allowedLevel={0} title="Регистрация" >
+        <ToggleButton style={styles.main_button} allowedLevel={0} title="регистрация" >
             <Redactor action={createUser()} buttonTitle="Зарегистрироваться" >
-                <strong>Регистрация</strong><br />
+                <h2>Регистрация</h2>
                 e-mail: <Mail /><br />
                 Имя на сайте: <Name /><br />
                 пароль: <Pass newPass={true} /><br />

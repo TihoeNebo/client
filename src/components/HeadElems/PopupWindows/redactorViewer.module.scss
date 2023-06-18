@@ -1,0 +1,49 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
+
+.redactor {
+    position: fixed;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $mainFontColor;
+    border-radius: 6px;
+    background: #000;
+    opacity: .9;
+    height: 30%;
+    min-width: 240px;
+    left: 0;
+    right: 0;
+    margin: 20px 30% auto;
+    top: 20%;
+    font-family: "Cormorant Garamond"; 
+}
+.redactor h2 {
+    display: block;
+}
+.redactor input {
+    background-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $mainFontColor;
+    border-radius: 4px;
+    display: inline-block;
+    box-align: right;
+
+}
+
+.close {
+    display: block;
+    position: absolute;
+    background-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $mainFontColor;
+    border-radius: 4px;
+    color: $mainFontColor;
+    font-weight: 400;
+    right: 10px;
+    top: 8px;
+    height: 26px;
+    width: 26px;
+}

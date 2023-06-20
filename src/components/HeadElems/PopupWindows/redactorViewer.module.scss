@@ -10,25 +10,35 @@
     border-radius: 6px;
     background: #000;
     opacity: .9;
-    height: 30%;
+    height: auto;
     min-width: 240px;
     left: 0;
     right: 0;
     margin: 20px 30% auto;
     top: 20%;
     font-family: "Cormorant Garamond"; 
+    text-align: center;
+    line-height: 30px;
 }
 .redactor h2 {
     display: block;
+}
+.redactor span {
+    display: inline;
+    position: absolute;
+    left: 30%;
 }
 .redactor input {
     background-color: black;
     border-width: 1px;
     border-style: solid;
     border-color: $mainFontColor;
+    color: inherit;
     border-radius: 4px;
-    display: inline-block;
-    box-align: right;
+    display: inline;
+    margin-top: 5px;
+    position: absolute;
+    right: 10%;
 
 }
 
@@ -40,7 +50,9 @@
     border-style: solid;
     border-color: $mainFontColor;
     border-radius: 4px;
-    color: $mainFontColor;
+    color: inherit;
+    padding-bottom: 3px;
+    padding-right: 5px;
     font-weight: 400;
     right: 10px;
     top: 8px;

@@ -127,10 +127,24 @@ export const postReducer = (state = initialState, action) => {
 				},
 				response: {
 					type: TYPE.SHOW_ALERT,
-					payload: `Вам было отправлено письмо с ссылкой для подтверждения указанного адреса e-mail.
-								Пожалуйста, проверьте почту и пройдите по ссылке для завершения регистрации.`
+					payload: `пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ e-mail.
+								пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.`
 				}
 			}
+		case TYPE.CREATE_USER_AUTHENTICATION:
+			return {
+				url: `/user`,
+				request: {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=utf-8'
+					},
+					body: JSON.stringify(action.payload)
+				},
+				response: {
+					type: TYPE.SET_USER_DATA
+				}
+			}	
 		default:
 			return state;
 	}

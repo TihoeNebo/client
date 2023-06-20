@@ -253,9 +253,9 @@ export const returnPost = (forumURN, topicId, id) => {
 
 export const logIn = (mail, pass) => {
     return {
-        type: TYPE.GET_USER_DATA,
+        type: TYPE.CREATE_USER_AUTHENTICATION,
         payload: {
-            mail, pass
+            account: {mail, pass}
         }
     }
 }

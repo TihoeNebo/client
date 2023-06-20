@@ -10,10 +10,10 @@ export default function LogIn( ) {
 
     return (
         <ToggleButton style={styles.main_button} allowedLevel={0} title="вход">
-            <Redactor action={logIn()} buttonTitle="Войти" >
+            <Redactor action={logIn()} buttonTitle="Войти" style={null}>
                 <h2>Вход</h2>
-                e-mail: <Mail />
-                пароль: <Pass />
+                <span className={styles.login_label}>e-mail: </span> <Mail /><br />
+                <span className={styles.login_label}>пароль: </span> <Pass /><br />
             </Redactor>
         </ToggleButton>
     )

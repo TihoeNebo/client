@@ -29,7 +29,7 @@ export default function Redactor({ children, action, buttonTitle = "Отправ
             {redactorElements}
             <button onClick={ () => {
                     action.payload = messageData;
-                    dispatch(action);
+                    dispatch((console.log("FGHFGHFGHGHG"),console.log(action), action));
                     dispatch(hideRedactor());
                 }
             }>{buttonTitle}</button>

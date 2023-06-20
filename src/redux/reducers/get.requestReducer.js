@@ -108,16 +108,6 @@ export const getReducer = (state = initialState, action) => {
 					type: TYPE.SET_PROFILE
 				}
 			}
-		case TYPE.GET_USER_DATA:
-			return {
-				url: "/user",
-				request: {
-					method: "GET"
-				},
-				response: {
-					type: TYPE.SET_USER_DATA
-				}
-			}
 		case TYPE.CONFIRM_MAIL:
 			return {
 				url: "/messager/mailing?confirm=1",
@@ -126,7 +116,7 @@ export const getReducer = (state = initialState, action) => {
 				},
 				response: {
 					type: TYPE.SHOW_ALERT,
-					payload: "Ссылка была отправлена."
+					payload: "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
 				}
 			}
 		case TYPE.GET_MAILING:

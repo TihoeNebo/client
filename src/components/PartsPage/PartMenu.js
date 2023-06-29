@@ -2,11 +2,9 @@
 import { useSelector } from 'react-redux';
 import ToggleButton from "../Redactor/ToggleButton";
 import Redactor from "../Redactor/Redactor.js";
-import ForumRedactor from "../Redactor/Forum.redactorElements.js";
-import TopicRedactor from "../Redactor/Topic.redactorElements.js";
-import PostRedactor from "../Redactor/Post.redactorElements.js";
-import PartSetTitle from "../Redactor/PartSetTitle.redactorElements.js";
-import { changePartName, createForum } from "../../redux/actions.js";
+import InputString from "../Redactor/InputString.js";
+import { changePartName, writeTitle } from "../../redux/actions/parts.js";
+import { createForum, writeForumTitle } from "../../redux/actions/forums.js";
 
 export default function PartMenu({ part }) {
 
@@ -20,7 +18,7 @@ export default function PartMenu({ part }) {
                 title="Переименовать раздел"
             >
                 <Redactor action={changePartName(part.id)} >
-                    <PartSetTitle thisTitle={ part.name } />
+                    <InputString action={writeTitle} />
                 </Redactor>
             </ToggleButton>
             <ToggleButton
@@ -29,11 +27,7 @@ export default function PartMenu({ part }) {
             >
                 <Redactor action={createForum(part.id)} >
                     <h3>Новый форум: </h3>
-                    <ForumRedactor />
-                    <h4>Первая тема:</h4>
-                    <TopicRedactor />
-                    <h4>Первое сообщение в теме:</h4>
-                    <PostRedactor />
+                    <InputString action={writeForumTitle}  />
                 </Redactor>
             </ToggleButton>
         </div>    

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hideRedactor } from "../../../redux/actions.js";
+import { hideRedactor, clearRedactor } from "../../../redux/actions/redactor.js";
 import styles from "./redactorViewer.module.scss";
 
 export default function RedactorViewer() {
@@ -12,7 +12,10 @@ export default function RedactorViewer() {
 
     return (
         <article className={styles.redactor}>
-            <button onClick={() => dispatch(hideRedactor()) } className={styles.close}>&#10006;</button>
+            <button onClick={ () => {
+                    dispatch(clearRedactor());
+                    dispatch(hideRedactor());
+                } } className={styles.close}>&#10006;</button>
             {redactor}
         </article>
     )

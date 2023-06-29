@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import Notices from "./Notices.js";
 import Senders from "./Senders.js";
-import { logOut } from "../../redux/actions.js";
+import { logOut } from "../../redux/actions/user.js";
 
 
 export default function LoginedMenu() {
@@ -14,9 +14,8 @@ export default function LoginedMenu() {
     return (
         <div>
             <span>{user.person.name}</span>
-            { !user.account.isMailConfurmed ?
+            { !user.account.isMailConfurmed &&
                 "На ваш e-mail выслано письмо с ссылкой для подтверждения указанного адреса. Пожалуйста, проверьте почту."
-                : null
             }
             <ul>
                 <li>
@@ -26,9 +25,10 @@ export default function LoginedMenu() {
                 <Senders />
             </ul>
             <button onClick={async () => {
-		await dispatch(logOut());
-		window.location.replace("/");
-	}}>Выйти</button>
+		                            await dispatch(logOut());
+		                            window.location.replace("/");
+	                            }
+                            }>Выйти</button>
         </div>
     )
 }

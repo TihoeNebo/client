@@ -1,24 +1,15 @@
 ﻿import React from "react";
 import ToggleButton from "../Redactor/ToggleButton";
-import ForumRedactor from "../Redactor/Forum.redactorElements.js";
-import TopicRedactor from "../Redactor/Topic.redactorElements.js";
-import PostRedactor from "../Redactor/Post.redactorElements.js";
-import PartSetTitle from "../Redactor/PartSetTitle.redactorElements.js";
+import InputString from "../Redactor/InputString.js";
 import Redactor from "../Redactor/Redactor.js";
-import { createPart } from "../../redux/actions.js";
+import { createPart, writeTitle } from "../../redux/actions/parts.js";
 
 export default function CreatePartButton( ) {
     return (
         <ToggleButton allowedLevel="4" title="Создать раздел">
-            <Redactor action={createPart()} >
+            <Redactor action={createPart} >
                 <h3>Новый раздел: </h3>
-                <PartSetTitle />
-                <h4>Первый форум: </h4>
-                <ForumRedactor />
-                <h4>Первая тема:</h4>
-                <TopicRedactor />
-                <h4>Первое сообщение в теме:</h4>
-                <PostRedactor />
+                <InputString action={writeTitle} inputName={"partName"} />
             </Redactor>
         </ToggleButton>
         )

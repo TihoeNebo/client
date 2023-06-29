@@ -7,6 +7,7 @@ import { settingsReducer } from "./settingsReducer.js";
 import { messagerReducer } from "./messagerReducer.js";
 import { requestReducer } from "./requestReducer.js";
 import { responseReducer } from "./responseReducer.js";
+import { redactorReducer } from "./redactorReducer.js";
 
 
 export const rootReducer = combineReducers({
@@ -17,5 +18,6 @@ export const rootReducer = combineReducers({
     messager: messagerReducer,
     request: requestReducer,
     loading: loadingReducer,
-    data: responseReducer
+    data: responseReducer,
+    redactor: redactorReducer
 });

@@ -2,9 +2,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import ToggleButton from "../Redactor/ToggleButton.js";
 import Redactor from "../Redactor/Redactor.js";
-import ForumRedactor from "../Redactor/Forum.redactorElements.js";
-import PartSelect from "../Redactor/PartSelect.redactorElements.js";
-import { showPrompt, deleteForum, replaceForum, renameForum } from "../../redux/actions.js";
+import InputString from "../Redactor/InputString.js";
+import PartSelect from "../Redactor/PartSelect.js";
+import * as action from "../../redux/actions/forums.js";
+import { showPrompt } from "../../redux/actions.js";
 
 export default function ForumMenu({ forum, partId }) {
 
@@ -19,19 +20,19 @@ export default function ForumMenu({ forum, partId }) {
         <div className="forum_menu" >
             
             <ToggleButton  allowedLevel="4" title="Переименовать форум">
-                <Redactor action={renameForum(urn)} >
-                    <ForumRedactor forum={forum} />
+                <Redactor action={action.renameForum(urn)} >
+                    <InputString action={action.writeForumTitle} inputName={"forumName"} />
                 </Redactor>
             </ToggleButton>
             <ToggleButton allowedLevel="4" title="Переместить в раздел...">
-                <Redactor action={replaceForum(urn)} >
-                    <PartSelect partId={partId} />
+                <Redactor action={action.replaceForum(urn)} >
+                    <PartSelect action={action.writePartId} partId={partId} />
                 </Redactor>
             </ToggleButton>
             <button onClick={ () => {
                     dispatch(showPrompt(
                         (<div>Удалить форум "{name}"?</div>),
-                        deleteForum(urn)
+                        action.deleteForum(urn)
                     ))
             } }>
                 Удалить форум

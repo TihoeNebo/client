@@ -1,38 +1,22 @@
 ﻿import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { hideRedactor } from "../../redux/actions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { hideRedactor, clearRedactor } from "../../redux/actions/redactor.js";
 
 export default function Redactor({ children, action, buttonTitle = "Отправить", style = null }) {
     
     const dispatch = useDispatch();
-
-    const messageState = useState({ ...action.payload });
-    const [messageData] = messageState;
-    const addMessageState = (element) => { 
-            
-            if (!element.type || !element.type.name) return element; 
-            const redactorElement = {
-                ...element, 
-                props:  {
-                    ...element.props, 
-                    messageState: messageState
-                }
-            };
-            
-            return redactorElement;    
-        }
-
-    const redactorElements = children.length ? children.map(addMessageState) : addMessageState(children);
-        
+    const redactorState = useSelector(state => state.redactor)
+    console.log(children);
+       
     return (
-        <div className={style}>
-            {redactorElements}
+        <>
+            {children}
             <button onClick={ () => {
-                    action.payload = messageData;
-                    dispatch((console.log("FGHFGHFGHGHG"),console.log(action), action));
+                    dispatch((console.log("FGHFGHFGHGHG"),console.log(redactorState), action(redactorState)));
+                    dispatch(clearRedactor());
                     dispatch(hideRedactor());
                 }
             }>{buttonTitle}</button>
-        </div>
+        </>
         );
 }

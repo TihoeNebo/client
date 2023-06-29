@@ -1,20 +1,10 @@
-﻿import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+﻿import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function PartSelect({ messageState, partId = null }) {
-
-    const [messageData, setMessageData] = messageState;
+export default function PartSelect({ action, partId = null }) {
 
     const partsData = useSelector(state => state.data.parts);
-
-    useEffect(() => {
-        setMessageData(
-            {
-                ...messageData,
-                partId: partId
-            }
-        );
-    }, [true]);
+    const dispatch = useDispatch();
 
     const parts = partsData.map(
         (part) => {
@@ -28,12 +18,7 @@ export default function PartSelect({ messageState, partId = null }) {
 
     
     const selectorHandler = (e) => {
-         setMessageData(
-            {
-                ...messageData,
-                partId: e.target.value
-            }
-        );
+         dispatch(action(e.target.value));
     }
 
     return (

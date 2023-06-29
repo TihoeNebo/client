@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Part from './Part.js';
 import CreatePartButton from "./CreatePartButton.js";
 import Loading from "../Loading/Loading.js";
-import { getParts  } from "../../redux/actions.js";
+import { getParts  } from "../../redux/actions/parts.js";
 
 export default function PartsPage() {
     console.log("partlist")

@@ -29,7 +29,7 @@ export const beginLoading = ({ dispatch }) => next => action => {
 		case TYPE.GET_PROFILE:
 			dispatch({ type: TYPE.SHOW_PROFILE_LOADING });
 			break;
-		case TYPE.CREATE_USER_AUTHENTICATION:
+		case TYPE.CONFIRM_USER:
 			dispatch({ type: TYPE.SHOW_USER_LOADING });
 			break;
 		case TYPE.GET_MAILING:

@@ -1,8 +1,8 @@
 ﻿import React from "react";
 import { useSelector } from "react-redux";
 import Redactor from "../Redactor/Redactor.js";
-import Name from "../Redactor/Name.redactorElements.js";
-import { changeUserData } from "../../redux/actions.js";
+import InputString from "../Redactor/InputString.js";
+import * as action from "../../redux/actions/user.js";
 
 
 export default function Person() {
@@ -17,8 +17,8 @@ export default function Person() {
             <h4>Анкетные данные.</h4>
             <div>
                 <strong>Изменить имя:</strong>
-                <Redactor action={changeUserData()} buttonTitle="Изменить">
-                    <Name name={person.name} />
+                <Redactor action={action.changeUserData()} buttonTitle="Изменить">
+                    <InputString action={action.writeName} inputName={"name"} />
                 </Redactor>
             </div>
         </>

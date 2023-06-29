@@ -131,7 +131,7 @@ export const postReducer = (state = initialState, action) => {
 								����������, ��������� ����� � �������� �� ������ ��� ���������� �����������.`
 				}
 			}
-		case TYPE.CREATE_USER_AUTHENTICATION:
+		case TYPE.CONFIRM_USER:
 			return {
 				url: `/user`,
 				request: {

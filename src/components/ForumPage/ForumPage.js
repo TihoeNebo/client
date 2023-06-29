@@ -7,7 +7,8 @@ import TopicRedactor from "../Redactor/Topic.redactorElements.js";
 import PostRedactor from "../Redactor/Post.redactorElements.js";
 import Redactor from "../Redactor/Redactor.js";
 import Loading from "../Loading/Loading.js";
-import { getForum, createTopic } from "../../redux/actions.js";
+import { getForum } from "../../redux/actions/forums.js";
+import { createTopic } from "../../redux/actions.js";
 
 
 export default function ForumPage() {

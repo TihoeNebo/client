@@ -28,84 +28,14 @@ export const hideAlert = () => {
     }
 }
 
-export const showRedactor = (components) => {
-    
-    return {
-        type: TYPE.SHOW_REDACTOR,
-        payload: components
-    }
-}
 
-export const hideRedactor = () => {
-    return {
-        type: TYPE.HIDE_REDACTOR
-    }
-}
 
-export const changePartName = (partId) => {
-    return {
-        type: TYPE.CHANGE_PART,
-        payload: {
-            part: {id: partId}
-        }
-    }
-}
 
-export const createForum = (partId) => {
-    return {
-        type: TYPE.CREATE_FORUM,
-        payload: {
-            forum: { partId }
-        }
-    }
-}
 
-export const createPart = ( ) => {
-    return {
-        type: TYPE.CREATE_PART,
-        payload: { }
-    }
-}
 
-export const deleteForum = (urn) => {
-    return {
-        type: TYPE.DELETE_FORUM,
-        payload: { urn }
-    }
-}
 
-export const replaceForum = (urn) => {
-    return {
-        type: TYPE.CHANGE_FORUM,
-        payload: {
-            forum: { urn }
-        }
-    }
-}
 
-export const getParts = () => {
-    return {
-        type: TYPE.GET_PARTS
-    }
-}
 
-export const getForum = (forumURN) => {
-    return {
-        type: TYPE.GET_FORUM,
-        payload: { forumURN }
-    }
-}
-
-export const renameForum = (urn) => {
-    return {
-        type: TYPE.CHANGE_FORUM,
-        payload: {
-            forum: {
-                oldURN: urn
-            }
-        }
-    }
-}
 
 export const createTopic = (forumURN) => {
     return {
@@ -251,26 +181,10 @@ export const returnPost = (forumURN, topicId, id) => {
     }
 }
 
-export const logIn = (mail, pass) => {
-    return {
-        type: TYPE.CREATE_USER_AUTHENTICATION,
-        payload: {
-            account: {mail, pass}
-        }
-    }
-}
 
-export const logOut = () => {
-    return {
-        type: TYPE.SET_GUEST_DATA
-    }
-}
 
-export const createUser = () => {
-    return {
-        type: TYPE.CREATE_USER_DATA
-    }
-}
+//export const 
+
 
 export const showProfile = (id) => {
 
@@ -390,19 +304,7 @@ export const openSection = (section) => {
     }
 }
 
-export const changeUserData = () => {
 
-    return {
-        type: TYPE.CHANGE_USER_DATA
-    }
-}
-
-export const confirmMail = () => {
-
-    return {
-        type: TYPE.CONFIRM_MAIL
-    }
-}
 
 export const changeMailingSettings = (data) => {
 

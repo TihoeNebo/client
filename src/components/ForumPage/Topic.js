@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Author from "../Profile/Author.js";
 import TopicMenu from "./TopicMenu.js";
-import { returnTopic } from "../../redux/actions.js";
+import { returnTopic } from "../../redux/actions/topic.js";
 
 
 export default function Topic({ topic }) {

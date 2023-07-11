@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { openSection } from "../../redux/actions.js";
+import { openSection } from "../../redux/actions/settings.js";
 import Account from "./Account.js";
 import Person from "./Person.js";
 import Subscribes from "./Subscribes.js";

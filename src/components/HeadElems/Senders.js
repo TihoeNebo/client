@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import PopupList from "./PopupList.js";
 import Sender from "./Sender.js";
-import { getSenders } from "../../redux/actions.js";
+import { getSenders } from "../../redux/actions/messager.js";
 
 
 export default function Senders( ) {

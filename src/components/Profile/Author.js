@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { showProfile } from "../../redux/actions.js";
+import { showProfile } from "../../redux/actions/profile.js";
 
 export default function Author({ author }) {
 

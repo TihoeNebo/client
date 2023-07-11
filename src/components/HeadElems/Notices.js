@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import PopupList from "./PopupList.js";
 import Notice from "./Notice.js";
-import { getNotices } from "../../redux/actions.js";
+import { getNotices } from "../../redux/actions/settings.js";
 
 
 export default function Notices( ) {

@@ -5,9 +5,9 @@ import IgnoreButton from "../../Profile/IgnoreButton.js";
 import Sender from "../Sender.js";
 import Message from "../Message.js";
 import Redactor from "../../Redactor/Redactor.js";
-import PostRedactor from "../../Redactor/Post.redactorElements.js";
+import Textarea from "../../Redactor/Textarea.js";
 import Loading from "../../Loading/Loading.js";
-import { hideMessager, sendMessage, getMessages } from "../../../redux/actions.js";
+import { hideMessager, sendMessage, getMessages, writeMessage } from "../../../redux/actions/messager.js";
 
 
 export default function Messager() {
@@ -65,7 +65,7 @@ export default function Messager() {
                 </Loading>
             </section>
             <Redactor action={ sendMessage(renderedUser) }>
-                <PostRedactor />
+                <Textarea action={writeMessage} />
             </Redactor>
         </article>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { renderUser, showMessager } from "../../redux/actions.js";
+import { renderUser, showMessager } from "../../redux/actions/messager.js";
 
 export default function Sender({ senderData, renderedUser = null }) {
 
@@ -8,10 +8,10 @@ export default function Sender({ senderData, renderedUser = null }) {
     const dispatch = useDispatch();
 
     const { author, newMessagesCount } = senderData;
-    const isPutted = (author.id == renderedUser);
+    const isPutted = (author.id == renderedUser) ? " putted" : "";
         
    return (
-       <li className={`sender`, isPutted ? " putted" : ""} onClick={() => {
+       <li className={`sender` + isPutted } onClick={() => {
            if (!isPutted) {
                isMessagerOpened ? dispatch(renderUser(author.id)) : dispatch(showMessager(author.id));
            }

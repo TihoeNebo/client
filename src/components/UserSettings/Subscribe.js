@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteSubscribe } from "../../redux/actions.js";
+import { deleteSubscribe } from "../../redux/actions/subscribe.js";
 
 
 export default function Subscribe({ data }) {

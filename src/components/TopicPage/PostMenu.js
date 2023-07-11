@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import PostRedactor from "../Redactor/Post.redactorElements.js";
+import Textarea from "../Redactor/Textarea.js";
 import ToggleButton from "../Redactor/ToggleButton";
 import Redactor from "../Redactor/Redactor.js";
-import { deletePost, redactPost } from "../../redux/actions.js";
+import { deletePost, redactPost, writePostContent } from "../../redux/actions/post.js";
 
 export default function PostMenu({ post }) {
 
@@ -26,7 +26,7 @@ export default function PostMenu({ post }) {
                         <ToggleButton allowedLevel="2" title="Редактировать">
                             <Redactor action={redactPost(forumURN, topicId, id)}>
                                 <h4>Отредактировать сообщение:</h4>
-                                <PostRedactor content={ content } />
+                                <Textarea action={writePostContent} content={ content } />
                             </Redactor>
                         </ToggleButton>
                         <button onClick={deletionHandler}>Удалить</button>

@@ -2,9 +2,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import ToggleButton from "../Redactor/ToggleButton";
 import Redactor from "../Redactor/Redactor.js";
-import BanPanel from "../Redactor/BanPanel.redactorElements.js";
-import PostRedactor from "../Redactor/Post.redactorElements.js";
-import { showPrompt, banUser, disbanUser, sendMessage, deleteUser } from "../../redux/actions.js";
+import BanPanel from "../Redactor/BanPanel.js";
+import Textarea from "../Redactor/Textarea.js";
+import { showPrompt } from "../../redux/actions/popup.js";
+import { banUser, disbanUser, deleteUser, writeBanTime } from "../../redux/actions/profile.js";
+import { sendMessage, writeMessage } from "../../redux/actions/messager.js";
 
 
 export default function ProfileMenu({ profileData }) {
@@ -16,7 +18,7 @@ export default function ProfileMenu({ profileData }) {
         <section>
             <ToggleButton allowedLevel="1" title="Написать автору">
                 <Redactor action={sendMessage(profileData.id)}>
-                    <PostRedactor />
+                    <Textarea action={writeMessage} />
                 </Redactor>
             </ToggleButton>
             
@@ -29,7 +31,7 @@ export default function ProfileMenu({ profileData }) {
                      :
                     <ToggleButton allowedLevel="3" title="Забанить пользователя">
                         <Redactor action={banUser(profileData.id)} buttonTitle="Забанить">
-                            <BanPanel />
+                            <BanPanel action={writeBanTime} />
                         </Redactor>
                     </ToggleButton>
             }

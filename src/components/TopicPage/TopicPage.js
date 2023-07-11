@@ -3,10 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Post from "./Post.js";
 import Redactor from "../Redactor/Redactor.js";
-import PostRedactor from "../Redactor/Post.redactorElements.js";
+import Textarea from "../Redactor/Textarea.js";
 import SubscribeButton from "./SubscribeButton.js";
 import Loading from "../Loading/Loading.js";
-import { getTopic, createPost } from "../../redux/actions.js";
+import { getTopic } from "../../redux/actions/topic.js";
+import { createPost, writePostContent } from "../../redux/actions/post.js";
 
 
 
@@ -46,7 +47,7 @@ export default function TopicPage() {
                             user.level > 1 && !data.topic.params.closed ?
                                 <Redactor action={createPost(forumURN, topicId)} >
                                     <strong> Написать сообщение:</strong>
-                                    <PostRedactor />
+                                    <Textarea action={writePostContent} />
                                 </Redactor> : null
                         }
                     </> : null}

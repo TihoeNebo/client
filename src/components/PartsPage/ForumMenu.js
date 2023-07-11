@@ -4,8 +4,8 @@ import ToggleButton from "../Redactor/ToggleButton.js";
 import Redactor from "../Redactor/Redactor.js";
 import InputString from "../Redactor/InputString.js";
 import PartSelect from "../Redactor/PartSelect.js";
-import * as action from "../../redux/actions/forums.js";
-import { showPrompt } from "../../redux/actions.js";
+import * as action from "../../redux/actions/forum.js";
+import { showPrompt } from "../../redux/actions/popup.js";
 
 export default function ForumMenu({ forum, partId }) {
 

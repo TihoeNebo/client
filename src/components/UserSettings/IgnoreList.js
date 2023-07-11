@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Ignored from "./Ignored.js";
 import Loading from "../Loading/Loading.js";
-import { getIgnored } from "../../redux/actions.js";
+import { getIgnored } from "../../redux/actions/settings.js";
 
 
 export default function IgnoreList() {

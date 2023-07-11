@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hideAlert } from "../../../redux/actions.js";
+import { hideAlert } from "../../../redux/actions/popup.js";
 
 
 export default function Alert() {

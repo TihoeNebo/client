@@ -2,7 +2,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import Subscribe from "./Subscribe.js";
 import Loading from "../Loading/Loading.js";
-import { changeMailingSettings, getMailingSettings, getSubscribes } from "../../redux/actions.js";
+import { changeMailingSettings, getMailingSettings } from "../../redux/actions/settings.js";
+import { getSubscribes } from "../../redux/actions/subscribe.js";
 
 
 export default function Subscribes() {

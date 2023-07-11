@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { hideProfile } from "../../redux/actions.js";
+import { hideProfile } from "../../redux/actions/profile.js";
 import ProfileMenu from "./ProfileMenu.js";
 import Loading from "../Loading/Loading.js";
 

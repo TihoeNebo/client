@@ -1,6 +1,6 @@
 ﻿import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getIgnored, deleteIgnored, createIgnored } from "../../redux/actions.js";
+import { getIgnored, deleteIgnored, createIgnored } from "../../redux/actions/settings.js";
 
 
 export default function IgnoreButton({ userId }) {

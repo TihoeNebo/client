@@ -2,7 +2,7 @@
 import ToggleButton from "../Redactor/ToggleButton";
 import InputString from "../Redactor/InputString.js";
 import Redactor from "../Redactor/Redactor.js";
-import { createPart, writeTitle } from "../../redux/actions/parts.js";
+import { createPart, writeTitle } from "../../redux/actions/part.js";
 
 export default function CreatePartButton( ) {
     return (

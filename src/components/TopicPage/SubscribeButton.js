@@ -1,6 +1,6 @@
 ﻿import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSubscribes, deleteSubscribe, createSubscribe } from "../../redux/actions.js";
+import { getSubscribes, deleteSubscribe, createSubscribe } from "../../redux/actions/subscribe.js";
 
 
 export default function SubscribeButton ({ forumURN, topicId }) {

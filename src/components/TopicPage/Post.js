@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Author from "../Profile/Author.js";
 import PostMenu from "./PostMenu.js";
-import { returnPost } from "../../redux/actions.js";
+import { returnPost } from "../../redux/actions/post.js";
 
 export default function Post({ post }) {
 

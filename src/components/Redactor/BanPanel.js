@@ -1,8 +1,11 @@
 ﻿import React, {useState} from "react";
+import {useDispatch} from "react-redux";
 
-export default function BanPanel({ messageState}) {
-
-    const banTime = new BanTime(messageState);
+export default function BanPanel({ action }) {
+    
+    const dispatch = useDispatch();
+    const setBanTime = (state) => dispatch(action(state));
+    const banTime = new BanTime(setBanTime);
     const [banPeriod, setBanPeriod] = useState(banTime.getPeriodMessage());
 
     const optionsData = [
@@ -35,7 +38,7 @@ export default function BanPanel({ messageState}) {
 
     const timeHandler = (value, measure) => {
         return () => {
-            banTime.setValue(value, measure);
+            banTime.setValue(value, measure, setBanTime);
             setBanPeriod(banTime.getPeriodMessage())
         }
     }
@@ -67,8 +70,8 @@ export default function BanPanel({ messageState}) {
 class BanTime {
     static nowDate = new Date();
     static banTime = new Date(BanTime.nowDate);
-    constructor(messageState) {
-        this.messageState = messageState;
+    constructor(setBanTime) {
+        this.setBanTime = setBanTime;
         this.nowDate = BanTime.nowDate;
         this.banTime = BanTime.banTime;
     }
@@ -86,23 +89,20 @@ class BanTime {
             case "days":
                 this.banTime.setDate(this.banTime.getDate() + value);
                 break;
+            default:
+                return;
         }
         if (this.banTime < this.nowDate) this.banTime.setTime(BanTime.nowDate.getTime());
 
-        const [messageData, setMessageData] = this.messageState;
-
-        setMessageData({
-            ...messageData,
-            banPeriod: this.banTime.getTime() - this.nowDate.getTime()
-        });
+        this.setBanTime( this.banTime.getTime() - this.nowDate.getTime());
     };
 
     getPeriodMessage() {
 
         const getMeasureWord = (value, words) => {
 
-            if (value % 10 == 0 || value % 10 > 4 || value % 100 > 10 && value % 100 < 20) return `${value} ${words[2]} `;
-            else if (value % 10 == 1) return `${value} ${words[1]} `;
+            if (value % 10 === 0 || value % 10 > 4 || value % 100 > 10 && value % 100 < 20) return `${value} ${words[2]} `;
+            else if (value % 10 === 1) return `${value} ${words[1]} `;
             else return `${value} ${words[0]} `;
         }
 
@@ -127,7 +127,7 @@ class BanTime {
         ];
 
         const periodMessage = measureWords.map(({ value, words }, index) => {
-            if (value || index == measureWords.length - 1) return getMeasureWord(value, words);
+            if (value || index === measureWords.length - 1) return getMeasureWord(value, words);
             return "";
             
         })

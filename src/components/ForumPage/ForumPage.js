@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import ToggleButton from "../Redactor/ToggleButton.js";
 import Topic from "./Topic.js";
-import TopicRedactor from "../Redactor/Topic.redactorElements.js";
-import PostRedactor from "../Redactor/Post.redactorElements.js";
+import InputString from "../Redactor/InputString.js";
+import Textarea from "../Redactor/Textarea.js";
 import Redactor from "../Redactor/Redactor.js";
 import Loading from "../Loading/Loading.js";
-import { getForum } from "../../redux/actions/forums.js";
-import { createTopic } from "../../redux/actions.js";
+import { getForum } from "../../redux/actions/forum.js";
+import { createTopic, writeTopicTitle, writeTopicComment } from "../../redux/actions/topic.js";
 
 
 export default function ForumPage() {
@@ -47,8 +47,8 @@ export default function ForumPage() {
             <ToggleButton allowedLevel={2} title="Создать тему">
                 <Redactor action={ createTopic(forumURN) } >
                     <h3>Новая тема:</h3>
-                    <TopicRedactor  />
-                    <PostRedactor  />
+                    <InputString  action={writeTopicTitle} />
+                    <Textarea action={writeTopicComment} />
                 </Redactor>
             </ToggleButton>
         </div>

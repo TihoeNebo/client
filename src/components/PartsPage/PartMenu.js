@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import ToggleButton from "../Redactor/ToggleButton";
 import Redactor from "../Redactor/Redactor.js";
 import InputString from "../Redactor/InputString.js";
-import { changePartName, writeTitle } from "../../redux/actions/parts.js";
-import { createForum, writeForumTitle } from "../../redux/actions/forums.js";
+import { changePartName, writeTitle } from "../../redux/actions/part.js";
+import { createForum, writeForumTitle } from "../../redux/actions/forum.js";
 
 export default function PartMenu({ part }) {
 

@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteIgnored } from "../../redux/actions.js";
+import { deleteIgnored } from "../../redux/actions/settings.js";
 
 
 export default function Ignored({ data }) {

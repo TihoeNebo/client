@@ -1,0 +1,14 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+ .partmenu { 
+    display:flex;
+    align-self: flex-end;
+    width: 55%;
+    justify-content: space-evenly;
+ }
+
+ .menu_button {
+    @include main_button(20px);
+ }
+ 

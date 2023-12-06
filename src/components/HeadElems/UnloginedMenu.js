@@ -6,10 +6,10 @@ import RegistrationForm from "./RegistrationForm.js";
 export default function UnloginedMenu() {
 
     return (
-        <div>
+        <>
             <LogIn /> 
             <RegistrationForm />
-        </div>
+        </>
     )
 }
 

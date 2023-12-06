@@ -1,0 +1,60 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
+
+
+ .header_maintitle {
+   position: relative;
+   margin: 0;
+   margin-right: 2%;
+   width: 82px;
+   height: 69px;
+   display: block;
+   font-size: 36px;
+   font-weight: 200;
+ }
+
+.header_maintitle:hover {
+  animation-name: title_hover;
+  animation-duration: 1.2s;    
+  animation-fill-mode: forwards;        
+ }     
+
+ .header_T {
+   position: absolute;
+   display: block;
+   left: 0px;
+   top: -6px;
+   font-size: 192%;
+   font-weight: 100;
+   color: white;
+ }
+
+ .header_firstword {
+   position: absolute;
+   display: block;
+   right: 2px;
+   top: 7px;
+   font-size: 65%;
+   letter-spacing: -1px;
+ }
+
+ .header_H {
+   position: absolute;
+   bottom: 0px;
+   left: 4px;
+   display: block;
+   font-size: 132%;
+   opacity: .88;
+ }
+ .header_secondword {
+   position: absolute;
+   display: block;
+   right: 0px;
+   bottom: 8px;
+   font-size: 85%;
+   opacity: .88;
+   letter-spacing: 1px;
+ }
+
+ 

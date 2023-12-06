@@ -1,0 +1,29 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+
+
+.last_post {
+    display: flex;
+    //color: $linkHover;
+    flex-direction: column;
+    width: 250px;
+}
+
+.topictitle{
+    display: block;
+    max-width: 250px;
+    max-height: 40px;
+    margin: 0 3px 0;
+}
+
+.topictitle a {
+    display: inline-block;
+    color: $link;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    max-height: 40px;
+}

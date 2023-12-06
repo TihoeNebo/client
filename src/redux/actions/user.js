@@ -66,7 +66,7 @@ export const changeUserData = (state) => {
 
     return {
         type: TYPE.CHANGE_USER_DATA,
-        payload: state.user
+        payload: {...state.user}
     }
 }
 

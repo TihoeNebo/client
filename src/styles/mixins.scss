@@ -1,4 +1,5 @@
 @import "./colors.scss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
 
 
 @mixin standard_button {
@@ -14,4 +15,236 @@
     height: auto;
     text-align: center;
     margin: 2px;
+}
+
+@mixin cuttedTitle {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: block;
+}
+
+@mixin title {
+   & {
+     font-family: "Cormorant Garamond", Times, serif;
+     font-size: 28px;
+     font-weight: 200;
+     color: $mainFontColor;
+     display: flex;
+     align-items:flex-start;
+     align-self: center;
+     height: 55px;
+     margin: 0;
+   }
+   & span {
+     align-self: flex-end;
+     font-size: 48px;
+   }
+ 
+ }
+
+@mixin def_button ($fontSize: 28px) {
+        font-family: "Cormorant Garamond", Times, serif;
+        font-size: $fontSize;
+        font-weight: 400;
+        color: $mainFontColor;
+        border-width: 0px 0px;
+        background: none;
+        padding: 0 0 0 5px;
+        display: block;
+        overflow: visible;
+        height: 1.8em;
+        text-align: center;
+        margin: 5px 5px;
+        opacity: .7;
+}
+
+@mixin main_button ($fontSize: 28px) {
+    & {
+        @include def_button($fontSize)
+    }
+
+    &:hover {
+        animation-name: button_hover;
+        animation-duration: .3467s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes button_hover {
+    0%{
+       opacity: .7;
+    }
+    33% {
+       opacity: .4;
+   }
+    66% {
+       opacity: .9;      
+     }
+    100% {
+       text-shadow: -2px 0px 10px $linkHover; 
+       opacity: 1;
+       color: white;
+    }
+ }
+
+ @keyframes title_hover {
+    0%{
+        text-shadow: 0px 0px 0px $linkHover; 
+        opacity: 1;
+    }
+    7% {
+        text-shadow: -6px 0px 5px $link;
+        opacity: .666;
+        color: white; 
+   }
+    
+    100% {
+       text-shadow: 0px 0px 1px $mainFontColor;
+       opacity: 1; 
+       color: $mainFontColor;
+    }
+ }
+
+
+
+@keyframes popup_option {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+@mixin popup_options($begin, $step, $count) {
+   
+      @for $i from 0 to $count {
+         & > *:nth-child(#{$i + 1}) {
+            animation-name: popup_option;
+            animation-delay: $begin/3 + $step*$i ;
+            animation-duration: $step*20;
+            animation-fill-mode: forwards;
+         }
+         
+      }
+   
+}
+
+ @mixin toggler {
+    & {
+        @include def_button;
+        font-size: 16px;
+        font-weight: 500;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 25px;
+        border-color: white;
+        height: 24px;
+        width: 60px;
+        padding-left: 0;
+        box-shadow: inset 0px -2px 5px white;
+        align-self: flex-start;
+        transition: .13s;
+     }
+     
+     &:hover {
+        opacity: 1;
+     }
+     
+     &:active {
+        box-shadow: inset 1px 2px 0px rgb(94, 94, 114);
+        border-top-color: gray;
+        padding-top: 2px;
+        padding-right: 1px;
+     }
+ }
+
+ @mixin popup_menu($top: 20px) { 
+   & {
+      display: flex;
+      list-style-type: none;
+      position: absolute;
+      flex-direction: column;
+      border-width: 0 1px; 
+      border-style: solid;
+      border-image: linear-gradient( #000, #fff 50%, #000) 1;
+      right: 0;
+      top: $top;
+      padding: 10px;
+      backdrop-filter: blur(2px);
+      background: radial-gradient( #000 40%, #00000000);
+      opacity: 0;
+      z-index: 10;
+   }
+   
+
+   & li {
+      & {
+         margin: 3px 0;
+         opacity: 0;
+      }
+      
+   }
+   
+   & > li > span {
+      @include def_button(16px);
+      & {
+         border-width: 1px 0; 
+         border-style: solid;
+         border-image: linear-gradient(to right, #000, #fff 50%, #000) 1;
+         backdrop-filter: blur(2px);
+         padding-top: 5px;
+         margin: 0;
+      }
+   }
+
+   & li > span:hover {
+      animation-name: button_hover;
+      animation-delay: 0s;
+      animation-duration: .3467s;
+      animation-fill-mode: forwards;
+  }  
+}
+
+@mixin popup_window($width: 14em, $popupTime: .3s,  $step: .10s, $count: 4) {
+   
+   @keyframes popup {
+      0% {
+         opacity: 0;
+         width: 0px;
+         padding: 0;
+         translate: -($width/2);
+      }
+      35% {
+         translate: -($width/2);
+         width: 0px;
+      }
+      100% {
+         width: $width;
+         opacity: 1;
+         translate: 0;
+      }
+   }
+
+   & {
+      width: $width;
+      animation-name: popup;
+      animation-duration: $popupTime;
+      animation-fill-mode: forwards;
+   }
+   @include popup_options($popupTime, $step, $count);
+}
+
+@keyframes popup_fixed {
+   0% {
+      opacity: 0;
+      width: 0px;
+      padding: 0;
+   }
+   100% {
+      width: 240px;
+      padding: auto;
+      opacity: 1;
+   }
 }

@@ -1,0 +1,33 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
+
+
+ .notice {
+   text-align: justify; 
+   font-family: Calibri;
+ }
+
+.string {
+  @include cuttedTitle;
+  max-width: 13em;
+  text-align: justify; 
+  font-family: Calibri;
+
+  & a {
+    color: $link;
+  }
+}
+
+
+
+ .title {
+  @include cuttedTitle;
+  max-width: 13em;
+  height: 1.2em;
+  color: $link;
+ }
+
+
+
+ 

@@ -1,0 +1,10 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+.parts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 0px white solid;
+    margin: 5%;
+}

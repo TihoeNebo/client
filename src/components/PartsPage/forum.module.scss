@@ -1,0 +1,65 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+.forum {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: space-around;
+    flex-wrap: wrap;
+    border-style: solid;
+    border-width: 1px 0;
+    border-image: linear-gradient(to right, #000, #fff 50%, #000) 1;
+    max-height: 110px;
+    margin: 3px;
+    padding: 15px;
+}
+.forum_first {
+    margin-top: 0;
+    border-radius: 84px/34px 0 0; 
+}
+.statistic {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-self: baseline;
+    height: 100%;
+}
+.forum_title {
+    @include cuttedTitle;
+    width: 14em;
+    color: $forumLink;
+}
+
+.forum_title::first-letter {
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+}
+
+p {
+    margin: 3px;
+}
+
+.description {
+    max-width: 350px;
+    height: 5em;
+    white-space: wrap;
+    overflow: hidden;
+    position: relative;
+    text-indent: 2em;
+    text-align: justify;
+    font-style: italic;
+    font-size: 14px;
+    margin-left: 0;
+}
+
+.description:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1em;
+    background: linear-gradient(180deg, transparent, $bgColor 85%);
+}

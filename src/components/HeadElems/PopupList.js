@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react';
+import styles from "./popuplist.module.scss";
 
 export default function PopupList({ data, visibilityState }) {
 
+    
     const [isVisible, setVisibility] = visibilityState;
-
-    const closeList = () => {
-        setVisibility(false);
-        window.removeEventListener("click", closeList);
-    }
+    
 
     useEffect(() => {
+        
+        const closeList = () => {
+            setVisibility(false);
+            window.removeEventListener("click", closeList);
+        }
         if (isVisible) window.addEventListener("click", closeList);
-    }, [isVisible]);
+    }, [isVisible, setVisibility]);
 
     if (!data || !isVisible) return null;
 
     return (
 
-        <ul>
+        <ul className={styles.submenu}>
             {data}
         </ul>
     );

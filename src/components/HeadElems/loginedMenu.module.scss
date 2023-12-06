@@ -1,0 +1,18 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+.userButton {
+  @include toggler;
+}
+
+.usermenu {
+  @include popup_menu(38px);
+  @include popup_window;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}

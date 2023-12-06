@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PopupList from "./PopupList.js";
 import Sender from "./Sender.js";
@@ -11,15 +11,15 @@ export default function Senders( ) {
     const [isVisible, setVisibility] = visibilityState;
 
     const data = useSelector(state => state.data.messager.senders);
-    const user = useSelector(state => state.data.user.account);
+    const newMessagesCount = useSelector(state => state.data.user.statistic.newMessagesCount);
     const dispatch = useDispatch();
 
-    useEffect(() => { if (isVisible) dispatch(getSenders()); }, [isVisible]);
+    useEffect(() => { if (isVisible) dispatch(getSenders()); }, [isVisible, dispatch]);
     const elements = data.length ? data.map(sender => <Sender senderData={sender} />) : null;
 
     return (
-        <li onClick={() => setVisibility(true)}>
-            Сообщения <span>{user.newMessagesCount}</span>
+        <li data-name="senders" onClick={() => setVisibility(true)}>
+            <span>Сообщения {newMessagesCount}</span>
             <PopupList data={elements} visibilityState={visibilityState} />
         </li>
     )

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Redactor from "../Redactor/Redactor.js";
 import InputString from "../Redactor/InputString.js";
@@ -9,6 +9,7 @@ export default function Account() {
 
     const isOpened = (useSelector(state => state.settings.section) === "ACCOUNT");
     const account = useSelector(state => state.data.user.account);
+    const redactedAccount = useSelector(state => state.redactor.user.account);
     const dispatch = useDispatch();
 
     if (!isOpened) return null;
@@ -18,7 +19,7 @@ export default function Account() {
             <h4>Настройки аккаунта.</h4>
             <div>
                 <strong>Изменить e-mail:</strong>
-                <Redactor action={action.changeUserData()} buttonTitle="Изменить">
+                <Redactor action={action.changeUserData(redactedAccount)} buttonTitle="Изменить">
                     <InputString action={action.writeMail} inputName={"mail"} /><br />
                 </Redactor>
             </div>
@@ -29,7 +30,7 @@ export default function Account() {
             }
             <div>
                 <strong>Изменить пароль:</strong>
-                <Redactor action={action.changeUserData()} buttonTitle="Изменить">
+                <Redactor action={action.changeUserData(redactedAccount)} buttonTitle="Изменить">
                     Действующий пароль: <InputString action={action.writePass} inputName={"pass"} /><br />
                     Новый пароль: <InputString action={action.writeNewPass} inputName={"newPass"} /><br />
                     Повторите пароль: <InputString action={action.repeatPass} inputName={"repeatPass"} /><br />

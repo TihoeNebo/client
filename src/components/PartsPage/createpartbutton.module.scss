@@ -1,0 +1,27 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+.createpart_button {
+  @include def_button;
+  font-size: 18px;
+  font-weight: 500;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 25px;
+  box-shadow: inset 0px -2px 8px white;
+  align-self: flex-end;
+  padding: 0px 20px;
+  transition: .13s;
+}
+
+.createpart_button:hover {
+  opacity: 1;
+}
+
+.createpart_button:active {
+  box-shadow: inset 2px 2px 2px rgb(94, 94, 114);
+  border-top-color: gray;
+  padding-top: 2px;
+  padding-right: 19px;
+  padding-left: 21px;
+}

@@ -26,7 +26,7 @@
         },
         topic: {
             id: 1,
-            theme: "sacrum",
+            theme: "Достоверное вычисление альмутенов изначальным методом",
             comment: "Описание лунных дней",
             linkPath: "/firstForum/1"
         },
@@ -42,7 +42,7 @@
     }, {
         forum: {
             urn: "firstForum",
-            name: "Луна",
+            name: "Астропсихологические факторы",
         },
         topic: {
             id: 1,
@@ -55,7 +55,7 @@
             date: "12:30 05-08-21",
             author: {
                 id: 17,
-                name: "Юхао"
+                name: "Кьеркегор призрак Лувра"
             }
         },
         isOpened: false

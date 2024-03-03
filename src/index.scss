@@ -1,10 +1,16 @@
 @import "./styles/colors.scss";
 
+button {
+  background: none;
+}
+
 body {
   background-color: $bgColor;
   font-family: Calibri;
   color: $mainFontColor;
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

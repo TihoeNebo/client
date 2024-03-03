@@ -19,7 +19,7 @@ export default function PopupList({ data, visibilityState }) {
     if (!data || !isVisible) return null;
 
     return (
-
+        
         <ul className={styles.submenu}>
             {data}
         </ul>

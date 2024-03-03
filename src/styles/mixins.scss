@@ -21,7 +21,7 @@
    white-space: nowrap;
    overflow: hidden;
    text-overflow: ellipsis;
-   display: block;
+   display: inline-block;
 }
 
 @mixin title {
@@ -49,7 +49,6 @@
         font-weight: 400;
         color: $mainFontColor;
         border-width: 0px 0px;
-        background: none;
         padding: 0 0 0 5px;
         display: block;
         overflow: visible;
@@ -118,7 +117,8 @@
 }
 
 @mixin popup_options($begin, $step, $count) {
-   
+      
+      
       @for $i from 0 to $count {
          & > *:nth-child(#{$i + 1}) {
             animation-name: popup_option;
@@ -126,7 +126,13 @@
             animation-duration: $step*20;
             animation-fill-mode: forwards;
          }
-         
+      }
+      
+      & > * {
+         animation-name: popup_option;
+         animation-delay: $begin/3 + $step*$count ;
+         animation-duration: $step*20;
+         animation-fill-mode: forwards;
       }
    
 }
@@ -160,6 +166,7 @@
      }
  }
 
+
  @mixin popup_menu($top: 20px) { 
    & {
       display: flex;
@@ -171,7 +178,7 @@
       border-image: linear-gradient( #000, #fff 50%, #000) 1;
       right: 0;
       top: $top;
-      padding: 10px;
+      padding: 12px 10px;
       backdrop-filter: blur(2px);
       background: radial-gradient( #000 40%, #00000000);
       opacity: 0;
@@ -213,7 +220,6 @@
       0% {
          opacity: 0;
          width: 0px;
-         padding: 0;
          translate: -($width/2);
       }
       35% {

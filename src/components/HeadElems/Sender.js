@@ -9,18 +9,20 @@ export default function Sender({ senderData, renderedUser = null }) {
 
     const { author, newMessagesCount } = senderData;
     const isPutted = (author.id == renderedUser) ? " putted" : "";
+    
         
    return (
        <li className={`sender` + isPutted } onClick={() => {
-           if (!isPutted) {
-               isMessagerOpened ? dispatch(renderUser(author.id)) : dispatch(showMessager(author.id));
-           }
-       }} >
+        if (!isPutted) {
+            isMessagerOpened ? dispatch(renderUser(author.id)) : dispatch(showMessager(author.id));
+        }
+    }} ><span>
                 {author.name} ({newMessagesCount})<br />
                 <span>
                     {author.status}
                 </span>
-            </li>
+            </span>
+        </li>
    );
     
 }

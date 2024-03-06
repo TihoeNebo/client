@@ -51,7 +51,7 @@ export default function ForumMenu({ forum, partId }) {
                                 action.deleteForum(urn)
                             ))
                     } }>
-                        <span>Удалить форум</span>
+                        <span className={styles.menu_item}>Удалить форум</span>
                     </li>
                 </ul> 
             : null}

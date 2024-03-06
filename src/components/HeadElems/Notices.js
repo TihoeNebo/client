@@ -12,7 +12,7 @@ export default function Notices(  ) {
     const [isVisible, setVisibility] = visibilityState;
 
     const data = useSelector(state => state.data.messager.notices)
-    
+    console.log(data)
     const newNoticesCount = useSelector(state => state.data.user.statistic.newNoticesCount);
     const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ export default function Notices(  ) {
 
     return (
         <li  onClick={() => { setVisibility(true)}}>
-            <span data-name="notices">Уведомления  {newNoticesCount}</span>
+            <span  className={styles.menu_item} data-name="notices">Уведомления  {newNoticesCount}</span>
             <div className={styles.wrap}><PopupList data={elements} visibilityState={visibilityState} /></div>
         </li>
     )

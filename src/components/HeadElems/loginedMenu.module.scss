@@ -10,6 +10,11 @@
   @include popup_window;
 }
 
+.menu_item {
+  @include popup_menu_item;
+  @include menu_button;
+}
+
 .wrap {
   display: flex;
   flex-direction: column;

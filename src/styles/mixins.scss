@@ -48,19 +48,22 @@
         font-size: $fontSize;
         font-weight: 400;
         color: $mainFontColor;
-        border-width: 0px 0px;
-        padding: 0 0 0 5px;
-        display: block;
-        overflow: visible;
-        height: 1.8em;
         text-align: center;
         margin: 5px 5px;
         opacity: .7;
 }
 
+@mixin menu_button () {
+   border-width: 0px 0px;
+   padding: 0 0 0 5px;
+   display: block; 
+   height: 1.8em;
+}
+
 @mixin main_button ($fontSize: 28px) {
     & {
-        @include def_button($fontSize)
+        @include def_button($fontSize);
+        @include menu_button();
     }
 
     &:hover {
@@ -185,7 +188,6 @@
       z-index: 10;
    }
    
-
    & li {
       & {
          margin: 3px 0;
@@ -193,25 +195,25 @@
       }
       
    }
-   
-   & > li > span {
+}
+
+@mixin popup_menu_item () {
+   & {
       @include def_button(16px);
-      & {
-         border-width: 1px 0; 
-         border-style: solid;
-         border-image: linear-gradient(to right, #000, #fff 50%, #000) 1;
-         backdrop-filter: blur(2px);
-         padding-top: 5px;
-         margin: 0;
-      }
+      border-width: 1px 0; 
+      border-style: solid;
+      border-image: linear-gradient(to right, #000, #fff 50%, #000) 1;
+      backdrop-filter: blur(2px);
+      padding-top: 5px;
+      margin: 0;   
    }
 
-   & li > span:hover {
+   &:hover {
       animation-name: button_hover;
       animation-delay: 0s;
       animation-duration: .3467s;
       animation-fill-mode: forwards;
-  }  
+   }
 }
 
 @mixin popup_window($width: 14em, $popupTime: .3s,  $step: .10s, $count: 4) {

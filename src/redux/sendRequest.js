@@ -29,6 +29,7 @@ function fetchEmulate(type) {
 		case TYPE.SET_TOPIC:
 			return topic;
 		case TYPE.SET_SENDERS:
+			console.log("senders")
 			return senders;
 		case TYPE.SET_MESSAGES:
 			return messages;

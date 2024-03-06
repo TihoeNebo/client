@@ -7,13 +7,6 @@
   overflow-y: auto;
   scrollbar-width: thin;
   max-height: 300px;
-
-  & > li > span {
-    height: auto;
-    max-height: 9em;
-    display: flex;
-    padding-bottom: 5px;
-   }
 }
 
 

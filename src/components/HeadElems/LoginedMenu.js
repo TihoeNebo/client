@@ -38,7 +38,7 @@ export default function LoginedMenu() {
             {isMenuOpened &&
                 <ul className={styles.usermenu}>
                     <li onClick={ () => navigate("/settings")}>
-                        <span>Настройки</span>
+                        <span className={styles.menu_item}>Настройки</span>
                     </li>
                     <Notices />
                     <Senders />
@@ -47,7 +47,7 @@ export default function LoginedMenu() {
                                         navigate("/");
                                     }
                                 }>
-                        <span>Выйти</span>
+                        <span className={styles.menu_item}>Выйти</span>
                     </li>
                 </ul>
             }

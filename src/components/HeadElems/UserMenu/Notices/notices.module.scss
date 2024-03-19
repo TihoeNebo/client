@@ -1,5 +1,5 @@
-@import "../../styles/colors.scss";
-@import "../../styles/mixins.scss";
+@import "../../../../styles/colors.scss";
+@import "../../../../styles/mixins.scss";
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap');
 
 
@@ -14,3 +14,8 @@
   @include popup_menu_item;
   @include menu_button;
 }
+
+
+
+
+ 

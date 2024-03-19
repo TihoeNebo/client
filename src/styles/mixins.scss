@@ -51,6 +51,7 @@
         text-align: center;
         margin: 5px 5px;
         opacity: .7;
+        cursor: pointer;
 }
 
 @mixin menu_button () {
@@ -153,7 +154,6 @@
         width: 60px;
         padding-left: 0;
         box-shadow: inset 0px -2px 5px white;
-        align-self: flex-start;
         transition: .13s;
      }
      
@@ -256,3 +256,25 @@
       opacity: 1;
    }
 }
+
+@mixin description {
+   & {
+     white-space: wrap;
+     overflow: hidden;
+     position: relative;
+     text-indent: 1em;
+     text-align: justify;
+     font-style: italic;
+     font-size: 14px;
+   }
+ 
+   &:after {
+     content: "";
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     width: 100%;
+     height: 50%;
+     background: linear-gradient(180deg, transparent, $bgColor 95%);
+   }
+ }

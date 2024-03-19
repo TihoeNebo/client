@@ -1,23 +1,22 @@
-@import "../../styles/colors.scss";
-@import "../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+@import "../../../styles/mixins.scss";
 
 .userButton {
   @include toggler;
 }
 
 .usermenu {
-  @include popup_menu(38px);
+  @include popup_menu(0);
   @include popup_window;
+  
 }
 
 .menu_item {
   @include popup_menu_item;
   @include menu_button;
+  
 }
 
 .wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   position: relative;
 }

@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import { useSelector } from 'react-redux';
-import LoginedMenu from "./LoginedMenu";
-import UnloginedMenu from "./UnloginedMenu";
+import LoginedMenu from "./UserMenu/LoginedMenu.js";
+import UnloginedMenu from "./GuestMenu/UnloginedMenu.js";
 import Loading from "../Loading/Loading.js";
 
 export default function AuthenticationMenu() {

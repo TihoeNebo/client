@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Author from "../../Profile/Author.js";
 import IgnoreButton from "../../Profile/IgnoreButton.js";
-import Sender from "../Sender.js";
+import Sender from "../UserMenu/Senders/Sender.js";
 import Message from "../Message.js";
 import Redactor from "../../Redactor/Redactor.js";
 import Textarea from "../../Redactor/Textarea.js";

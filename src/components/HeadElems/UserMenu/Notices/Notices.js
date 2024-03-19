@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PopupList from "./PopupList.js";
+import PopupList from "../PopupList.js";
 import Notice from "./Notice.js";
-import { getNotices } from "../../redux/actions/settings.js";
+import { getNotices } from "../../../../redux/actions/settings.js";
 import styles from "./notices.module.scss";
 
 export default function Notices(  ) {

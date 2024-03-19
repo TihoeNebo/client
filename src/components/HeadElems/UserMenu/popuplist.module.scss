@@ -1,9 +1,9 @@
-@import "../../styles/colors.scss";
-@import "../../styles/mixins.scss";
+@import "../../../styles/colors.scss";
+@import "../../../styles/mixins.scss";
 
 .submenu {
   @include popup_menu(20px);
-  @include popup_window(27em);
+  @include popup_window(24em);
   overflow-y: auto;
   scrollbar-width: thin;
   max-height: 300px;

@@ -1,8 +1,8 @@
 ﻿import React from "react";
-import ToggleButton from "../Redactor/ToggleButton.js";
-import Redactor from "../Redactor/Redactor.js";
-import InputString from "../Redactor/InputString.js";
-import * as action from "../../redux/actions/user.js";
+import ToggleButton from "../../Redactor/ToggleButton.js";
+import Redactor from "../../Redactor/Redactor.js";
+import InputString from "../../Redactor/InputString.js";
+import * as action from "../../../redux/actions/user.js";
 import styles from "./registrationForm.module.scss";
 
 export default function RegistrationForm() {

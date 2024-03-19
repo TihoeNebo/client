@@ -1,0 +1,46 @@
+@import "../../../../styles/colors.scss";
+@import "../../../../styles/mixins.scss";
+
+ .menu_item {
+  @include popup_menu_item;
+  height: auto;
+  max-height: 12em;
+  display: flex;
+}
+
+ .avatar {
+  width: 55px;
+  height: 89px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $mainFontColor;
+ }
+
+ .user {
+  min-width: 61px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ }
+
+ .message {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+ }
+
+ .date {
+  align-self: flex-end;
+  justify-self: flex-start;
+}
+
+.content {
+  @include description;
+  align-self: flex-start;
+  flex-basis: 80%;
+  text-align: justify;
+  max-height: 7em;
+  padding: 5px;
+  padding-top: 10%;
+}

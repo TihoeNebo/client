@@ -1,0 +1,15 @@
+@import "../../../../styles/colors.scss";
+@import "../../../../styles/mixins.scss";
+
+
+ .wrap {
+   position: relative;
+   top: -65px;
+   left: -235px;
+   
+ }
+
+ .menu_item {
+  @include popup_menu_item;
+  @include menu_button;
+}

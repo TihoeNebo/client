@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PopupList from "./PopupList.js";
+import PopupList from "../PopupList.js";
 import Sender from "./Sender.js";
-import { getSenders } from "../../redux/actions/messager.js";
+import { getSenders } from "../../../../redux/actions/messager.js";
 import styles from "./senders.module.scss";
 
 

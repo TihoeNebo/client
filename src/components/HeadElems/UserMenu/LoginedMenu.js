@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import Notices from "./Notices.js";
-import Senders from "./Senders.js";
-import { logOut } from "../../redux/actions/user.js";
+import Notices from "./Notices/Notices.js";
+import Senders from "./Senders/Senders.js";
+import { logOut } from "../../../redux/actions/user.js";
 import styles from "./loginedMenu.module.scss";
 
 
@@ -30,28 +30,30 @@ export default function LoginedMenu() {
     }, [isMenuOpened])
     
     return (
-        <div className={styles.wrap}>
+        <>
             <button onClick={()=> setOpening(!isMenuOpened)} className={styles.userButton}>{user.person.name}</button>
             { !user.account.isMailConfurmed &&
                 "На ваш e-mail выслано письмо с ссылкой для подтверждения указанного адреса. Пожалуйста, проверьте почту."
             }
             {isMenuOpened &&
-                <ul className={styles.usermenu}>
-                    <li onClick={ () => navigate("/settings")}>
-                        <span className={styles.menu_item}>Настройки</span>
-                    </li>
-                    <Notices />
-                    <Senders />
-                    <li onClick={async () => {
+                <div className={styles.wrap}>
+                    <ul className={styles.usermenu}>
+                        <li onClick={ () => navigate("/settings")}>
+                            <span className={styles.menu_item}>Настройки</span>
+                        </li>
+                        <Notices />
+                        <Senders />
+                        <li onClick={async () => {
                                         dispatch(logOut());
                                         navigate("/");
                                     }
                                 }>
-                        <span className={styles.menu_item}>Выйти</span>
-                    </li>
-                </ul>
+                            <span className={styles.menu_item}>Выйти</span>
+                        </li>
+                    </ul>
+                </div>
             }
             
-        </div>
+        </>
     )
 }

@@ -12,7 +12,9 @@
 
  .header_loginmenu {
    display: flex;
-   border-width: 0;
+   justify-content: center;
+   align-items: center;
+   border-width: 0px;
    border-right-width: 1px;
    border-style: solid;
    border-image: linear-gradient( #000, #fff 50%, #000) 1;
